@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="so">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Laam wallet - Full Updated</title>
-    <!-- Favicon & OG Image -->
-    <link rel="icon" type="image/png" href="https://i.ibb.co/r28SP1bN/20250802-225108.png">
-    <link rel="apple-touch-icon" href="https://i.ibb.co/r28SP1bN/20250802-225108.png">
-    <meta property="og:image" content="https://i.ibb.co/r28SP1bN/20250802-225108.png">
-    <meta property="og:title" content="Laam wallet - Modern Digital Currency">
-    <meta property="og:description" content="Laam Token is a digital asset built on Stellar with a fixed supply.">
-    <meta property="og:url" content="https://laam.online">
-    <meta property="og:type" content="website">
+<title>Laam wallet</title>
+<!-- Favicon & OG Image -->
+<link rel="icon" type="image/png" href="https://i.ibb.co/r28SP1bN/20250802-225108.png">
+<link rel="apple-touch-icon" href="https://i.ibb.co/r28SP1bN/20250802-225108.png">
+<meta property="og:image" content="https://i.ibb.co/r28SP1bN/20250802-225108.png">
+<meta property="og:title" content="Laam wallet - Modern Digital Currency">
+<meta property="og:description" content="Laam Token is a digital asset built on Stellar with a fixed supply.">
+<meta property="og:url" content="https://laam.online">
+<meta property="og:type" content="website">
 <!-- Android PWA -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#1976d2">
@@ -26,28 +26,6 @@
 <!-- Add Chart.js for beautiful charts -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-  .custom-alert {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #28a745;
-    color: white;
-    padding: 14px 22px;
-    border-radius: 12px;
-    font-weight: 600;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    z-index: 9999;
-    display: none;
-    animation: fadeInUp 0.4s ease;
-  }
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translate(-50%, 20px); }
-    to { opacity: 1; transform: translate(-50%, 0); }
-  }
-</style>
-    
-    <style>
   :root{
     /* Blue & White Theme */
     --bg1:#eef2f3; --bg2:#8e9eab;
@@ -571,6 +549,9 @@
     max-height: 300px;
     overflow-y: auto;
     margin-bottom: 20px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px;
   }
   .order-item {
     display: flex;
@@ -699,6 +680,163 @@
       flex-wrap: wrap;
     }
   }
+
+  /* Updated Wallet Container Styles to Match Image */
+  .wallet-container {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .total-assets {
+    margin-bottom: 25px;
+  }
+  
+  .total-label {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  
+  .total-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1976d2;
+  }
+  
+  .action-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 25px;
+  }
+  
+  .action-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 10px;
+    border-radius: 12px;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .action-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .action-item.send {
+    background: #f8f9fa;
+    color: #212529;
+  }
+  
+  .action-item.receive {
+    background: #28a745;
+    color: white;
+  }
+  
+  .action-item.swap {
+    background: #0052cc;
+    color: white;
+  }
+  
+  .action-item.add {
+    background: #6c757d;
+    color: white;
+  }
+  
+  .action-item.trustline {
+    background: #dc3545;
+    color: white;
+    grid-column: span 2;
+  }
+  
+  .action-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .action-text {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  .assets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .asset-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+  }
+  
+  .asset-info {
+    text-align: left;
+  }
+  
+  .asset-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .asset-price {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .asset-balance {
+    text-align: right;
+  }
+  
+  .balance-amount {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #1976d2;
+  }
+  
+  .balance-value {
+    font-size: 14px;
+    color: #666;
+  }
+
+  .custom-alert {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #28a745;
+    color: white;
+    padding: 14px 22px;
+    border-radius: 12px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    z-index: 9999;
+    display: none;
+    animation: fadeInUp 0.4s ease;
+  }
+  
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translate(-50%, 20px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+  }
 </style>
 </head>
 <body>
@@ -777,8 +915,6 @@
 
         <div class="warning-text">
           <strong>⚠️IMPORTANT</strong> Save your Secret Key in a secure place! You will need it to access your wallet. If you lose it, you will not be able to recover your account. Also, copy your public key and fund it with at least 4 XLM to activate your wallet.
-
-.
         </div>
 
         <button class="use-account-btn" onclick="useGeneratedAccount()">Use This Account</button>
@@ -787,117 +923,91 @@
 
     <!-- LOGGED IN VIEW -->
     <div id="loggedInView" class="hidden">
-       <div class="card">
-    <!-- BUTTONS ROW - UPDATED DESIGN -->
-
-    <!-- BUTTONS ROW - MATCHING PROVIDED IMAGE -->
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px;">
-      <!-- Top-left: Send -->
-      <button id="btnSendToggle" aria-label="Send" style="background:linear-gradient(180deg,#6fa8ff,#2d9cdb); color:white; border:none; padding:20px; border-radius:18px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; box-shadow:0 6px 18px rgba(45,156,219,0.18);">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
-        <div style="font-weight:800; font-size:1.05rem;">Send</div>
-      </button>
-
-      <!-- Top-right: Receive -->
-      <button id="btnReceive" aria-label="Receive" style="background:linear-gradient(180deg,#3ddc9a,#13a06d); color:white; border:none; padding:20px; border-radius:18px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; box-shadow:0 6px 18px rgba(19,160,109,0.18);">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M12 2v14m0 0l-4-4m4 4l4-4M20 20H4"/></svg>
-        <div style="font-weight:800; font-size:1.05rem;">Receive</div>
-      </button>
-
-      <!-- Bottom-left: Swap -->
-      <button id="btnSwap" aria-label="Swap" style="background:linear-gradient(180deg,#8a7bff,#6a50e6); color:white; border:none; padding:20px; border-radius:18px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; box-shadow:0 6px 18px rgba(106,80,230,0.18);">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H7v2zm10 10H7v-3l-4 4 4 4v-3h10v-2z"/></svg>
-        <div style="font-weight:800; font-size:1.05rem;">Swap</div>
-      </button>
-
-      <!-- Bottom-right: Add Trustline -->
-      <button id="addTrustlineBtn" aria-label="Add Trustline" style="background:linear-gradient(180deg,#6c757d,#4e555b); color:white; border:none; padding:20px; border-radius:18px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; box-shadow:0 6px 18px rgba(78,85,91,0.12);">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5h-2v5H6v2h5v5h2v-5h5v-2h-5V7z"/></svg>
-        <div style="font-weight:800; font-size:1.05rem;">Add Trustline</div>
-      </button>
-    </div>
-
-    <!-- Total assets card (prominent) matching layout in the image -->
-    <div style="margin: 18px 0 8px 0; padding: 14px; background: linear-gradient(90deg,#1e88e5,#0d47a1); border-radius: 16px; color: white; text-align: center; box-shadow: 0 8px 24px rgba(13,71,161,0.18);">
-        <div style="font-size: 0.95rem; margin-bottom: 6px; opacity: 0.95;">Total assets</div>
-        <div style="font-size: 2.2rem; font-weight: 900;">$<span id="totalAssets">0</span></div>
-    </div>
-
-    <!-- Tokens list styled like the provided image -->
-    <div style="background:linear-gradient(180deg,#ffffff,rgba(255,255,255,0.92)); padding:12px; border-radius:14px; border:1px solid rgba(0,0,0,0.04); box-shadow:0 8px 30px rgba(0,0,0,0.04); margin-top:8px;">
-      <div style="display:flex; flex-direction:column; gap:12px; align-items:stretch;">
-        <!-- Token row: XLM -->
-        <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 10px; border-radius:12px; background:transparent;">
-          <div style="display:flex; align-items:center; gap:12px;">
-            <div style="width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#dbeafe,#bfdbfe); box-shadow:0 6px 14px rgba(2,6,23,0.06);">
-              <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="XLM" style="width:28px;height:28px;">
-            </div>
-            <div style="text-align:left;">
-              <div style="font-weight:800;">XLM</div>
-              <div style="font-size:0.85rem; color:#6b7280;">$<span id="xlmPriceSmall">0.409</span> / XLM</div>
-            </div>
+      <!-- Wallet Container with New Design -->
+      <div class="wallet-container">
+        <!-- Total Assets -->
+        <div class="total-assets">
+          <div class="total-label">Total assets</div>
+          <div class="total-value">$<span id="totalAssets">0</span></div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="action-grid">
+          <div class="action-item send" id="btnSendToggle">
+            <div class="action-icon">→</div>
+            <div class="action-text">SEND</div>
           </div>
-          <div style="text-align:right;">
-            <div style="font-weight:900; font-size:1.05rem;">0</div>
-            <div style="font-size:0.85rem; color:#6b7280;">$<span id="xlmUsd">0</span></div>
+          <div class="action-item receive" id="btnReceive">
+            <div class="action-icon">←</div>
+            <div class="action-text">RECEIVE</div>
+          </div>
+          <div class="action-item swap" id="btnSwap">
+            <div class="action-icon">⇄</div>
+            <div class="action-text">SWAP</div>
+          </div>
+          <div class="action-item add" id="addTrustlineBtn">
+            <div class="action-icon">+</div>
+            <div class="action-text">ADD</div>
+          </div>
+          <div class="action-item trustline" id="btnTrustline">
+            <div class="action-icon">✓</div>
+            <div class="action-text">TRUSTLINE</div>
           </div>
         </div>
-
-        <!-- Token row: LAAM -->
-        <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 10px; border-radius:12px; background:transparent;">
-          <div style="display:flex; align-items:center; gap:12px;">
-            <div style="width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#e9d5ff,#d6bbff); box-shadow:0 6px 14px rgba(2,6,23,0.06);">
-              <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="Laam" style="width:28px;height:28px;">
+        
+        <!-- Asset Balances -->
+        <div class="assets-list">
+          <div class="asset-row">
+            <div class="asset-info">
+              <div class="asset-name">XLM</div>
+              <div class="asset-price">$<span id="xlmPrice">0.409</span> / XLM</div>
             </div>
-            <div style="text-align:left;">
-              <div style="font-weight:800;">LAAM</div>
-              <div style="font-size:0.85rem; color:#6b7280;">$<span id="laamPriceSmall">0.056</span> / Laam</div>
-            </div>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-weight:900; font-size:1.05rem;">0</div>
-            <div style="font-size:0.85rem; color:#6b7280;">$<span id="laamUsd">0</span></div>
-          </div>
-        </div>
-
-        <!-- Token row: USDC -->
-        <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 10px; border-radius:12px; background:transparent;">
-          <div style="display:flex; align-items:center; gap:12px;">
-            <div style="width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:linear-gradient(180deg,#d1fae5,#a7f3d0); box-shadow:0 6px 14px rgba(2,6,23,0.06);">
-              <img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.png?v=024" alt="USDC" style="width:28px;height:28px;border-radius:6px;">
-            </div>
-            <div style="text-align:left;">
-              <div style="font-weight:800;">USDC</div>
-              <div style="font-size:0.85rem; color:#6b7280;">$1.00 / USDC</div>
+            <div class="asset-balance">
+              <div class="balance-amount"><span id="xlmBal">0</span></div>
+              <div class="balance-value">$<span id="xlmUsd">0</span></div>
             </div>
           </div>
-          <div style="text-align:right;">
-            <div style="font-weight:900; font-size:1.05rem;">0</div>
-            <div style="font-size:0.85rem; color:#6b7280;">$<span id="usdcUsd">0</span></div>
+          <div class="asset-row">
+            <div class="asset-info">
+              <div class="asset-name">Laam</div>
+              <div class="asset-price">$<span id="laamPrice">0.056</span> / Laam</div>
+            </div>
+            <div class="asset-balance">
+              <div class="balance-amount"><span id="laamBal">0</span></div>
+              <div class="balance-value">$<span id="laamUsd">0</span></div>
+            </div>
+          </div>
+          <div class="asset-row">
+            <div class="asset-info">
+              <div class="asset-name">USDC</div>
+              <div class="asset-price">$<span id="usdcPrice">1.00</span> / USDC</div>
+            </div>
+            <div class="asset-balance">
+              <div class="balance-amount"><span id="usdcBal">0</span></div>
+              <div class="balance-value">$<span id="usdcUsd">0</span></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-<div id="sendForm" class="send-wrap">
+      <!-- SEND FORM -->
+      <div id="sendForm" class="send-wrap">
         <h4 style="margin:0 0 10px 0; color:var(--brand)">Send Assets</h4>
         <div class="send-row">
-            <div><label for="sendAsset">Asset</label><select id="sendAsset"><option value="XLM">XLM</option><option value="LAAM">Laam</option>      <option value="USDC">USDC</option>
-    </select></div>
-            <div><label for="sendAmount">Amount</label><input id="sendAmount" type="number" step="0.0000001" placeholder="e.g. 10" /></div>
+          <div><label for="sendAsset">Asset</label><select id="sendAsset"><option value="XLM">XLM</option><option value="LAAM">Laam</option><option value="USDC">USDC</option></select></div>
+          <div><label for="sendAmount">Amount</label><input id="sendAmount" type="number" step="0.0000001" placeholder="e.g. 10" /></div>
         </div>
         <label for="sendDest" style="margin-top:8px;">Destination Public Key</label>
         <input id="sendDest" type="text" placeholder="G... destination" />
         
-        <!-- MEMO FIELD ADDED HERE -->
+        <!-- MEMO FIELD -->
         <div class="form-group">
-            <label for="sendMemo">Memo (Optional)</label>
-            <input class="form-input" id="sendMemo" type="text" placeholder="Memo text or ID" />
+          <label for="sendMemo">Memo (Optional)</label>
+          <input class="form-input" id="sendMemo" type="text" placeholder="Memo text or ID" />
         </div>
         
         <button id="btnSend" style="margin-top:10px;">Send Now</button>
-    </div>
-       </div>
+      </div>
 
       <!-- Enhanced Trade Section -->
       <div class="card trade-card">
@@ -931,47 +1041,46 @@
           <div class="tab" id="lastTradesTab">Last Trades</div>
         </div>
         
-          <!-- Replace the entire overview-content div with this updated version -->
-<div id="overviewContent" class="tab-content">
-  <div class="overview-content">
-    <div class="price-display">
-      <span id="overviewLaamPriceXLM">0.000000</span>$
-    </div>
-    <div class="price-change" id="priceChange">Loading price change...</div>
-    
-    <div class="chart-timeframes">
-      <button class="timeframe-btn active" data-timeframe="1D">1D</button>
-      <button class="timeframe-btn" data-timeframe="1W">1W</button>
-      <button class="timeframe-btn" data-timeframe="1M">1M</button>
-      <button class="timeframe-btn" data-timeframe="ALL">ALL</button>
-    </div>
-    
-    <!-- Chart container for Chart.js -->
-    <div class="chart-container">
-      <canvas id="priceChart"></canvas>
-    </div>
-    
-    <div class="market-stats">
-      <div class="stat-item">
-        <div class="stat-label">24h Volume</div>
-        <div class="stat-value" id="volume24h">0 Laam</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">24h High</div>
-        <div class="stat-value" id="high24h">0.000000 XLM</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">24h Low</div>
-        <div class="stat-value" id="low24h">0.000000 XLM</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-label">Market Cap</div>
-        <div class="stat-value" id="marketCap">0 XLM</div>
-      </div>
-    </div>
-  </div>
-</div>
-  
+        <!-- Overview Tab Content -->
+        <div id="overviewContent" class="tab-content">
+          <div class="overview-content">
+            <div class="price-display">
+              <span id="overviewLaamPriceXLM">0.000000</span>$
+            </div>
+            <div class="price-change" id="priceChange">Loading price change...</div>
+            
+            <div class="chart-timeframes">
+              <button class="timeframe-btn active" data-timeframe="1D">1D</button>
+              <button class="timeframe-btn" data-timeframe="1W">1W</button>
+              <button class="timeframe-btn" data-timeframe="1M">1M</button>
+              <button class="timeframe-btn" data-timeframe="ALL">ALL</button>
+            </div>
+            
+            <!-- Chart container for Chart.js -->
+            <div class="chart-container">
+              <canvas id="priceChart"></canvas>
+            </div>
+            
+            <div class="market-stats">
+              <div class="stat-item">
+                <div class="stat-label">24h Volume</div>
+                <div class="stat-value" id="volume24h">0 Laam</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">24h High</div>
+                <div class="stat-value" id="high24h">0.000000 XLM</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">24h Low</div>
+                <div class="stat-value" id="low24h">0.000000 XLM</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label">Market Cap</div>
+                <div class="stat-value" id="marketCap">0 XLM</div>
+              </div>
+            </div>
+          </div>
+        </div>
         
         <!-- Orderbook Tab Content -->
         <div id="orderbookContent" class="tab-content active">
@@ -1009,95 +1118,96 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Trade Modal -->
-  <div id="tradeModal" class="trade-modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="modalTitle">Buy Laam</h3>
-        <button class="modal-close" onclick="closeTradeModal()">&times;</button>
-      </div>
-      <div class="panel">
-        <div class="titleRow">
-          <div class="title" id="panelTitle">Buy Laam</div>
-          <div class="avail">Available: <span id="availBalance">0 XLM</span></div>
+    <!-- Trade Modal -->
+    <div id="tradeModal" class="trade-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modalTitle">Buy Laam</h3>
+          <button class="modal-close" onclick="closeTradeModal()">&times;</button>
         </div>
-
-        <div class="field">
-          <div class="inputWrap">
-            <input id="modalPrice" type="number" step="0.0000001" placeholder="0.135000" />
-            <div class="unit">XLM</div>
+        <div class="panel">
+          <div class="titleRow">
+            <div class="title" id="panelTitle">Buy Laam</div>
+            <div class="avail">Available: <span id="availBalance">0 XLM</span></div>
           </div>
-          <div class="hint">Price (XLM per Laam)</div>
+
+          <div class="field">
+            <div class="inputWrap">
+              <input id="modalPrice" type="number" step="0.0000001" placeholder="0.135000" />
+              <div class="unit">XLM</div>
+            </div>
+            <div class="hint">Price (XLM per Laam)</div>
+          </div>
+
+          <div class="field">
+            <div class="inputWrap">
+              <input id="modalAmount" type="number" step="0.0000001" placeholder="Amount" />
+              <div class="unit">Laam</div>
+            </div>
+            <div class="rowBtns">
+              <button data-fill="25">25%</button>
+              <button data-fill="50">50%</button>
+              <button data-fill="75">75%</button>
+              <button data-fill="100">100%</button>
+            </div>
+          </div>
+
+          <div class="totalBox">
+            <div class="inputWrap">
+              <input id="modalTotal" type="number" step="0.0000001" placeholder="Total" readonly />
+              <div class="unit">XLM</div>
+            </div>
+            <div class="hint">Total cost</div>
+          </div>
+
+          <button class="cta buy" id="modalBuyBtn">Buy Laam</button>
         </div>
-
-        <div class="field">
-          <div class="inputWrap">
-            <input id="modalAmount" type="number" step="0.0000001" placeholder="Amount" />
-            <div class="unit">Laam</div>
-          </div>
-          <div class="rowBtns">
-            <button data-fill="25">25%</button>
-            <button data-fill="50">50%</button>
-            <button data-fill="75">75%</button>
-            <button data-fill="100">100%</button>
-          </div>
-        </div>
-
-        <div class="totalBox">
-          <div class="inputWrap">
-            <input id="modalTotal" type="number" step="0.0000001" placeholder="Total" readonly />
-            <div class="unit">XLM</div>
-          </div>
-          <div class="hint">Total cost</div>
-        </div>
-
-        <button class="cta buy" id="modalBuyBtn">Buy Laam</button>
       </div>
     </div>
-  </div>
 
-  <!-- My Orders Modal -->
-  <div id="myOrdersModal" class="my-orders-modal">
-    <div class="my-orders-modal-content">
-      <div class="my-orders-modal-header">
-        <h3 class="my-orders-modal-title">My Orders</h3>
-        <button class="my-orders-modal-close" onclick="closeMyOrdersModal()">&times;</button>
-      </div>
-      
-      <div id="ordersList" class="orders-list">
-        <div class="loading-spinner"></div>
-      </div>
-      
-      <div class="order-actions">
-        <button class="order-action-btn edit-order-btn" onclick="promptEditOffer()">Edit Order</button>
-        <button class="order-action-btn cancel-order-btn" onclick="confirmCancelOffer()">Cancel Order</button>
+    <!-- My Orders Modal -->
+    <div id="myOrdersModal" class="my-orders-modal">
+      <div class="my-orders-modal-content">
+        <div class="my-orders-modal-header">
+          <h3 class="my-orders-modal-title">My Orders</h3>
+          <button class="my-orders-modal-close" onclick="closeMyOrdersModal()">&times;</button>
+        </div>
+        
+        <div id="ordersList" class="orders-list">
+          <div class="loading-spinner"></div>
+        </div>
+        
+        <div class="order-actions">
+          <button class="order-action-btn edit-order-btn" onclick="promptEditOffer()">Edit Order</button>
+          <button class="order-action-btn cancel-order-btn" onclick="confirmCancelOffer()">Cancel Order</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Edit Order Modal -->
-  <div id="editOrderModal" class="trade-modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Edit Order</h3>
-        <button class="modal-close" onclick="closeEditModal()">&times;</button>
-      </div>
-      <div class="panel">
-        <div class="field">
-          <label>Amount (Laam)</label>
-          <input id="editAmount" type="number" step="0.0001">
+    <!-- Edit Order Modal -->
+    <div id="editOrderModal" class="trade-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Edit Order</h3>
+          <button class="modal-close" onclick="closeEditModal()">&times;</button>
         </div>
-        <div class="field">
-          <label>Price (XLM per Laam)</label>
-          <input id="editPrice" type="number" step="0.0000001">
+        <div class="panel">
+          <div class="field">
+            <label>Amount (Laam)</label>
+            <input id="editAmount" type="number" step="0.0001">
+          </div>
+          <div class="field">
+            <label>Price (XLM per Laam)</label>
+            <input id="editPrice" type="number" step="0.0000001">
+          </div>
+          <button class="cta" id="confirmEditBtn">Update Order</button>
         </div>
-        <button class="cta" id="confirmEditBtn">Update Order</button>
       </div>
     </div>
+    
+    <div id="successAlert" class="custom-alert">Transaction sent successfully</div>
   </div>
-    <div id="successAlert" class="custom-alert">Transaction sent successful</div>
 
   <script>
     // Laam token configuration
@@ -1111,16 +1221,17 @@
       currentPrice: 0.06
     };
 
+    // USDC token configuration
+    const USDC_TOKEN = {
+      code: "USDC",
+      issuer: "GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN"
+    };
+    
     // Global variables
     let currentKeypair = null;
     let server = null;
-    
-  const USDC_TOKEN = {
-    code: "USDC",
-    issuer: "GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN"
-  };
-  let USDC_ASSET = new StellarSdk.Asset(USDC_TOKEN.code, USDC_TOKEN.issuer);
-  let LAAM_ASSET = null;
+    let USDC_ASSET = null;
+    let LAAM_ASSET = null;
     let xlmPriceUSD = 0.42;
     let currentTradeMode = 'buy';
     let generatedKeypair = null;
@@ -1150,6 +1261,7 @@
       try {
         if (typeof StellarSdk !== 'undefined') {
           LAAM_ASSET = new StellarSdk.Asset(LAAM_TOKEN.code, LAAM_TOKEN.issuer);
+          USDC_ASSET = new StellarSdk.Asset(USDC_TOKEN.code, USDC_TOKEN.issuer);
           console.log('Assets initialized successfully');
         }
       } catch (error) {
@@ -1163,12 +1275,12 @@
     }
     
     function showSuccess(message) {
-  const alertBox = document.getElementById("successAlert");
-  alertBox.textContent = message;
-  alertBox.style.display = "block";
-  setTimeout(() => {
-    alertBox.style.display = "none";
-  }, 3000);
+      const alertBox = document.getElementById("successAlert");
+      alertBox.textContent = message;
+      alertBox.style.display = "block";
+      setTimeout(() => {
+        alertBox.style.display = "none";
+      }, 3000);
     }
     
     function formatAmount(amount) {
@@ -1244,23 +1356,23 @@
     }
 
     // Tab switching functionality
-function switchTab(tabName) {
-  document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-  
-  document.getElementById(tabName + 'Tab').classList.add('active');
-  document.getElementById(tabName + 'Content').classList.add('active');
-  
-  currentTab = tabName;
-  
-  if (tabName === 'orderbook') {
-    fetchOrderbook();
-  } else if (tabName === 'lastTrades') {
-    fetchTrades();
-  } else if (tabName === 'overview') {
-    updateOverview(); // This now uses the real data function
-  }
-}
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      
+      document.getElementById(tabName + 'Tab').classList.add('active');
+      document.getElementById(tabName + 'Content').classList.add('active');
+      
+      currentTab = tabName;
+      
+      if (tabName === 'orderbook') {
+        fetchOrderbook();
+      } else if (tabName === 'lastTrades') {
+        fetchTrades();
+      } else if (tabName === 'overview') {
+        updateOverview();
+      }
+    }
 
     // Fetch XLM price from API
     async function fetchXLMPrice() {
@@ -1628,142 +1740,136 @@ function switchTab(tabName) {
         
         sampleTrades.forEach(trade => {
           const row = document.createElement('tr');
-          row.innerHTML = `
-            <td class="trade-time">${trade.time}</td>
-            <td class="${trade.type.toLowerCase() === 'buy' ? 'trade-buy' : 'trade-sell'}">${trade.type}</td>
-            <td>${trade.price}</td>
-            <td>${trade.amount}</td>
-          `;
-          tradesBody.appendChild(row);
+            row.innerHTML = `
+              <td class="trade-time">${trade.time}</td>
+              <td class="${trade.type.toLowerCase() === 'buy' ? 'trade-buy' : 'trade-sell'}">${trade.type}</td>
+              <td>${trade.price}</td>
+              <td>${trade.amount}</td>
+            `;
+            tradesBody.appendChild(row);
         });
       }
     }
 
-// Update total assets value - FIXED CALCULATION
-function updateTotalAssets() {
-    const xlmUsd = parseFloat(document.getElementById('xlmUsd').textContent) || 0;
-    const laamUsd = parseFloat(document.getElementById('laamUsd').textContent) || 0;
-    const totalAssets = (xlmUsd + laamUsd).toFixed(2);
-    document.getElementById('totalAssets').textContent = totalAssets;
-}
-      // Helper: get best sell offer price (qiimaha iibka ugu fiican)
-async function getBestSellOfferPrice() {
-  try {
-    const orderbookUrl = `https://horizon.stellar.org/order_book?selling_asset_type=credit_alphanum4&selling_asset_code=${LAAM_TOKEN.code}&selling_asset_issuer=${LAAM_TOKEN.issuer}&buying_asset_type=native&limit=1`;
-    const response = await fetch(orderbookUrl);
-    const data = await response.json();
-    
-    // Ka eeg 'asks' (sell offers)
-    if (data.asks && data.asks.length > 0) {
-      return parseFloat(data.asks[0].price); // best sell offer (qiimaha iibka ugu hooseeya)
+    // Update total assets value
+    function updateTotalAssets() {
+      const xlmUsd = parseFloat(document.getElementById('xlmUsd').textContent) || 0;
+      const laamUsd = parseFloat(document.getElementById('laamUsd').textContent) || 0;
+      const usdcUsd = parseFloat(document.getElementById('usdcUsd').textContent) || 0;
+      const totalAssets = (xlmUsd + laamUsd + usdcUsd).toFixed(2);
+      document.getElementById('totalAssets').textContent = totalAssets;
     }
-  } catch (e) {
-    console.error("Failed to fetch best sell offer:", e);
-  }
-  return LAAM_TOKEN.currentPrice; // fallback haddii error dhaco
-}          
- // Update balance display function
-async function updateBalanceDisplay() {
-  if (!currentKeypair || !server) {
-    console.log('No keypair or server available');
-    return;
-  }
 
-  try {
-    console.log('Loading account data...');
-    const account = await server.loadAccount(currentKeypair.publicKey());
-    
-    let xlmBalance = 0;
-    let laamBalance = 0;
-
-    account.balances.forEach(balance => {
-      if (balance.asset_type === 'native') {
-        xlmBalance = parseFloat(balance.balance);
-      } else if (
-        balance.asset_code === LAAM_TOKEN.code &&
-        balance.asset_issuer === LAAM_TOKEN.issuer
-      ) {
-        laamBalance = parseFloat(balance.balance);
+    // Helper: get best sell offer price
+    async function getBestSellOfferPrice() {
+      try {
+        const orderbookUrl = `https://horizon.stellar.org/order_book?selling_asset_type=credit_alphanum4&selling_asset_code=${LAAM_TOKEN.code}&selling_asset_issuer=${LAAM_TOKEN.issuer}&buying_asset_type=native&limit=1`;
+        const response = await fetch(orderbookUrl);
+        const data = await response.json();
+        
+        // Check 'asks' (sell offers)
+        if (data.asks && data.asks.length > 0) {
+          return parseFloat(data.asks[0].price); // best sell offer
+        }
+      } catch (e) {
+        console.error("Failed to fetch best sell offer:", e);
       }
-    });
-
-    // ✅ XLM part
-    document.getElementById('xlmBal').textContent = xlmBalance.toFixed(2);
-    document.getElementById('xlmUsd').textContent = (xlmBalance * xlmPriceUSD).toFixed(2);
-    document.getElementById('xlmPrice').textContent = xlmPriceUSD.toFixed(3);
-
-    // ✅ Laam part - Qiimaha USD ee Laam token-ka
-    const bestSellOfferXLM = await getBestSellOfferPrice();
-    const laamPriceUSD = bestSellOfferXLM * xlmPriceUSD;
-    
-    LAAM_TOKEN.currentPrice = laamPriceUSD;
-
-    document.getElementById('laamBal').textContent = laamBalance.toFixed(2);
-    
-    // HALKAN WAA ISBEDDELKA: Qiimaha Laam USD ahaan
-    document.getElementById('laamUsd').textContent = (laamBalance * laamPriceUSD).toFixed(2);
-    document.getElementById('laamPrice').textContent =laamPriceUSD.toFixed(6);
-    
-      updateTotalAssets();
-      
-    console.log('Balance display updated successfully');
-    
-  } catch (error) {
-    console.error('Error updating balance display:', error);
-    showError('Failed to load account balance: ' + error.message);
-  }
-}
-  
-
-// Update total assets value - WITH NULL CHECK
-function updateTotalAssets() {
-  // Check if elements exist before updating them
-  if (document.getElementById('xlmUsd') && document.getElementById('laamUsd') && document.getElementById('totalAssets')) {
-    const xlmUsd = parseFloat(document.getElementById('xlmUsd').textContent) || 0;
-    const laamUsd = parseFloat(document.getElementById('laamUsd').textContent) || 0;
-    const totalAssets = (xlmUsd + laamUsd).toFixed(2);
-    document.getElementById('totalAssets').textContent = totalAssets;
-  }
-}
-
-// Load wallet function - WITH NULL CHECK
-async function loadWallet() {
-  if (!currentKeypair) {
-    console.error('No keypair available');
-    return;
-  }
-
-  try {
-    console.log('Loading wallet for:', currentKeypair.publicKey());
-    
-    // Check if element exists before updating it
-    if (document.getElementById('pubKey')) {
-      document.getElementById('pubKey').textContent = currentKeypair.publicKey();
+      return LAAM_TOKEN.currentPrice; // fallback if error occurs
     }
-    
-    await fetchXLMPrice();
-    
-    await updateBalanceDisplay();
-    
-    if (currentTab === 'orderbook') {
-      await fetchOrderbook();
-    } else if (currentTab === 'lastTrades') {
-      await fetchTrades();
-    } else if (currentTab === 'overview') {
-      updateOverview();
+
+    // Update balance display function
+    async function updateBalanceDisplay() {
+      if (!currentKeypair || !server) {
+        console.log('No keypair or server available');
+        return;
+      }
+
+      try {
+        console.log('Loading account data...');
+        const account = await server.loadAccount(currentKeypair.publicKey());
+        
+        let xlmBalance = 0;
+        let laamBalance = 0;
+        let usdcBalance = 0;
+
+        account.balances.forEach(balance => {
+          if (balance.asset_type === 'native') {
+            xlmBalance = parseFloat(balance.balance);
+          } else if (
+            balance.asset_code === LAAM_TOKEN.code &&
+            balance.asset_issuer === LAAM_TOKEN.issuer
+          ) {
+            laamBalance = parseFloat(balance.balance);
+          } else if (
+            balance.asset_code === USDC_TOKEN.code &&
+            balance.asset_issuer === USDC_TOKEN.issuer
+          ) {
+            usdcBalance = parseFloat(balance.balance);
+          }
+        });
+
+        // XLM part
+        document.getElementById('xlmBal').textContent = xlmBalance.toFixed(2);
+        document.getElementById('xlmUsd').textContent = (xlmBalance * xlmPriceUSD).toFixed(2);
+        document.getElementById('xlmPrice').textContent = xlmPriceUSD.toFixed(3);
+
+        // Laam part - USD value of Laam token
+        const bestSellOfferXLM = await getBestSellOfferPrice();
+        const laamPriceUSD = bestSellOfferXLM * xlmPriceUSD;
+        
+        LAAM_TOKEN.currentPrice = laamPriceUSD;
+
+        document.getElementById('laamBal').textContent = laamBalance.toFixed(2);
+        document.getElementById('laamUsd').textContent = (laamBalance * laamPriceUSD).toFixed(2);
+        document.getElementById('laamPrice').textContent = laamPriceUSD.toFixed(6);
+
+        // USDC part
+        document.getElementById('usdcBal').textContent = usdcBalance.toFixed(2);
+        document.getElementById('usdcUsd').textContent = usdcBalance.toFixed(2); // USDC is 1:1 with USD
+        document.getElementById('usdcPrice').textContent = "1.00";
+        
+        updateTotalAssets();
+        
+        console.log('Balance display updated successfully');
+        
+      } catch (error) {
+        console.error('Error updating balance display:', error);
+        showError('Failed to load account balance: ' + error.message);
+      }
     }
-    
-    console.log('Wallet loaded successfully');
-    
-  } catch (error) {
-    console.error('Error loading wallet:', error);
-    
-    // Only show error if wallet view is visible
-    if (!document.getElementById('loggedInView').classList.contains('hidden')) {
-      showError('Failed to load wallet: ' + error.message);
+
+    // Load wallet function
+    async function loadWallet() {
+      if (!currentKeypair) {
+        console.error('No keypair available');
+        return;
+      }
+
+      try {
+        console.log('Loading wallet for:', currentKeypair.publicKey());
+        
+        await fetchXLMPrice();
+        await updateBalanceDisplay();
+        
+        if (currentTab === 'orderbook') {
+          await fetchOrderbook();
+        } else if (currentTab === 'lastTrades') {
+          await fetchTrades();
+        } else if (currentTab === 'overview') {
+          updateOverview();
+        }
+        
+        console.log('Wallet loaded successfully');
+        
+      } catch (error) {
+        console.error('Error loading wallet:', error);
+        
+        // Only show error if wallet view is visible
+        if (!document.getElementById('loggedInView').classList.contains('hidden')) {
+          showError('Failed to load wallet: ' + error.message);
+        }
+      }
     }
-  }
-}
 
     // Check if wallet exists in localStorage
     function checkSavedWallet() {
@@ -2261,46 +2367,46 @@ async function loadWallet() {
         }
       });
         
-// Event listener for the new Receive button
-document.getElementById('btnReceive').addEventListener('click', function() {
-    const publicKey = currentKeypair ? currentKeypair.publicKey() : "GB7WZHXV4FCATLV2LZFLYU7A74BD5WALPUMOU4CY4DRJGJIL3EW3DGXA";
-    
-    // Create a modal to show the receive address (QR code and text)
-    const receiveModal = document.createElement('div');
-    receiveModal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.7);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10000;
-    `;
-    
-    receiveModal.innerHTML = `
-        <div style="background: white; padding: 25px; border-radius: 20px; text-align: center; max-width: 320px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-            <h3 style="color: #1976d2; margin-top: 0; margin-bottom: 20px;">Your Receive Address</h3>
-            <div style="background: white; padding: 15px; margin: 15px 0; border-radius: 12px; border: 1px solid #e0e0e0;">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${publicKey}" 
-                     alt="QR Code" style="max-width: 180px; border-radius: 8px;">
-            </div>
-            <div style="font-size: 14px; color: #666; margin-bottom: 10px;">Scan this QR code or copy the address below</div>
-            <div class="mono" style="font-size: 13px; margin: 15px 0; padding: 12px; background: #f8f9fa; border-radius: 12px; word-break: break-all; line-height: 1.5;">
-                ${publicKey}
-            </div>
-            <button onclick="this.parentElement.parentElement.remove()" 
-                    style="background: #1976d2; color: white; border: none; padding: 12px 24px; 
-                           border-radius: 12px; cursor: pointer; font-weight: 600; margin-top: 10px;">
-                Close
-            </button>
-        </div>
-    `;
-    
-    document.body.appendChild(receiveModal);
-});
+      // Event listener for the Receive button
+      document.getElementById('btnReceive').addEventListener('click', function() {
+          const publicKey = currentKeypair ? currentKeypair.publicKey() : "GB7WZHXV4FCATLV2LZFLYU7A74BD5WALPUMOU4CY4DRJGJIL3EW3DGXA";
+          
+          // Create a modal to show the receive address (QR code and text)
+          const receiveModal = document.createElement('div');
+          receiveModal.style.cssText = `
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: rgba(0,0,0,0.7);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              z-index: 10000;
+          `;
+          
+          receiveModal.innerHTML = `
+              <div style="background: white; padding: 25px; border-radius: 20px; text-align: center; max-width: 320px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                  <h3 style="color: #1976d2; margin-top: 0; margin-bottom: 20px;">Your Receive Address</h3>
+                  <div style="background: white; padding: 15px; margin: 15px 0; border-radius: 12px; border: 1px solid #e0e0e0;">
+                      <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${publicKey}" 
+                           alt="QR Code" style="max-width: 180px; border-radius: 8px;">
+                  </div>
+                  <div style="font-size: 14px; color: #666; margin-bottom: 10px;">Scan this QR code or copy the address below</div>
+                  <div class="mono" style="font-size: 13px; margin: 15px 0; padding: 12px; background: #f8f9fa; border-radius: 12px; word-break: break-all; line-height: 1.5;">
+                      ${publicKey}
+                  </div>
+                  <button onclick="this.parentElement.parentElement.remove()" 
+                          style="background: #1976d2; color: white; border: none; padding: 12px 24px; 
+                                 border-radius: 12px; cursor: pointer; font-weight: 600; margin-top: 10px;">
+                      Close
+                  </button>
+              </div>
+          `;
+          
+          document.body.appendChild(receiveModal);
+      });
       
       document.getElementById('btnSend').addEventListener('click', async function() {
         const asset = document.getElementById('sendAsset').value;
@@ -2335,6 +2441,12 @@ document.getElementById('btnReceive').addEventListener('click', function() {
             operation = StellarSdk.Operation.payment({
               destination: destination,
               asset: LAAM_ASSET,
+              amount: amount
+            });
+          } else if (asset === 'USDC') {
+            operation = StellarSdk.Operation.payment({
+              destination: destination,
+              asset: USDC_ASSET,
               amount: amount
             });
           }
@@ -2380,19 +2492,19 @@ document.getElementById('btnReceive').addEventListener('click', function() {
       document.getElementById('orderbookTab').addEventListener('click', () => switchTab('orderbook'));
       document.getElementById('lastTradesTab').addEventListener('click', () => switchTab('lastTrades'));
 
-      // Replace the existing timeframe button event listeners with this:
-document.querySelectorAll('.timeframe-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.timeframe-btn').forEach(b => b.classList.remove('active'));
-    this.classList.add('active');
-    
-    // Update chart with selected timeframe
-    const timeframe = this.getAttribute('data-timeframe');
-    createRealPriceChart(timeframe);
-  });
-});
+      // Timeframe button event listeners
+      document.querySelectorAll('.timeframe-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.timeframe-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Update chart with selected timeframe
+          const timeframe = this.getAttribute('data-timeframe');
+          createRealPriceChart(timeframe);
+        });
+      });
 
-      // Trade button functionality - FIXED
+      // Trade button functionality
       document.getElementById('btnBuy').addEventListener('click', function() {
         console.log('Buy button clicked');
         openTradeModal('buy');
@@ -2513,7 +2625,7 @@ document.querySelectorAll('.timeframe-btn').forEach(btn => {
     });
 
     // Auto-refresh balance, price, and current tab data every 30 seconds
-    setInterval(async () => {
+    setInterval(async () {
       if (currentKeypair && !document.getElementById('loggedInView').classList.contains('hidden')) {
         await fetchXLMPrice();
         await updateBalanceDisplay();
@@ -2527,516 +2639,359 @@ document.querySelectorAll('.timeframe-btn').forEach(btn => {
         }
       }
     }, 30000);
-    </script>
-  <script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("service-worker.js")
-      .then(() => console.log("Service Worker Registered"));
-  }
-  
-// Fetch real-time Laam/XLM price from Stellar DEX
-async function fetchLaamPrice() {
-  try {
-    const orderbookUrl = `https://horizon.stellar.org/order_book?selling_asset_type=credit_alphanum4&selling_asset_code=${LAAM_TOKEN.code}&selling_asset_issuer=${LAAM_TOKEN.issuer}&buying_asset_type=native&limit=1`;
-    
-    const response = await fetch(orderbookUrl);
-    const data = await response.json();
-    
-    if (data.bids && data.bids.length > 0 && data.asks && data.asks.length > 0) {
-      const bestBid = parseFloat(data.bids[0].price);
-      const bestAsk = parseFloat(data.asks[0].price);
-      const currentPrice = (bestBid + bestAsk) / 2;
+
+    // Fetch real-time Laam/XLM price from Stellar DEX
+    async function fetchLaamPrice() {
+      try {
+        const orderbookUrl = `https://horizon.stellar.org/order_book?selling_asset_type=credit_alphanum4&selling_asset_code=${LAAM_TOKEN.code}&selling_asset_issuer=${LAAM_TOKEN.issuer}&buying_asset_type=native&limit=1`;
+        
+        const response = await fetch(orderbookUrl);
+        const data = await response.json();
+        
+        if (data.bids && data.bids.length > 0 && data.asks && data.asks.length > 0) {
+          const bestBid = parseFloat(data.bids[0].price);
+          const bestAsk = parseFloat(data.asks[0].price);
+          const currentPrice = (bestBid + bestAsk) / 2;
+          
+          return {
+            price: currentPrice,
+            bid: bestBid,
+            ask: bestAsk
+          };
+        }
+        
+        return { price: 0.06, bid: 0.06, ask: 0.06 }; // Fallback to default price
+      } catch (error) {
+        console.error('Error fetching Laam price:', error);
+        return { price: 0.06, bid: 0.06, ask: 0.06 }; // Fallback to default price
+      }
+    }
+
+    // Fetch trade history for Laam/XLM
+    async function fetchTradeHistory(limit = 100) {
+      try {
+        const tradesUrl = `https://horizon.stellar.org/trades?base_asset_type=credit_alphanum4&base_asset_code=${LAAM_TOKEN.code}&base_asset_issuer=${LAAM_TOKEN.issuer}&counter_asset_type=native&limit=${limit}&order=desc`;
+        
+        const response = await fetch(tradesUrl);
+        const data = await response.json();
+        
+        if (data._embedded && data._embedded.records) {
+          return data._embedded.records;
+        }
+        
+        return [];
+      } catch (error) {
+        console.error('Error fetching trade history:', error);
+        return [];
+      }
+    }
+
+    // Calculate 24h stats from trade history
+    function calculate24hStats(trades) {
+      const now = new Date();
+      const twentyFourHoursAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+      
+      const recentTrades = trades.filter(trade => 
+        new Date(trade.ledger_close_time) >= twentyFourHoursAgo
+      );
+      
+      if (recentTrades.length === 0) {
+        return {
+          volume: 0,
+          high: 0,
+          low: 0,
+          change: 0,
+          changePercent: 0
+        };
+      }
+      
+      let volume = 0;
+      let high = 0;
+      let low = Infinity;
+      let prices = [];
+      
+      recentTrades.forEach(trade => {
+        const price = parseFloat(trade.price.n / trade.price.d);
+        const amount = parseFloat(trade.base_amount);
+        
+        volume += amount;
+        
+        if (price > high) high = price;
+        if (price < low) low = price;
+        
+        prices.push({
+          price: price,
+          time: new Date(trade.ledger_close_time)
+        });
+      });
+      
+      // Sort prices by time to get first and last price
+      prices.sort((a, b) => a.time - b.time);
+      
+      const firstPrice = prices.length > 0 ? prices[0].price : 0;
+      const lastPrice = prices.length > 0 ? prices[prices.length - 1].price : 0;
+      const change = lastPrice - firstPrice;
+      const changePercent = firstPrice > 0 ? (change / firstPrice) * 100 : 0;
       
       return {
-        price: currentPrice,
-        bid: bestBid,
-        ask: bestAsk
+        volume: volume,
+        high: high,
+        low: low === Infinity ? 0 : low,
+        change: change,
+        changePercent: changePercent
       };
     }
-    
-    return { price: 0.06, bid: 0.06, ask: 0.06 }; // Fallback to default price
-  } catch (error) {
-    console.error('Error fetching Laam price:', error);
-    return { price: 0.06, bid: 0.06, ask: 0.06 }; // Fallback to default price
-  }
-}
 
-// Fetch trade history for Laam/XLM
-async function fetchTradeHistory(limit = 100) {
-  try {
-    const tradesUrl = `https://horizon.stellar.org/trades?base_asset_type=credit_alphanum4&base_asset_code=${LAAM_TOKEN.code}&base_asset_issuer=${LAAM_TOKEN.issuer}&counter_asset_type=native&limit=${limit}&order=desc`;
-    
-    const response = await fetch(tradesUrl);
-    const data = await response.json();
-    
-    if (data._embedded && data._embedded.records) {
-      return data._embedded.records;
+    // Create price chart with real data
+    async function createRealPriceChart(timeframe = '1D') {
+      const trades = await fetchTradeHistory(500); // Get more trades for different timeframes
+      const ctx = document.getElementById('priceChart').getContext('2d');
+      
+      // Filter trades based on timeframe
+      const now = new Date();
+      let filteredTrades = [];
+      let timeLabels = [];
+      
+      switch(timeframe) {
+        case '1D':
+          const oneDayAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
+          filteredTrades = trades.filter(trade => 
+            new Date(trade.ledger_close_time) >= oneDayAgo
+          );
+          timeLabels = filteredTrades.map(trade => 
+            new Date(trade.ledger_close_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+          );
+          break;
+          
+        case '1W':
+          const oneWeekAgo = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
+          filteredTrades = trades.filter(trade => 
+            new Date(trade.ledger_close_time) >= oneWeekAgo
+          );
+          // Group by day and calculate average price per day
+          const dailyPrices = {};
+          filteredTrades.forEach(trade => {
+            const date = new Date(trade.ledger_close_time).toLocaleDateString();
+            const price = parseFloat(trade.price.n / trade.price.d);
+            
+            if (!dailyPrices[date]) {
+              dailyPrices[date] = { total: 0, count: 0 };
+            }
+            
+            dailyPrices[date].total += price;
+            dailyPrices[date].count += 1;
+          });
+          
+          filteredTrades = Object.keys(dailyPrices).map(date => ({
+            price: dailyPrices[date].total / dailyPrices[date].count,
+            date: date
+          }));
+          
+          timeLabels = Object.keys(dailyPrices);
+          break;
+          
+        case '1M':
+          const oneMonthAgo = new Date(now.getTime() - (30 * 24 * 60 * 60 * 1000));
+          filteredTrades = trades.filter(trade => 
+            new Date(trade.ledger_close_time) >= oneMonthAgo
+          );
+          // Group by week and calculate average price per week
+          const weeklyPrices = {};
+          filteredTrades.forEach(trade => {
+            const date = new Date(trade.ledger_close_time);
+            const week = `Week ${Math.ceil(date.getDate() / 7)}`;
+            const price = parseFloat(trade.price.n / trade.price.d);
+            
+            if (!weeklyPrices[week]) {
+              weeklyPrices[week] = { total: 0, count: 0 };
+            }
+            
+            weeklyPrices[week].total += price;
+            weeklyPrices[week].count += 1;
+          });
+          
+          filteredTrades = Object.keys(weeklyPrices).map(week => ({
+            price: weeklyPrices[week].total / weeklyPrices[week].count,
+            week: week
+          }));
+          
+          timeLabels = Object.keys(weeklyPrices);
+          break;
+          
+        case 'ALL':
+        default:
+          filteredTrades = trades;
+          timeLabels = filteredTrades.map(trade => 
+            new Date(trade.ledger_close_time).toLocaleDateString()
+          );
+          break;
+      }
+      
+      const prices = filteredTrades.map(trade => 
+        typeof trade.price === 'number' ? trade.price : parseFloat(trade.price.n / trade.price.d)
+      );
+      
+      // Destroy existing chart if it exists
+      if (priceChart) {
+        priceChart.destroy();
+      }
+      
+      // If we don't have enough data, show the Stellar.expert iframe
+      if (prices.length < 2) {
+        // Hide the canvas
+        ctx.canvas.style.display = 'none';
+        
+        return;
+      }
+      
+      priceChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: timeLabels,
+          datasets: [{
+            label: 'LAAM/XLM Price',
+            data: prices,
+            borderColor: '#1976d2',
+            backgroundColor: 'rgba(25, 118, 210, 0.1)',
+            borderWidth: 2,
+            pointRadius: 2,
+            pointBackgroundColor: '#1976d2',
+            pointBorderColor: '#fff',
+            pointHoverRadius: 4,
+            fill: true,
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              mode: 'index',
+              intersect: false,
+              backgroundColor: 'rgba(0, 0, 0, 0.7)',
+              titleFont: {
+                size: 14
+              },
+              bodyFont: {
+                size: 13
+              },
+              callbacks: {
+                label: function(context) {
+                  return `Price: ${context.parsed.y.toFixed(7)} XLM`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                maxRotation: 0,
+                autoSkip: true,
+                maxTicksLimit: 6
+              }
+            },
+            y: {
+              grid: {
+                color: 'rgba(0, 0, 0, 0.05)'
+              },
+              ticks: {
+                callback: function(value) {
+                  return value.toFixed(6) + ' XLM';
+                }
+              }
+            }
+          },
+          interaction: {
+            intersect: false,
+            mode: 'index',
+          }
+        }
+      });
     }
-    
-    return [];
-  } catch (error) {
-    console.error('Error fetching trade history:', error);
-    return [];
-  }
-}
 
-// Calculate 24h stats from trade history
-function calculate24hStats(trades) {
-  const now = new Date();
-  const twentyFourHoursAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
-  
-  const recentTrades = trades.filter(trade => 
-    new Date(trade.ledger_close_time) >= twentyFourHoursAgo
-  );
-  
-  if (recentTrades.length === 0) {
-    return {
-      volume: 0,
-      high: 0,
-      low: 0,
-      change: 0,
-      changePercent: 0
-    };
-  }
-  
-  let volume = 0;
-  let high = 0;
-  let low = Infinity;
-  let prices = [];
-  
-  recentTrades.forEach(trade => {
-    const price = parseFloat(trade.price.n / trade.price.d);
-    const amount = parseFloat(trade.base_amount);
-    
-    volume += amount;
-    
-    if (price > high) high = price;
-    if (price < low) low = price;
-    
-    prices.push({
-      price: price,
-      time: new Date(trade.ledger_close_time)
-    });
-  });
-  
-  // Sort prices by time to get first and last price
-  prices.sort((a, b) => a.time - b.time);
-  
-  const firstPrice = prices.length > 0 ? prices[0].price : 0;
-  const lastPrice = prices.length > 0 ? prices[prices.length - 1].price : 0;
-  const change = lastPrice - firstPrice;
-  const changePercent = firstPrice > 0 ? (change / firstPrice) * 100 : 0;
-  
-  return {
-    volume: volume,
-    high: high,
-    low: low === Infinity ? 0 : low,
-    change: change,
-    changePercent: changePercent
-  };
-}
-
-// Create price chart with real data
-async function createRealPriceChart(timeframe = '1D') {
-  const trades = await fetchTradeHistory(500); // Get more trades for different timeframes
-  const ctx = document.getElementById('priceChart').getContext('2d');
-  
-  // Filter trades based on timeframe
-  const now = new Date();
-  let filteredTrades = [];
-  let timeLabels = [];
-  
-  switch(timeframe) {
-    case '1D':
-      const oneDayAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
-      filteredTrades = trades.filter(trade => 
-        new Date(trade.ledger_close_time) >= oneDayAgo
-      );
-      timeLabels = filteredTrades.map(trade => 
-        new Date(trade.ledger_close_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
-      );
-      break;
-      
-    case '1W':
-      const oneWeekAgo = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
-      filteredTrades = trades.filter(trade => 
-        new Date(trade.ledger_close_time) >= oneWeekAgo
-      );
-      // Group by day and calculate average price per day
-      const dailyPrices = {};
-      filteredTrades.forEach(trade => {
-        const date = new Date(trade.ledger_close_time).toLocaleDateString();
-        const price = parseFloat(trade.price.n / trade.price.d);
+    // Update overview tab with real data
+    async function updateOverview() {
+      try {
+        // Fetch current price
+        const priceData = await fetchLaamPrice();
+        const currentPrice = priceData.price;
         
-        if (!dailyPrices[date]) {
-          dailyPrices[date] = { total: 0, count: 0 };
-        }
+        // Fetch trade history for stats
+        const trades = await fetchTradeHistory(200);
+        const stats = calculate24hStats(trades);
         
-        dailyPrices[date].total += price;
-        dailyPrices[date].count += 1;
-      });
-      
-      filteredTrades = Object.keys(dailyPrices).map(date => ({
-        price: dailyPrices[date].total / dailyPrices[date].count,
-        date: date
-      }));
-      
-      timeLabels = Object.keys(dailyPrices);
-      break;
-      
-    case '1M':
-      const oneMonthAgo = new Date(now.getTime() - (30 * 24 * 60 * 60 * 1000));
-      filteredTrades = trades.filter(trade => 
-        new Date(trade.ledger_close_time) >= oneMonthAgo
-      );
-      // Group by week and calculate average price per week
-      const weeklyPrices = {};
-      filteredTrades.forEach(trade => {
-        const date = new Date(trade.ledger_close_time);
-        const week = `Week ${Math.ceil(date.getDate() / 7)}`;
-        const price = parseFloat(trade.price.n / trade.price.d);
+        // Update price display
+        document.getElementById('overviewLaamPriceXLM').textContent = currentPrice.toFixed(7);
         
-        if (!weeklyPrices[week]) {
-          weeklyPrices[week] = { total: 0, count: 0 };
-        }
+        // Update price change
+        const priceChangeElement = document.getElementById('priceChange');
+        const changeSign = stats.change >= 0 ? '+' : '';
+        priceChangeElement.textContent = `${changeSign}${stats.change.toFixed(7)} (${changeSign}${stats.changePercent.toFixed(2)}%)`;
+        priceChangeElement.className = stats.change >= 0 ? 'price-change positive' : 'price-change negative';
         
-        weeklyPrices[week].total += price;
-        weeklyPrices[week].count += 1;
-      });
-      
-      filteredTrades = Object.keys(weeklyPrices).map(week => ({
-        price: weeklyPrices[week].total / weeklyPrices[week].count,
-        week: week
-      }));
-      
-      timeLabels = Object.keys(weeklyPrices);
-      break;
-      
-    case 'ALL':
-    default:
-      filteredTrades = trades;
-      timeLabels = filteredTrades.map(trade => 
-        new Date(trade.ledger_close_time).toLocaleDateString()
-      );
-      break;
-  }
-  
-  const prices = filteredTrades.map(trade => 
-    typeof trade.price === 'number' ? trade.price : parseFloat(trade.price.n / trade.price.d)
-  );
-  
-  // Destroy existing chart if it exists
-  if (priceChart) {
-    priceChart.destroy();
-  }
-  
-  // If we don't have enough data, show the Stellar.expert iframe
-if (prices.length < 2) {
-  // Hide the canvas
-  ctx.canvas.style.display = 'none';
-  
-  return;
-}
-  
-  priceChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: timeLabels,
-      datasets: [{
-        label: 'LAAM/XLM Price',
-        data: prices,
-        borderColor: '#1976d2',
-        backgroundColor: 'rgba(25, 118, 210, 0.1)',
-        borderWidth: 2,
-        pointRadius: 2,
-        pointBackgroundColor: '#1976d2',
-        pointBorderColor: '#fff',
-        pointHoverRadius: 4,
-        fill: true,
-        tension: 0.3
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false
-        },
-        tooltip: {
-          mode: 'index',
-          intersect: false,
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          titleFont: {
-            size: 14
-          },
-          bodyFont: {
-            size: 13
-          },
-          callbacks: {
-            label: function(context) {
-              return `Price: ${context.parsed.y.toFixed(7)} XLM`;
-            }
-          }
-        }
-      },
-      scales: {
-        x: {
-          grid: {
-            display: false
-          },
-          ticks: {
-            maxRotation: 0,
-            autoSkip: true,
-            maxTicksLimit: 6
-          }
-        },
-        y: {
-          grid: {
-            color: 'rgba(0, 0, 0, 0.05)'
-          },
-          ticks: {
-            callback: function(value) {
-              return value.toFixed(6) + ' XLM';
-            }
-          }
-        }
-      },
-      interaction: {
-        intersect: false,
-        mode: 'index',
+        // Update market stats
+        document.getElementById('volume24h').textContent = `${stats.volume.toFixed(2)} Laam`;
+        document.getElementById('high24h').textContent = `${stats.high.toFixed(7)} XLM`;
+        document.getElementById('low24h').textContent = `${stats.low.toFixed(7)} XLM`;
+        
+        // Calculate market cap (current price * max supply)
+        const marketCap = currentPrice * LAAM_TOKEN.maxSupply;
+        document.getElementById('marketCap').textContent = `${marketCap.toFixed(0)} XLM`;
+        
+        // Create or update the price chart
+        const activeTimeframe = document.querySelector('.timeframe-btn.active').getAttribute('data-timeframe');
+        await createRealPriceChart(activeTimeframe);
+        
+      } catch (error) {
+        console.error('Error updating overview:', error);
+        
+        // Fallback values in case of error
+        document.getElementById('overviewLaamPriceXLM').textContent = '0.060000';
+        document.getElementById('priceChange').textContent = 'Error loading data';
+        document.getElementById('volume24h').textContent = '0 Laam';
+        document.getElementById('high24h').textContent = '0.000000 XLM';
+        document.getElementById('low24h').textContent = '0.000000 XLM';
+        document.getElementById('marketCap').textContent = '0 XLM';
+        
+        createPriceChart(); // Fallback to sample chart
       }
     }
-  });
-}
 
-// Update overview tab with real data
-async function updateOverview() {
-  try {
-    // Fetch current price
-    const priceData = await fetchLaamPrice();
-    const currentPrice = priceData.price;
-    
-    // Fetch trade history for stats
-    const trades = await fetchTradeHistory(200);
-    const stats = calculate24hStats(trades);
-    
-    // Update price display
-    document.getElementById('overviewLaamPriceXLM').textContent = currentPrice.toFixed(7);
-    
-    // Update price change
-    const priceChangeElement = document.getElementById('priceChange');
-    const changeSign = stats.change >= 0 ? '+' : '';
-    priceChangeElement.textContent = `${changeSign}${stats.change.toFixed(7)} (${changeSign}${stats.changePercent.toFixed(2)}%)`;
-    priceChangeElement.className = stats.change >= 0 ? 'price-change positive' : 'price-change negative';
-    
-    // Update market stats
-    document.getElementById('volume24h').textContent = `${stats.volume.toFixed(2)} Laam`;
-    document.getElementById('high24h').textContent = `${stats.high.toFixed(7)} XLM`;
-    document.getElementById('low24h').textContent = `${stats.low.toFixed(7)} XLM`;
-    
-    // Calculate market cap (current price * max supply)
-    const marketCap = currentPrice * LAAM_TOKEN.maxSupply;
-    document.getElementById('marketCap').textContent = `${marketCap.toFixed(0)} XLM`;
-    
-    // Create or update the price chart
-    const activeTimeframe = document.querySelector('.timeframe-btn.active').getAttribute('data-timeframe');
-    await createRealPriceChart(activeTimeframe);
-    
-  } catch (error) {
-    console.error('Error updating overview:', error);
-    
-    // Fallback values in case of error
-    document.getElementById('overviewLaamPriceXLM').textContent = '0.060000';
-    document.getElementById('priceChange').textContent = 'Error loading data';
-    document.getElementById('volume24h').textContent = '0 Laam';
-    document.getElementById('high24h').textContent = '0.000000 XLM';
-    document.getElementById('low24h').textContent = '0.000000 XLM';
-    document.getElementById('marketCap').textContent = '0 XLM';
-    
-    createPriceChart(); // Fallback to sample chart
-  }
-}   
-if ('serviceWorker' in navigator && 'PushManager' in window) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/sw.js')
-      .then(function(registration) {
-        console.log('Service Worker registered with scope:', registration.scope);
-
-        // Background Sync
-        if ('sync' in registration) {
-          registration.sync.register('sync-actions')
-            .then(() => console.log('Background sync registered'))
-            .catch(err => console.log('Background sync failed', err));
-        }
-
-        // Push Notifications
-        Notification.requestPermission().then(permission => {
-          if (permission === 'granted') {
-            console.log('Notifications allowed');
-            // Subscribe user to Push server here if you have backend
-            // registration.pushManager.subscribe({...})
+    // Swap button logic
+    document.getElementById('btnSwap').addEventListener('click', function() {
+      openTradeModal('buy');
+      (async () => {
+        try {
+          const ob = await fetchLaamPrice();
+          if (ob && ob.ask) {
+            document.getElementById('modalPrice').value = parseFloat(ob.ask).toFixed(7);
+            calculateTotal();
           }
-        });
-
-      })
-      .catch(function(error) {
-        console.log('Service Worker registration failed:', error);
-      });
-  });
-}
-
-// Swap button logic
-document.getElementById('btnSwap').addEventListener('click', function() {
-  openTradeModal('buy');
-  (async () => {
-    try {
-      const ob = await fetchLaamPrice();
-      if (ob && ob.ask) {
-        document.getElementById('modalPrice').value = parseFloat(ob.ask).toFixed(7);
-        calculateTotal();
-      }
-    } catch (e) {
-      console.warn('Could not prefill price for swap:', e);
-    }
-  })();
-});
-
-// Allow swapping direction by clicking the swap icon
-const swapIcon = document.getElementById('swapAssets');
-if (swapIcon) {
-  swapIcon.addEventListener('click', () => {
-    const assetBoxes = document.querySelectorAll('.trade-asset-selector .asset-box');
-    if (assetBoxes.length === 2) {
-      const left = assetBoxes[0].innerHTML;
-      assetBoxes[0].innerHTML = assetBoxes[1].innerHTML;
-      assetBoxes[1].innerHTML = left;
-    }
-  });
-}
-
-</script>             
-
-  <!-- Receive Modal -->
-  <div id="receiveModal" class="trade-modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title">Receive Assets</h3>
-        <button class="modal-close" onclick="closeReceiveModal()">&times;</button>
-      </div>
-      <div class="panel">
-        <label>Your Public Key</label>
-        <div class="key-display-container" style="margin-top:10px;">
-          <textarea class="key-display-input" id="publicKeyDisplay" readonly rows="2"></textarea>
-          <button class="copy-btn" onclick="copyToClipboard('publicKeyDisplay', this)">Copy</button>
-        </div>
-        <p class="note-text">Share this public key to receive assets.</p>
-      </div>
-    </div>
-  </div>
-
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Wizard toggle for Send
-  const sendToggle = document.getElementById("btnSendToggle");
-  const sendForm = document.getElementById("sendForm");
-  if (sendToggle && sendForm) {
-    sendToggle.addEventListener("click", () => {
-      sendForm.style.display = sendForm.style.display === "block" ? "none" : "block";
+        } catch (e) {
+          console.warn('Could not prefill price for swap:', e);
+        }
+      })();
     });
-  }
 
-  // Tab switch events
-  const overviewTab = document.getElementById("overviewTab");
-  const orderbookTab = document.getElementById("orderbookTab");
-  const lastTradesTab = document.getElementById("lastTradesTab");
-  if (overviewTab) overviewTab.onclick = () => switchTab("overview");
-  if (orderbookTab) orderbookTab.onclick = () => switchTab("orderbook");
-  if (lastTradesTab) lastTradesTab.onclick = () => switchTab("lastTrades");
-
-  // Update balances after login
-  async function updateBalances(publicKey) {
-    try {
-      const account = await server.loadAccount(publicKey);
-      let xlmBalance = 0, laamBalance = 0, usdcBalance = 0;
-
-      account.balances.forEach(b => {
-        if (b.asset_type === "native") xlmBalance = parseFloat(b.balance);
-        if (b.asset_code === "Laam") laamBalance = parseFloat(b.balance);
-        if (b.asset_code === "USDC") usdcBalance = parseFloat(b.balance);
+    // Allow swapping direction by clicking the swap icon
+    const swapIcon = document.getElementById('swapAssets');
+    if (swapIcon) {
+      swapIcon.addEventListener('click', () => {
+        const assetBoxes = document.querySelectorAll('.trade-asset-selector .asset-box');
+        if (assetBoxes.length === 2) {
+          const left = assetBoxes[0].innerHTML;
+          assetBoxes[0].innerHTML = assetBoxes[1].innerHTML;
+          assetBoxes[1].innerHTML = left;
+        }
       });
-
-      // Update UI
-      document.querySelector("#xlmUsd").textContent = (xlmBalance * xlmPriceUSD).toFixed(2);
-      document.querySelector("#laamUsd").textContent = (laamBalance * LAAM_TOKEN.currentPrice).toFixed(2);
-      document.querySelector("#usdcUsd").textContent = usdcBalance.toFixed(2);
-
-      document.querySelector("#totalAssets").textContent = (
-        (xlmBalance * xlmPriceUSD) +
-        (laamBalance * LAAM_TOKEN.currentPrice) +
-        usdcBalance
-      ).toFixed(2);
-    } catch (err) {
-      console.error("Balance update error:", err);
     }
-  }
-
-  // Example usage: call updateBalances after login
-  // updateBalances(currentKeypair.publicKey());
-});
-</script>
-
+  </script>
 </body>
-
-<script>
-document.addEventListener("DOMContentLoaded", function(){
-  // Send button toggles sendForm
-  const sendToggle = document.getElementById("btnSendToggle");
-  if(sendToggle){
-    sendToggle.addEventListener("click", ()=>{
-      const form = document.getElementById("sendForm");
-      if(form){
-        form.style.display = form.style.display === "none" || form.style.display==="" ? "block" : "none";
-      }
-    });
-  }
-
-  // Receive button opens modal with public key
-  const receiveBtn = document.getElementById("btnReceive");
-  if(receiveBtn){
-    receiveBtn.addEventListener("click", ()=>{
-      const pubKey = window.currentKeypair ? window.currentKeypair.publicKey() : "G...YourPublicKey";
-      document.getElementById("publicKeyDisplay").value = pubKey;
-      document.getElementById("receiveModal").classList.add("show");
-    });
-  }
-});
-
-function closeReceiveModal(){
-  document.getElementById("receiveModal").classList.remove("show");
-}
-
-// Swap button opens trade modal
-const swapBtn = document.getElementById("btnSwap");
-if(swapBtn){
-  swapBtn.addEventListener("click", ()=>{
-    document.getElementById("tradeModal").classList.add("show");
-  });
-}
-
-// Add Trustline button
-const addTrustBtn = document.getElementById("addTrustlineBtn");
-if(addTrustBtn){
-  addTrustBtn.addEventListener("click", async ()=>{
-    try {
-      // Placeholder trustline logic
-      showSuccess("Trustline added successfully (demo).");
-    } catch(e){
-      showError("Failed to add trustline: " + e.message);
-    }
-  });
-}
-</script>
-
 </html>
