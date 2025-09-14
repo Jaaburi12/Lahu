@@ -912,9 +912,13 @@
         </div>
         <!-- Button to open wizard -->
 <button onclick="openSendWizard()" 
-  style="background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+  style="background:#1976d2;color:white;
+         width:45px;height:45px;  /* ball size */
+         border:none;border-radius:50%;  /* round */
+         font-size:12px;font-weight:600;
+         cursor:pointer;box-shadow:0 2px 5px rgba(0,0,0,0.2);">
   Send
-</button>  
+</button>
 
 <div id="sendWizard" class="send-wrap" style="display:none;">
   <!-- Step 1: Choose Asset -->
@@ -1029,8 +1033,7 @@
             <div class="asset-price">$<span id="usdcUsd">0</span> ($<span id="usdcPrice">1.00</span>/USDC)</div>
           </div>
         </div>
-      </div>
-
+      
       <!-- Enhanced Trade Section -->
       <div class="card trade-card">
         <div class="trade-header">
