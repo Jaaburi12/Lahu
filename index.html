@@ -186,7 +186,6 @@
     transform:none;
     box-shadow:none;
   }
-  
   .note-text{
     font-size:12px;
     color:#666;
@@ -775,7 +774,7 @@
     text-align: center;
     padding: 15px 10px;
     background: #f8f9fa;
-    borderRadius: 12px;
+    border-radius: 12px;
     border: 1px solid #e9ecef;
   }
   
@@ -816,6 +815,360 @@
   @keyframes fadeInUp {
     from { opacity: 0; transform: translate(-50%, 20px); }
     to { opacity: 1; transform: translate(-50%, 0); }
+  }
+  
+  /* Token List Styles */
+  .token-list-container {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+  }
+  
+  .token-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .token-list-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1976d2;
+  }
+  
+  .token-list-refresh {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.3s ease;
+  }
+  
+  .token-list-refresh:hover {
+    color: #1976d2;
+    transform: rotate(180deg);
+  }
+  
+  .token-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px;
+    border-bottom: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+  }
+  
+  .token-item:last-child {
+    border-bottom: none;
+  }
+  
+  .token-item:hover {
+    background: #f8f9fa;
+    border-radius: 12px;
+  }
+  
+  .token-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .token-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .token-details {
+    text-align: left;
+  }
+  
+  .token-name {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+  }
+  
+  .token-price {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .token-balance {
+    text-align: right;
+  }
+  
+  .token-amount {
+    font-weight: bold;
+    color: #1976d2;
+    margin-bottom: 4px;
+  }
+  
+  .token-value {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  /* Send Wizard Styles */
+  .send-wizard-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .send-wizard-modal.show {
+    display: flex;
+  }
+  
+  .send-wizard-content {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    padding: 25px;
+    max-width: 450px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease-out;
+  }
+  
+  .wizard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+  }
+  
+  .wizard-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1976d2;
+    margin: 0;
+  }
+  
+  .wizard-close {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    width: auto;
+    height: auto;
+    box-shadow: none;
+    text-transform: none;
+  }
+  
+  .wizard-close:hover {
+    color: #333;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .wizard-progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    position: relative;
+  }
+  
+  .wizard-progress:before {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #e9ecef;
+    z-index: 1;
+  }
+  
+  .wizard-progress-bar {
+    position: absolute;
+    top: 14px;
+    left: 0;
+    height: 4px;
+    background: #1976d2;
+    z-index: 2;
+    transition: width 0.3s ease;
+  }
+  
+  .wizard-step-indicator {
+    position: relative;
+    z-index: 3;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.3s ease;
+  }
+  
+  .wizard-step-indicator.active {
+    background: #1976d2;
+    color: white;
+  }
+  
+  .wizard-step-indicator.completed {
+    background: #28a745;
+    color: white;
+  }
+  
+  .wizard-step {
+    display: none;
+  }
+  
+  .wizard-step.active {
+    display: block;
+  }
+  
+  .wizard-field {
+    margin-bottom: 20px;
+  }
+  
+  .wizard-label {
+    display: block;
+    font-weight: 600;
+    color: #1976d2;
+    margin-bottom: 8px;
+    text-align: left;
+  }
+  
+  .wizard-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 16px;
+    background: #f8f9fa;
+    color: #333;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .wizard-input:focus {
+    border-color: #1976d2;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(25,118,210,0.1);
+  }
+  
+  .wizard-select {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    font-size: 16px;
+    background: #f8f9fa;
+    color: #333;
+    outline: none;
+    transition: all 0.3s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+  }
+  
+  .wizard-select:focus {
+    border-color: #1976d2;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(25,118,210,0.1);
+  }
+  
+  .wizard-review-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .wizard-review-item:last-child {
+    border-bottom: none;
+  }
+  
+  .wizard-review-label {
+    font-weight: 600;
+    color: #666;
+  }
+  
+  .wizard-review-value {
+    font-weight: 600;
+    color: #1976d2;
+  }
+  
+  .wizard-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+  }
+  
+  .wizard-btn {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .wizard-btn.prev {
+    background: #6c757d;
+    color: white;
+    box-shadow: 0 4px 14px rgba(108,117,125,0.3);
+  }
+  
+  .wizard-btn.prev:hover {
+    background: #5a6268;
+    box-shadow: 0 6px 20px rgba(108,117,125,0.4);
+    transform: translateY(-2px);
+  }
+  
+  .wizard-btn.next {
+    background: #1976d2;
+    color: white;
+    box-shadow: 0 4px 14px rgba(25,118,210,0.3);
+  }
+  
+  .wizard-btn.next:hover {
+    background: #1565c0;
+    box-shadow: 0 6px 20px rgba(25,118,210,0.4);
+    transform: translateY(-2px);
+  }
+  
+  .wizard-btn.send {
+    background: #28a745;
+    color: white;
+    box-shadow: 0 4px 14px rgba(40,167,69,0.3);
+  }
+  
+  .wizard-btn.send:hover {
+    background: #218838;
+    box-shadow: 0 6px 20px rgba(40,167,69,0.4);
+    transform: translateY(-2px);
+  }
+  
+  .wizard-btn:disabled {
+    background: #b0bec5;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
   }
 </style>
 </head>
@@ -913,7 +1266,7 @@
         
         <!-- Action Buttons -->
         <div class="action-buttons">
-          <div class="action-button send" id="btnSendToggle">
+          <div class="action-button send" id="btnSendWizard">
             <div class="action-icon">→</div>
             <div class="action-text">Send</div>
           </div>
@@ -958,23 +1311,56 @@
         </div>
       </div>
 
-      <!-- SEND FORM -->
-      <div id="sendForm" class="send-wrap">
-        <h4 style="margin:0 0 10px 0; color:var(--brand)">Send Assets</h4>
-        <div class="send-row">
-          <div><label for="sendAsset">Asset</label><select id="sendAsset"><option value="XLM">XLM</option><option value="LAAM">Laam</option><option value="USDC">USDC</option></select></div>
-          <div><label for="sendAmount">Amount</label><input id="sendAmount" type="number" step="0.0000001" placeholder="e.g. 10" /></div>
-        </div>
-        <label for="sendDest" style="margin-top:8px;">Destination Public Key</label>
-        <input id="sendDest" type="text" placeholder="G... destination" />
-        
-        <!-- MEMO FIELD -->
-        <div class="form-group">
-          <label for="sendMemo">Memo (Optional)</label>
-          <input class="form-input" id="sendMemo" type="text" placeholder="Memo text or ID" />
+      <!-- Token List Section -->
+      <div class="token-list-container">
+        <div class="token-list-header">
+          <div class="token-list-title">Tokens</div>
+          <button class="token-list-refresh" id="refreshTokenList">↻</button>
         </div>
         
-        <button id="btnSend" style="margin-top:10px;">Send Now</button>
+        <div id="tokenList">
+          <div class="token-item">
+            <div class="token-info">
+              <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="XLM" class="token-icon">
+              <div class="token-details">
+                <div class="token-name">XLM</div>
+                <div class="token-price">$0.409 / XLM</div>
+              </div>
+            </div>
+            <div class="token-balance">
+              <div class="token-amount" id="tokenXlmBal">0</div>
+              <div class="token-value" id="tokenXlmValue">$0.00</div>
+            </div>
+          </div>
+          
+          <div class="token-item">
+            <div class="token-info">
+              <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="Laam" class="token-icon">
+              <div class="token-details">
+                <div class="token-name">Laam</div>
+                <div class="token-price">$0.056 / Laam</div>
+              </div>
+            </div>
+            <div class="token-balance">
+              <div class="token-amount" id="tokenLaamBal">0</div>
+              <div class="token-value" id="tokenLaamValue">$0.00</div>
+            </div>
+          </div>
+          
+          <div class="token-item">
+            <div class="token-info">
+              <img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.png" alt="USDC" class="token-icon">
+              <div class="token-details">
+                <div class="token-name">USDC</div>
+                <div class="token-price">$1.00 / USDC</div>
+              </div>
+            </div>
+            <div class="token-balance">
+              <div class="token-amount" id="tokenUsdcBal">0</div>
+              <div class="token-value" id="tokenUsdcValue">$0.00</div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Enhanced Trade Section -->
@@ -1083,6 +1469,113 @@
         <div class="trade-actions">
           <button class="btn-buy" id="btnBuy">Buy</button>
           <button class="btn-sell" id="btnSell">Sell</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Send Wizard Modal -->
+    <div id="sendWizardModal" class="send-wizard-modal">
+      <div class="send-wizard-content">
+        <div class="wizard-header">
+          <h3 class="wizard-title">Send Assets</h3>
+          <button class="wizard-close" onclick="closeSendWizard()">&times;</button>
+        </div>
+        
+        <div class="wizard-progress">
+          <div class="wizard-progress-bar" id="wizardProgressBar"></div>
+          <div class="wizard-step-indicator active" id="step1Indicator">1</div>
+          <div class="wizard-step-indicator" id="step2Indicator">2</div>
+          <div class="wizard-step-indicator" id="step3Indicator">3</div>
+          <div class="wizard-step-indicator" id="step4Indicator">4</div>
+          <div class="wizard-step-indicator" id="step5Indicator">5</div>
+        </div>
+        
+        <!-- Step 1: Select Asset -->
+        <div class="wizard-step active" id="wizardStep1">
+          <div class="wizard-field">
+            <label class="wizard-label" for="wizardAsset">Select Asset</label>
+            <select class="wizard-select" id="wizardAsset">
+              <option value="XLM">XLM</option>
+              <option value="LAAM">Laam</option>
+              <option value="USDC">USDC</option>
+            </select>
+          </div>
+          <div class="wizard-actions">
+            <button class="wizard-btn next" onclick="nextWizardStep(1)">Next</button>
+          </div>
+        </div>
+        
+        <!-- Step 2: Enter Amount -->
+        <div class="wizard-step" id="wizardStep2">
+          <div class="wizard-field">
+            <label class="wizard-label" for="wizardAmount">Amount</label>
+            <input class="wizard-input" id="wizardAmount" type="number" step="0.0000001" placeholder="Enter amount" />
+            <div class="muted" style="margin-top: 8px;">Available: <span id="wizardAvailableBalance">0</span></div>
+          </div>
+          <div class="wizard-actions">
+            <button class="wizard-btn prev" onclick="prevWizardStep(2)">Previous</button>
+            <button class="wizard-btn next" onclick="nextWizardStep(2)">Next</button>
+          </div>
+        </div>
+        
+        <!-- Step 3: Destination Address -->
+        <div class="wizard-step" id="wizardStep3">
+          <div class="wizard-field">
+            <label class="wizard-label" for="wizardDestination">Destination Address</label>
+            <input class="wizard-input" id="wizardDestination" type="text" placeholder="Enter destination public key (G...)" />
+          </div>
+          <div class="wizard-actions">
+            <button class="wizard-btn prev" onclick="prevWizardStep(3)">Previous</button>
+            <button class="wizard-btn next" onclick="nextWizardStep(3)">Next</button>
+          </div>
+        </div>
+        
+        <!-- Step 4: Memo (Optional) -->
+        <div class="wizard-step" id="wizardStep4">
+          <div class="wizard-field">
+            <label class="wizard-label" for="wizardMemo">Memo (Optional)</label>
+            <input class="wizard-input" id="wizardMemo" type="text" placeholder="Enter memo" />
+          </div>
+          <div class="wizard-actions">
+            <button class="wizard-btn prev" onclick="prevWizardStep(4)">Previous</button>
+            <button class="wizard-btn next" onclick="nextWizardStep(4)">Next</button>
+          </div>
+        </div>
+        
+        <!-- Step 5: Review and Confirm -->
+        <div class="wizard-step" id="wizardStep5">
+          <div class="wizard-field">
+            <h4 style="margin: 0 0 15px 0; color: #1976d2;">Review Transaction</h4>
+            
+            <div class="wizard-review-item">
+              <div class="wizard-review-label">Asset:</div>
+              <div class="wizard-review-value" id="reviewAsset">XLM</div>
+            </div>
+            
+            <div class="wizard-review-item">
+              <div class="wizard-review-label">Amount:</div>
+              <div class="wizard-review-value" id="reviewAmount">0</div>
+            </div>
+            
+            <div class="wizard-review-item">
+              <div class="wizard-review-label">Destination:</div>
+              <div class="wizard-review-value" id="reviewDestination" style="font-size: 12px;">GABCD...</div>
+            </div>
+            
+            <div class="wizard-review-item">
+              <div class="wizard-review-label">Memo:</div>
+              <div class="wizard-review-value" id="reviewMemo">None</div>
+            </div>
+            
+            <div class="wizard-review-item" style="border-top: 2px solid #1976d2; padding-top: 15px; margin-top: 10px;">
+              <div class="wizard-review-label">Network Fee:</div>
+              <div class="wizard-review-value">0.00001 XLM</div>
+            </div>
+          </div>
+          <div class="wizard-actions">
+            <button class="wizard-btn prev" onclick="prevWizardStep(5)">Previous</button>
+            <button class="wizard-btn send" id="wizardSendBtn">Send Now</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1208,6 +1701,7 @@
     let tradesData = [];
     let currentOfferId = null;
     let priceChart = null; // Chart.js instance
+    let currentWizardStep = 1;
     
     // Initialize Stellar SDK
     function initializeStellar() {
@@ -1518,7 +2012,7 @@
               <td>${ask.price}</td>
               <td>${ask.total}</td>
             `;
-            
+      
             row.addEventListener('click', () => {
               if (document.getElementById('tradeModal').classList.contains('show')) {
                 document.getElementById('modalPrice').value = ask.price;
@@ -1570,7 +2064,7 @@
             row.innerHTML = `
               <td>${bid.amount}</td>
               <td>${bid.price}</td>
-              <td>${bid.total}</td>
+              <td>${bid.total</td>
             `;
             
             row.addEventListener('click', () => {
@@ -1708,15 +2202,36 @@
         
         sampleTrades.forEach(trade => {
           const row = document.createElement('tr');
-          row.innerHTML = `
-            <td class="trade-time">${trade.time}</td>
-            <td class="${trade.type.toLowerCase() === 'buy' ? 'trade-buy' : 'trade-sell'}">${trade.type}</td>
-            <td>${trade.price}</td>
-            <td>${trade.amount}</td>
-          `;
-          tradesBody.appendChild(row);
+            row.innerHTML = `
+              <td class="trade-time">${trade.time}</td>
+              <td class="${trade.type.toLowerCase() === 'buy' ? 'trade-buy' : 'trade-sell'}">${trade.type}</td>
+              <td>${trade.price}</td>
+              <td>${trade.amount}</td>
+            `;
+            tradesBody.appendChild(row);
         });
       }
+    }
+
+    // Update token list display
+    function updateTokenListDisplay() {
+      const xlmBal = document.getElementById('xlmBal').textContent;
+      const xlmUsd = document.getElementById('xlmUsd').textContent;
+      
+      const laamBal = document.getElementById('laamBal').textContent;
+      const laamUsd = document.getElementById('laamUsd').textContent;
+      
+      const usdcBal = document.getElementById('usdcBal').textContent;
+      const usdcUsd = document.getElementById('usdcUsd').textContent;
+      
+      document.getElementById('tokenXlmBal').textContent = xlmBal;
+      document.getElementById('tokenXlmValue').textContent = '$' + xlmUsd;
+      
+      document.getElementById('tokenLaamBal').textContent = laamBal;
+      document.getElementById('tokenLaamValue').textContent = '$' + laamUsd;
+      
+      document.getElementById('tokenUsdcBal').textContent = usdcBal;
+      document.getElementById('tokenUsdcValue').textContent = '$' + usdcUsd;
     }
 
     // Update total assets value
@@ -1726,12 +2241,15 @@
       const usdcUsd = parseFloat(document.getElementById('usdcUsd').textContent) || 0;
       const totalAssets = (xlmUsd + laamUsd + usdcUsd).toFixed(2);
       document.getElementById('totalAssets').textContent = totalAssets;
+      
+      // Also update the token list
+      updateTokenListDisplay();
     }
 
     // Helper: get best sell offer price
     async function getBestSellOfferPrice() {
       try {
-        const orderbookUrl = `https://horizon.stellar.org/order_book?selling_asset_type=credit_alphanum4&selling_asset_code=${LAAM_TOKEN.code}&selling_asset_issuer=${LAAM_TOKEN.issuer}&buying_asset_type=native&limit=1`;
+        const orderbookUrl = `https://horizon.stellar.org/order_book?selling_asset_type=credit_alphanum4&selling_asset_code=${LAAM_TOKEN.code&selling_asset_issuer=${LAAM_TOKEN.issuer}&buying_asset_type=native&limit=1`;
         const response = await fetch(orderbookUrl);
         const data = await response.json();
         
@@ -1996,9 +2514,9 @@
         const operation = StellarSdk.Operation.manageSellOffer({
           selling: new StellarSdk.Asset(offer.selling.asset_code, offer.selling.asset_issuer),
           buying: new StellarSdk.Asset(offer.buying.asset_code, offer.buying.asset_issuer),
-          amount: '0',
-          price: '1',
-          offerId: offerId
+            amount: '0',
+            price: '1',
+            offerId: offerId
         });
 
         const transaction = new StellarSdk.TransactionBuilder(account, {
@@ -2111,6 +2629,181 @@
         } catch (error) {
           showError('Failed to cancel order: ' + error.message);
         }
+      }
+    }
+
+    // Send Wizard functions
+    function openSendWizard() {
+      currentWizardStep = 1;
+      updateWizardProgress();
+      document.getElementById('sendWizardModal').classList.add('show');
+    }
+
+    function closeSendWizard() {
+      document.getElementById('sendWizardModal').classList.remove('show');
+    }
+
+    function updateWizardProgress() {
+      // Update progress bar
+      const progressPercentage = ((currentWizardStep - 1) / 4) * 100;
+      document.getElementById('wizardProgressBar').style.width = progressPercentage + '%';
+      
+      // Update step indicators
+      for (let i = 1; i <= 5; i++) {
+        const indicator = document.getElementById('step' + i + 'Indicator');
+        if (i < currentWizardStep) {
+          indicator.className = 'wizard-step-indicator completed';
+        } else if (i === currentWizardStep) {
+          indicator.className = 'wizard-step-indicator active';
+        } else {
+          indicator.className = 'wizard-step-indicator';
+        }
+      }
+      
+      // Show/hide steps
+      for (let i = 1; i <= 5; i++) {
+        const step = document.getElementById('wizardStep' + i);
+        if (i === currentWizardStep) {
+          step.classList.add('active');
+        } else {
+          step.classList.remove('active');
+        }
+      }
+      
+      // Update available balance based on selected asset
+      if (currentWizardStep === 2) {
+        const selectedAsset = document.getElementById('wizardAsset').value;
+        let availableBalance = 0;
+        
+        if (selectedAsset === 'XLM') {
+          availableBalance = document.getElementById('xlmBal').textContent;
+        } else if (selectedAsset === 'LAAM') {
+          availableBalance = document.getElementById('laamBal').textContent;
+        } else if (selectedAsset === 'USDC') {
+          availableBalance = document.getElementById('usdcBal').textContent;
+        }
+        
+        document.getElementById('wizardAvailableBalance').textContent = availableBalance + ' ' + selectedAsset;
+      }
+      
+      // Update review details
+      if (currentWizardStep === 5) {
+        const asset = document.getElementById('wizardAsset').value;
+        const amount = document.getElementById('wizardAmount').value;
+        const destination = document.getElementById('wizardDestination').value;
+        const memo = document.getElementById('wizardMemo').value;
+        
+        document.getElementById('reviewAsset').textContent = asset;
+        document.getElementById('reviewAmount').textContent = amount + ' ' + asset;
+        
+        // Shorten destination for display
+        const shortDestination = destination.substring(0, 8) + '...' + destination.substring(destination.length - 4);
+        document.getElementById('reviewDestination').textContent = shortDestination;
+        
+        document.getElementById('reviewMemo').textContent = memo || 'None';
+      }
+    }
+
+    function nextWizardStep(currentStep) {
+      // Validate current step before proceeding
+      if (currentStep === 2) {
+        const amount = parseFloat(document.getElementById('wizardAmount').value);
+        const availableBalance = parseFloat(document.getElementById('wizardAvailableBalance').textContent.split(' ')[0]);
+        
+        if (isNaN(amount) || amount <= 0) {
+          showError('Please enter a valid amount');
+          return;
+        }
+        
+        if (amount > availableBalance) {
+          showError('Insufficient balance');
+          return;
+        }
+      } else if (currentStep === 3) {
+        const destination = document.getElementById('wizardDestination').value;
+        
+        if (!destination.startsWith('G') || destination.length !== 56) {
+          showError('Please enter a valid Stellar public key (starts with G, 56 characters)');
+          return;
+        }
+      }
+      
+      currentWizardStep++;
+      updateWizardProgress();
+    }
+
+    function prevWizardStep(currentStep) {
+      currentWizardStep--;
+      updateWizardProgress();
+    }
+
+    async function sendWizardTransaction() {
+      const asset = document.getElementById('wizardAsset').value;
+      const amount = document.getElementById('wizardAmount').value;
+      const destination = document.getElementById('wizardDestination').value;
+      const memo = document.getElementById('wizardMemo').value;
+      
+      if (!currentKeypair) {
+        showError('Wallet not loaded.');
+        return;
+      }
+      
+      document.getElementById('wizardSendBtn').textContent = 'Sending...';
+      document.getElementById('wizardSendBtn').disabled = true;
+      
+      try {
+        const account = await server.loadAccount(currentKeypair.publicKey());
+        
+        let operation;
+        if (asset === 'XLM') {
+          operation = StellarSdk.Operation.payment({
+            destination: destination,
+            asset: StellarSdk.Asset.native(),
+            amount: amount
+          });
+        } else if (asset === 'LAAM') {
+          operation = StellarSdk.Operation.payment({
+            destination: destination,
+            asset: LAAM_ASSET,
+            amount: amount
+          });
+        } else if (asset === 'USDC') {
+          operation = StellarSdk.Operation.payment({
+            destination: destination,
+            asset: USDC_ASSET,
+            amount: amount
+          });
+        }
+        
+        const transactionBuilder = new StellarSdk.TransactionBuilder(account, {
+          fee: StellarSdk.BASE_FEE,
+          networkPassphrase: StellarSdk.Networks.PUBLIC
+        });
+
+        if (memo) {
+          transactionBuilder.addMemo(StellarSdk.Memo.text(memo));
+        }
+
+        const transaction = transactionBuilder
+          .addOperation(operation)
+          .setTimeout(180)
+          .build();
+        
+        transaction.sign(currentKeypair);
+        
+        const result = await server.submitTransaction(transaction);
+        
+        showSuccess('Transaction sent successfully!');
+        closeSendWizard();
+        
+        await updateBalanceDisplay();
+        
+      } catch (error) {
+        console.error('Send transaction error:', error);
+        showError('Failed to send transaction: ' + error.message);
+      } finally {
+        document.getElementById('wizardSendBtn').textContent = 'Send Now';
+        document.getElementById('wizardSendBtn').disabled = false;
       }
     }
 
@@ -2326,13 +3019,9 @@
         }
       });
       
-      document.getElementById('btnSendToggle').addEventListener('click', function() {
-        const sendForm = document.getElementById('sendForm');
-        if (sendForm.style.display === 'none' || sendForm.style.display === '') {
-          sendForm.style.display = 'block';
-        } else {
-          sendForm.style.display = 'none';
-        }
+      // Event listener for the Send Wizard button
+      document.getElementById('btnSendWizard').addEventListener('click', function() {
+        openSendWizard();
       });
         
       // Event listener for the Receive button
@@ -2376,85 +3065,6 @@
           document.body.appendChild(receiveModal);
       });
       
-      document.getElementById('btnSend').addEventListener('click', async function() {
-        const asset = document.getElementById('sendAsset').value;
-        const amount = document.getElementById('sendAmount').value;
-        const destination = document.getElementById('sendDest').value;
-        const memo = document.getElementById('sendMemo').value;
-        
-        if (!amount || !destination) {
-          showError('Please fill in all fields.');
-          return;
-        }
-        
-        if (!currentKeypair) {
-          showError('Wallet not loaded.');
-          return;
-        }
-        
-        this.textContent = 'Sending...';
-        this.disabled = true;
-        
-        try {
-          const account = await server.loadAccount(currentKeypair.publicKey());
-          
-          let operation;
-          if (asset === 'XLM') {
-            operation = StellarSdk.Operation.payment({
-              destination: destination,
-              asset: StellarSdk.Asset.native(),
-              amount: amount
-            });
-          } else if (asset === 'LAAM') {
-            operation = StellarSdk.Operation.payment({
-              destination: destination,
-              asset: LAAM_ASSET,
-              amount: amount
-            });
-          } else if (asset === 'USDC') {
-            operation = StellarSdk.Operation.payment({
-              destination: destination,
-              asset: USDC_ASSET,
-              amount: amount
-            });
-          }
-          
-          const transactionBuilder = new StellarSdk.TransactionBuilder(account, {
-            fee: StellarSdk.BASE_FEE,
-            networkPassphrase: StellarSdk.Networks.PUBLIC
-          });
-
-          if (memo) {
-            transactionBuilder.addMemo(StellarSdk.Memo.text(memo));
-          }
-
-          const transaction = transactionBuilder
-            .addOperation(operation)
-            .setTimeout(180)
-            .build();
-          
-          transaction.sign(currentKeypair);
-          
-          const result = await server.submitTransaction(transaction);
-          
-          showSuccess('Transaction sent successfully!');
-          
-          document.getElementById('sendAmount').value = '';
-          document.getElementById('sendDest').value = '';
-          document.getElementById('sendMemo').value = '';
-          document.getElementById('sendForm').style.display = 'none';
-          
-          await updateBalanceDisplay();
-          
-        } catch (error) {
-          console.error('Send transaction error:', error);
-          showError('Failed to send transaction: ' + error.message);
-        } finally {
-          this.textContent = 'Send Now';
-          this.disabled = false;
-        }
-      });
-        
       // Tab switching event listeners
       document.getElementById('overviewTab').addEventListener('click', () => switchTab('overview'));
       document.getElementById('orderbookTab').addEventListener('click', () => switchTab('orderbook'));
@@ -2589,6 +3199,17 @@
         }
       });
       
+      // Send wizard send button
+      document.getElementById('wizardSendBtn').addEventListener('click', function() {
+        sendWizardTransaction();
+      });
+      
+      // Refresh token list button
+      document.getElementById('refreshTokenList').addEventListener('click', function() {
+        updateBalanceDisplay();
+        showSuccess('Token list refreshed');
+      });
+      
       console.log('All event listeners attached successfully');
     });
 
@@ -2654,311 +3275,44 @@
       }
     }
 
-    // Calculate 24h stats from trade history
-    function calculate24hStats(trades) {
-      const now = new Date();
-      const twentyFourHoursAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
-      
-      const recentTrades = trades.filter(trade => 
-        new Date(trade.ledger_close_time) >= twentyFourHoursAgo
-      );
-      
-      if (recentTrades.length === 0) {
-        return {
-          volume: 0,
-          high: 0,
-          low: 0,
-          change: 0,
-          changePercent: 0
-        };
-      }
-      
-      let volume = 0;
-      let high = 0;
-      let low = Infinity;
-      let prices = [];
-      
-      recentTrades.forEach(trade => {
-        const price = parseFloat(trade.price.n / trade.price.d);
-        const amount = parseFloat(trade.base_amount);
-        
-        volume += amount;
-        
-        if (price > high) high = price;
-        if (price < low) low = price;
-        
-        prices.push({
-          price: price,
-          time: new Date(trade.ledger_close_time)
-        });
-      });
-      
-      // Sort prices by time to get first and last price
-      prices.sort((a, b) => a.time - b.time);
-      
-      const firstPrice = prices.length > 0 ? prices[0].price : 0;
-      const lastPrice = prices.length > 0 ? prices[prices.length - 1].price : 0;
-      const change = lastPrice - firstPrice;
-      const changePercent = firstPrice > 0 ? (change / firstPrice) * 100 : 0;
-      
-      return {
-        volume: volume,
-        high: high,
-        low: low === Infinity ? 0 : low,
-        change: change,
-        changePercent: changePercent
-      };
-    }
-
-    // Create price chart with real data
+    // Create a more realistic price chart
     async function createRealPriceChart(timeframe = '1D') {
-      const trades = await fetchTradeHistory(500); // Get more trades for different timeframes
-      const ctx = document.getElementById('priceChart').getContext('2d');
-      
-      // Filter trades based on timeframe
-      const now = new Date();
-      let filteredTrades = [];
-      let timeLabels = [];
-      
-      switch(timeframe) {
-        case '1D':
-          const oneDayAgo = new Date(now.getTime() - (24 * 60 * 60 * 1000));
-          filteredTrades = trades.filter(trade => 
-            new Date(trade.ledger_close_time) >= oneDayAgo
-          );
-          timeLabels = filteredTrades.map(trade => 
-            new Date(trade.ledger_close_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
-          );
-          break;
-          
-        case '1W':
-          const oneWeekAgo = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
-          filteredTrades = trades.filter(trade => 
-            new Date(trade.ledger_close_time) >= oneWeekAgo
-          );
-          // Group by day and calculate average price per day
-          const dailyPrices = {};
-          filteredTrades.forEach(trade => {
-            const date = new Date(trade.ledger_close_time).toLocaleDateString();
-            const price = parseFloat(trade.price.n / trade.price.d);
-            
-            if (!dailyPrices[date]) {
-              dailyPrices[date] = { total: 0, count: 0 };
-            }
-            
-            dailyPrices[date].total += price;
-            dailyPrices[date].count += 1;
-          });
-          
-          filteredTrades = Object.keys(dailyPrices).map(date => ({
-            price: dailyPrices[date].total / dailyPrices[date].count,
-            date: date
-          }));
-          
-          timeLabels = Object.keys(dailyPrices);
-          break;
-          
-        case '1M':
-          const oneMonthAgo = new Date(now.getTime() - (30 * 24 * 60 * 60 * 1000));
-          filteredTrades = trades.filter(trade => 
-            new Date(trade.ledger_close_time) >= oneMonthAgo
-          );
-          // Group by week and calculate average price per week
-          const weeklyPrices = {};
-          filteredTrades.forEach(trade => {
-            const date = new Date(trade.ledger_close_time);
-            const week = `Week ${Math.ceil(date.getDate() / 7)}`;
-            const price = parseFloat(trade.price.n / trade.price.d);
-            
-            if (!weeklyPrices[week]) {
-              weeklyPrices[week] = { total: 0, count: 0 };
-            }
-            
-            weeklyPrices[week].total += price;
-            weeklyPrices[week].count += 1;
-          });
-          
-          filteredTrades = Object.keys(weeklyPrices).map(week => ({
-            price: weeklyPrices[week].total / weeklyPrices[week].count,
-            week: week
-          }));
-          
-          timeLabels = Object.keys(weeklyPrices);
-          break;
-          
-        case 'ALL':
-        default:
-          filteredTrades = trades;
-          timeLabels = filteredTrades.map(trade => 
-            new Date(trade.ledger_close_time).toLocaleDateString()
-          );
-          break;
-      }
-      
-      const prices = filteredTrades.map(trade => 
-        typeof trade.price === 'number' ? trade.price : parseFloat(trade.price.n / trade.price.d)
-      );
-      
-      // Destroy existing chart if it exists
-      if (priceChart) {
-        priceChart.destroy();
-      }
-      
-      // If we don't have enough data, show the Stellar.expert iframe
-      if (prices.length < 2) {
-        // Hide the canvas
-        ctx.canvas.style.display = 'none';
-        
-        return;
-      }
-      
-      priceChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: timeLabels,
-          datasets: [{
-            label: 'LAAM/XLM Price',
-            data: prices,
-            borderColor: '#1976d2',
-            backgroundColor: 'rgba(25, 118, 210, 0.1)',
-            borderWidth: 2,
-            pointRadius: 2,
-            pointBackgroundColor: '#1976d2',
-            pointBorderColor: '#fff',
-            pointHoverRadius: 4,
-            fill: true,
-            tension: 0.3
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false
-            },
-            tooltip: {
-              mode: 'index',
-              intersect: false,
-              backgroundColor: 'rgba(0, 0, 0, 0.7)',
-              titleFont: {
-                size: 14
-              },
-              bodyFont: {
-                size: 13
-              },
-              callbacks: {
-                label: function(context) {
-                  return `Price: ${context.parsed.y.toFixed(7)} XLM`;
-                }
-              }
-            }
-          },
-          scales: {
-            x: {
-              grid: {
-                display: false
-              },
-              ticks: {
-                maxRotation: 0,
-                autoSkip: true,
-                maxTicksLimit: 6
-              }
-            },
-            y: {
-              grid: {
-                color: 'rgba(0, 0, 0, 0.05)'
-              },
-              ticks: {
-                callback: function(value) {
-                  return value.toFixed(6) + ' XLM';
-                }
-              }
-            }
-          },
-          interaction: {
-            intersect: false,
-            mode: 'index',
-          }
-        }
-      });
-    }
-
-    // Update overview tab with real data
-    async function updateOverview() {
       try {
-        // Fetch current price
-        const priceData = await fetchLaamPrice();
-        const currentPrice = priceData.price;
+        const trades = await fetchTradeHistory(100);
         
-        // Fetch trade history for stats
-        const trades = await fetchTradeHistory(200);
-        const stats = calculate24hStats(trades);
+        if (trades.length === 0) {
+          console.warn('No trade data available for chart');
+          return;
+        }
         
-        // Update price display
-        document.getElementById('overviewLaamPriceXLM').textContent = currentPrice.toFixed(7);
+        // Process data based on timeframe
+        const prices = [];
+        const labels = [];
         
-        // Update price change
-        const priceChangeElement = document.getElementById('priceChange');
-        const changeSign = stats.change >= 0 ? '+' : '';
-        priceChangeElement.textContent = `${changeSign}${stats.change.toFixed(7)} (${changeSign}${stats.changePercent.toFixed(2)}%)`;
-        priceChangeElement.className = stats.change >= 0 ? 'price-change positive' : 'price-change negative';
+        // For simplicity, we'll use the last 100 trades regardless of timeframe
+        trades.forEach(trade => {
+          const price = parseFloat(trade.price.n) / parseFloat(trade.price.d);
+          const time = new Date(trade.ledger_close_time);
+          
+          prices.push(price);
+          labels.push(time.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}));
+        });
         
-        // Update market stats
-        document.getElementById('volume24h').textContent = `${stats.volume.toFixed(2)} Laam`;
-        document.getElementById('high24h').textContent = `${stats.high.toFixed(7)} XLM`;
-        document.getElementById('low24h').textContent = `${stats.low.toFixed(7)} XLM`;
+        // Reverse to show chronological order
+        prices.reverse();
+        labels.reverse();
         
-        // Calculate market cap (current price * max supply)
-        const marketCap = currentPrice * LAAM_TOKEN.maxSupply;
-        document.getElementById('marketCap').textContent = `${marketCap.toFixed(0)} XLM`;
-        
-        // Create or update the price chart
-        const activeTimeframe = document.querySelector('.timeframe-btn.active').getAttribute('data-timeframe');
-        await createRealPriceChart(activeTimeframe);
-        
+        // Update the chart
+        if (priceChart) {
+          priceChart.data.labels = labels;
+          priceChart.data.datasets[0].data = prices;
+          priceChart.update();
+        } else {
+          createPriceChart();
+        }
       } catch (error) {
-        console.error('Error updating overview:', error);
-        
-        // Fallback values in case of error
-        document.getElementById('overviewLaamPriceXLM').textContent = '0.060000';
-        document.getElementById('priceChange').textContent = 'Error loading data';
-        document.getElementById('volume24h').textContent = '0 Laam';
-        document.getElementById('high24h').textContent = '0.000000 XLM';
-        document.getElementById('low24h').textContent = '0.000000 XLM';
-        document.getElementById('marketCap').textContent = '0 XLM';
-        
-        createPriceChart(); // Fallback to sample chart
+        console.error('Error creating real price chart:', error);
       }
-    }
-
-    // Swap button logic
-    document.getElementById('btnSwap').addEventListener('click', function() {
-      openTradeModal('buy');
-      (async () => {
-        try {
-          const ob = await fetchLaamPrice();
-          if (ob && ob.ask) {
-            document.getElementById('modalPrice').value = parseFloat(ob.ask).toFixed(7);
-            calculateTotal();
-          }
-        } catch (e) {
-          console.warn('Could not prefill price for swap:', e);
-        }
-      })();
-    });
-
-    // Allow swapping direction by clicking the swap icon
-    const swapIcon = document.getElementById('swapAssets');
-    if (swapIcon) {
-      swapIcon.addEventListener('click', () => {
-        const assetBoxes = document.querySelectorAll('.trade-asset-selector .asset-box');
-        if (assetBoxes.length === 2) {
-          const left = assetBoxes[0].innerHTML;
-          assetBoxes[0].innerHTML = assetBoxes[1].innerHTML;
-          assetBoxes[1].innerHTML = left;
-        }
-      });
     }
   </script>
 </body>
