@@ -705,11 +705,11 @@
   }
 
   .action-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 15px;
-  }
+  display: grid;
+  grid-template-columns: repeat(2, 100px); /* 2 button isku garab ah */
+  justify-content: center; /* bartamaha dhig */
+  gap: 15px; /* firaaqo u dhexeeya */
+}
   
   .action-button {
     display: flex;
