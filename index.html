@@ -1106,7 +1106,6 @@
           </div>
         </div>
       </div>
-    </div>
       <!-- Enhanced Trade Section -->
       <div class="card trade-card">
         <div class="trade-header">
@@ -3096,6 +3095,128 @@
       btn.disabled = false;
     }
   }
+document.addEventListener('DOMContentLoaded', function() {
+            const accountInput = document.getElementById('accountInput');
+            const refreshBtn = document.getElementById('refreshBtn');
+            
+            // Token configuration
+            const tokens = {
+                XLM: {
+                    balanceElement: document.getElementById('xlmBalance'),
+                    usdElement: document.getElementById('xlmUsd'),
+                    price: 0.409,
+                    issuer: null, // Native asset
+                    code: 'XLM'
+                },
+                LAAM: {
+                    balanceElement: document.getElementById('laamBalance'),
+                    usdElement: document.getElementById('laamUsd'),
+                    price: 0.056,
+                    issuer: 'GAL4ECDAXNBMJYFCWIJ32HKVIRLCNEXY664CAZYI3EINQWPLXTMEPR64',
+                    code: 'LAAM'
+                },
+                USDC: {
+                    balanceElement: document.getElementById('usdcBalance'),
+                    usdElement: document.getElementById('usdcUsd'),
+                    price: 1.00,
+                    issuer: 'GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN',
+                    code: 'USDC'
+                }
+            };
+            
+            // Event listeners
+            refreshBtn.addEventListener('click', fetchBalances);
+            accountInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    fetchBalances();
+                }
+            });
+            
+            // Function to fetch token balances
+            async function fetchBalances() {
+                const accountId = accountInput.value.trim();
+                
+                if (!accountId) {
+                    alert('Please enter a Stellar account address');
+                    return;
+                }
+                
+                // Show loading state
+                Object.values(tokens).forEach(token => {
+                    token.balanceElement.textContent = 'Loading...';
+                    token.usdElement.textContent = 'Loading...';
+                    token.balanceElement.parentElement.parentElement.classList.add('loading');
+                });
+                
+                try {
+                    // Fetch account data from Horizon
+                    const response = await fetch(`https://horizon.stellar.org/accounts/${accountId}`);
+                    
+                    if (!response.ok) {
+                        throw new Error('Account not found or network error');
+                    }
+                    
+                    const accountData = await response.json();
+                    
+                    // Process balances
+                    processBalances(accountData.balances);
+                } catch (error) {
+                    console.error('Error fetching balances:', error);
+                    alert('Error fetching balances: ' + error.message);
+                    
+                    // Reset display on error
+                    Object.values(tokens).forEach(token => {
+                        token.balanceElement.textContent = '0';
+                        token.usdElement.textContent = '0';
+                        token.balanceElement.parentElement.parentElement.classList.remove('loading');
+                    });
+                }
+            }
+            
+            // Process the balances from the Horizon response
+            function processBalances(balances) {
+                // Reset all balances to 0 first
+                Object.values(tokens).forEach(token => {
+                    token.balanceElement.textContent = '0';
+                    token.usdElement.textContent = '0';
+                    token.balanceElement.parentElement.parentElement.classList.remove('loading');
+                });
+                
+                // Process each balance from the account
+                balances.forEach(balance => {
+                    for (const [tokenName, token] of Object.entries(tokens)) {
+                        if (tokenName === 'XLM' && balance.asset_type === 'native') {
+                            // Handle native XLM
+                            displayTokenBalance(token, balance.balance);
+                            return;
+                        }
+                        
+                        if (balance.asset_type === 'credit_alphanum4' || balance.asset_type === 'credit_alphanum12') {
+                            if (balance.asset_code === token.code && balance.asset_issuer === token.issuer) {
+                                displayTokenBalance(token, balance.balance);
+                                return;
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Display token balance and calculate USD value
+            function displayTokenBalance(token, balance) {
+                const numericBalance = parseFloat(balance);
+                const usdValue = numericBalance * token.price;
+                
+                token.balanceElement.textContent = numericBalance.toFixed(2);
+                token.usdElement.textContent = usdValue.toFixed(2);
+                token.balanceElement.parentElement.parentElement.classList.remove('loading');
+            }
+            
+            // Initialize with placeholder values
+            Object.values(tokens).forEach(token => {
+                token.balanceElement.textContent = '0';
+                token.usdElement.textContent = '0';
+            });
+        });
   </script>
 </body>
 </html>
