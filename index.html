@@ -704,66 +704,68 @@
     color: #1976d2;
   }
   
-  .action-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 15px;
-  }
-  
-  .action-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 10px;
-    border-radius: 12px;
-    background: #f8f9fa;
-    border: 2px solid #e9ecef;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .action-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  
-  .action-button.send {
-    background: #f8f9fa;
-    color: #212529;
-  }
-  
-  .action-button.receive {
-    background: #28a745;
-    color: white;
-  }
-  
-  .action-button.swap {
-    background: #0052cc;
-    color: white;
-  }
-  
-  .action-button.trustline {
-    background: #6c757d;
-    color: white;
-  }
-  
-  .action-button.lock {
-    background: #dc3545;
-    color: white;
-  }
-  
-  .action-icon {
-    font-size: 24px;
-    margin-bottom: 8px;
-  }
-  
-  .action-text {
-    font-size: 14px;
-    font-weight: 600;
-  }
-  
+.action-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.action-button {
+  width: 85px;               /* cabbir dhexdhexaad */
+  height: 85px;              /* square */
+  border-radius: 50%;        /* round kubbad */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;              /* nadiif ah */
+}
+
+.action-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Midab walba sidii hore */
+.action-button.send {
+  background: #f8f9fa;
+  color: #212529;
+  border: 2px solid #e9ecef;
+}
+
+.action-button.receive {
+  background: #28a745;
+  color: white;
+}
+
+.action-button.swap {
+  background: #0052cc;
+  color: white;
+}
+
+.action-button.trustline {
+  background: #6c757d;
+  color: white;
+}
+
+.action-button.lock {
+  background: #dc3545;
+  color: white;
+}
+
+.action-icon {
+  font-size: 20px;   /* icon dhexdhexaad */
+  margin-bottom: 4px;
+}
+
+.action-text {
+  font-size: 12px;   /* qoraal dhexdhexaad */
+  font-weight: 600;
+}
+    
   .assets-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
