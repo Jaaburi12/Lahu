@@ -1052,58 +1052,46 @@
             <div class="action-text">Lock</div>
           </div>
         </div>  
-        <div class="assets-list">
+
+        <div class="assets-grid">
             <!-- XLM Token -->
             <div class="asset-item">
-                <div class="asset-left">
-                    <div class="asset-icon xlm">
-                        <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="XLM">
-                    </div>
-                    <div class="asset-info">
-                        <div class="asset-name">XLM</div>
-                        <div class="asset-price">$0.409 / XLM</div>
-                    </div>
+                <div class="asset-icon xlm">
+                    <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="XLM">
                 </div>
-                <div class="asset-right">
-                    <div class="asset-balance">1,250.50</div>
-                    <div class="asset-total">$511.45</div>
+                <div class="asset-details">
+                    <div class="asset-name">XLM</div>
+                    <div class="asset-balance"><span id="xlmBal">1,250.50</span></div>
+                    <div class="asset-price">$<span id="xlmUsd">511.45</span> ($<span id="xlmPrice">0.409</span>/XLM)</div>
                 </div>
             </div>
             
             <!-- LAAM Token -->
             <div class="asset-item">
-                <div class="asset-left">
-                    <div class="asset-icon laam">
-                        <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="LAAM">
-                    </div>
-                    <div class="asset-info">
-                        <div class="asset-name">LAAM</div>
-                        <div class="asset-price">$0.056 / LAAM</div>
-                    </div>
+                <div class="asset-icon laam">
+                    <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="LAAM">
                 </div>
-                <div class="asset-right">
-                    <div class="asset-balance">8,420.75</div>
-                    <div class="asset-total">$471.56</div>
+                <div class="asset-details">
+                    <div class="asset-name">Laam</div>
+                    <div class="asset-balance"><span id="laamBal">8,420.75</span></div>
+                    <div class="asset-price">$<span id="laamUsd">471.56</span> ($<span id="laamPrice">0.056</span>/Laam)</div>
                 </div>
             </div>
             
             <!-- USDC Token -->
             <div class="asset-item">
-                <div class="asset-left">
-                    <div class="asset-icon usdc">
-                        <img src="https://i.ibb.co/r2qNFs22/images-2.png" alt="USDC">
-                    </div>
-                    <div class="asset-info">
-                        <div class="asset-name">USDC</div>
-                        <div class="asset-price">$1.00 / USDC</div>
-                    </div>
+                <div class="asset-icon usdc">
+                    <img src="https://i.ibb.co/r2qNFs22/images-2.png" alt="USDC">
                 </div>
-                <div class="asset-right">
-                    <div class="asset-balance">265.74</div>
-                    <div class="asset-total">$265.74</div>
+                <div class="asset-details">
+                    <div class="asset-name">USDC</div>
+                    <div class="asset-balance"><span id="usdcBal">265.74</span></div>
+                    <div class="asset-price">$<span id="usdcUsd">265.74</span> ($<span id="usdcPrice">1.00</span>/USDC)</div>
                 </div>
             </div>
         </div>
+            
+                        
       <!-- Enhanced Trade Section -->
       <div class="card trade-card">
         <div class="trade-header">
