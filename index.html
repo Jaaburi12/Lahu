@@ -747,26 +747,37 @@
   }
   
   .assets-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin-top: 20px;
 }
 
 .asset-item {
   display: flex;
-  flex-direction: column; /* name & balance/price hoos u kala baxa */
+  justify-content: space-between;
+  align-items: center;
   padding: 15px;
-  background: #f8f9fa;
-  border-radius: 12px;
-  border: 1px solid #e9ecef;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.asset-header {
+.asset-left {
   display: flex;
-  justify-content: space-between; /* name-left, balance-right */
   align-items: center;
-  margin-bottom: 5px;
+  gap: 10px;
+}
+
+.asset-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.asset-info {
+  display: flex;
+  flex-direction: column;
 }
 
 .asset-name {
@@ -774,14 +785,24 @@
   color: #333;
 }
 
-.asset-balance {
-  font-size: 16px;
-  font-weight: bold;
-  color: #1976d2;
-  text-align: right;
+.asset-price {
+  font-size: 12px;
+  color: #666;
 }
 
-.asset-price {
+.asset-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.asset-balance {
+  font-weight: bold;
+  font-size: 16px;
+  color: #1976d2;
+}
+
+.asset-total {
   font-size: 12px;
   color: #666;
 }
