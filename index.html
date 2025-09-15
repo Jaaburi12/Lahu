@@ -951,6 +951,28 @@
   <div class="total-label">Total assets</div>
   <div class="total-value">$<span id="totalAssets">0</span></div>
 </div>
+          <div class="action-buttons">
+            <div class="action-button send" onclick="openSendWizard()">
+                <div class="action-icon">→</div>
+                <div class="action-text">Send</div>
+            </div>
+            <div class="action-button receive" id="btnReceive">
+                <div class="action-icon">←</div>
+                <div class="action-text">Receive</div>
+            </div>
+            <div class="action-button swap" id="btnSwap">
+                <div class="action-icon">⇄</div>
+                <div class="action-text">Swap</div>
+            </div>
+            <div class="action-button trustline" id="addTrustlineBtn">
+                <div class="action-icon">+</div>
+                <div class="action-text">Add Trustline</div>
+            </div>
+            <div class="action-button lock" id="logoutBtn">
+                <div class="action-icon">🔒</div>
+                <div class="action-text">Lock</div>
+            </div>
+          </div>
      
         <!-- Button to open wizard -->
 <button onclick="openSendWizard()" 
