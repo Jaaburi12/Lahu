@@ -1164,8 +1164,7 @@
     <p><strong>Memo:</strong> <span id="confirmMemo"></span></p>
     <div class="btn-group">
       <button class="wizard-btn secondary" onclick="backStep(3)">Back</button>
-      <button class="wizard-btn confirm" onclick="sendTransaction()">Send Now</button>
-    </div>
+      <button id="confirmSendBtn" class="wizard-btn confirm" onclick="sendTransaction()">Send Now</button>
 </div>
 </div>
 <!-- Main action buttons, ka baxsan wizard-ka -->
@@ -3113,22 +3112,7 @@
       document.getElementById("confirmMemo").textContent = document.getElementById("sendMemo").value || "—";
     }
   }
-function swapTradeAssets() {
-  // Hel labada asset box
-  const assetBoxes = document.querySelectorAll(".trade-asset-selector .asset-box");
 
-  if (assetBoxes.length === 2) {
-    const firstBox = assetBoxes[0];
-    const secondBox = assetBoxes[1];
-
-    // Ku keydi copy of firstBox HTML
-    const tempHTML = firstBox.innerHTML;
-
-    // Swap contents
-    firstBox.innerHTML = secondBox.innerHTML;
-    secondBox.innerHTML = tempHTML;
-  }
-}
   function nextStep(step) {
     showStep(step);
   }
@@ -3206,6 +3190,22 @@ document.getElementById('btnSend').onclick = function() {
   document.getElementById('sendWizard').style.display = 'block';
   document.getElementById('wizardOverlay').style.display = 'block';
 };
+function swapTradeAssets() {
+  // Hel labada asset box
+  const assetBoxes = document.querySelectorAll(".trade-asset-selector .asset-box");
+
+  if (assetBoxes.length === 2) {
+    const firstBox = assetBoxes[0];
+    const secondBox = assetBoxes[1];
+
+    // Ku keydi copy of firstBox HTML
+    const tempHTML = firstBox.innerHTML;
+
+    // Swap contents
+    firstBox.innerHTML = secondBox.innerHTML;
+    secondBox.innerHTML = tempHTML;
+  }
+}
 </script>
 </script>
 </body>
