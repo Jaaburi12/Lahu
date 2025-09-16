@@ -3227,6 +3227,76 @@ function swapTradeAssets() {
     secondBox.innerHTML = tempHTML;
   }
 }
+<script> src="https://cdnjs.cloudflare.com/ajax/libs/stellar-sdk/11.1.1/stellar-sdk.min.js"></script>
+<script>
+  const server = new StellarSdk.Server("https://horizon.stellar.org");
+
+  // Asset definitions
+  const LAAM_ASSET = new StellarSdk.Asset("Laam", "GAL4ECDAXNBMJYFCWIJ32HKVIRLCNEXY664CAZYI3EINQWPLXTMEPR64");
+  const USDC_ASSET = new StellarSdk.Asset("USDC", "GA5ZSEZ3LOORQ3HNTYXYITJVYZLBZK7NRR3MQHDCKJUMG6KGWLC5XIDV");
+
+  async function sendTransaction() {
+    const asset = document.getElementById("sendAsset").value;
+    const amount = document.getElementById("sendAmount").value;
+    const destination = document.getElementById("sendDest").value;
+    const memo = document.getElementById("sendMemo").value;
+
+    const btn = document.getElementById("confirmSendBtn");
+    btn.textContent = "Sending...";
+    btn.disabled = true;
+
+    try {
+      const account = await server.loadAccount(currentKeypair.publicKey());
+
+      let operation;
+      if (asset === "XLM") {
+        operation = StellarSdk.Operation.payment({
+          destination,
+          asset: StellarSdk.Asset.native(),
+          amount
+        });
+      } else if (asset === "LAAM") {
+        operation = StellarSdk.Operation.payment({
+          destination,
+          asset: LAAM_ASSET,
+          amount
+        });
+      } else if (asset === "USDC") {
+        operation = StellarSdk.Operation.payment({
+          destination,
+          asset: USDC_ASSET,
+          amount
+        });
+      }
+
+      const txBuilder = new StellarSdk.TransactionBuilder(account, {
+        fee: StellarSdk.BASE_FEE,
+        networkPassphrase: StellarSdk.Networks.PUBLIC
+      });
+
+      if (memo) txBuilder.addMemo(StellarSdk.Memo.text(memo));
+
+      const transaction = txBuilder
+        .addOperation(operation)
+        .setTimeout(180)
+        .build();
+
+      transaction.sign(currentKeypair);
+
+      const result = await server.submitTransaction(transaction);
+
+      alert("✅ Success! Hash: " + result.hash);
+      document.getElementById("sendWizard").style.display = "none";
+      document.getElementById("wizardOverlay").style.display = "none";
+
+    } catch (err) {
+      console.error("Send error:", err);
+      alert("❌ Failed: " + err.message);
+    } finally {
+      btn.textContent = "Send Now";
+      btn.disabled = false;
+    }
+  }
 </script>
   </script>
 </body>
