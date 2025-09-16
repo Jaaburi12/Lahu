@@ -1105,152 +1105,138 @@
 
     <!-- LOGGED IN VIEW -->
     <div id="loggedInView" class="hidden">
-      <!-- Wallet Container with New Design -->
-      <div class="wallet-container">
-        <!-- Total Assets -->
-<div class="total-assets">
-  <div class="total-label">Total assets</div>
-  <div class="total-value">$<span id="totalAssets">0</span></div>
+      <!-- START: REPLACE WITH THIS WALLET CONTAINER -->
+<div class="wallet-container">
+  <div class="total-assets">
+    <div class="total-label">Total assets</div>
+    <div class="total-value">$<span id="totalAssets">0</span></div>
+  </div>
+
+  <div class="action-buttons">
+    <div class="action-button send" id="btnSend">✈️ SEND</div>
+    <div class="action-button receive" id="btnReceive">⬅️ RECEIVE</div>
+    <div class="action-button trustline" id="addTrustlineBtn">✔️ ADD TRUSTLINE</div>
+    <div class="action-button lock" id="logoutBtn">🔒 LOCK</div>
+  </div>
+
+  <div class="assets-list">
+    <div class="asset-item">
+      <div class="asset-left">
+        <div class="asset-icon" style="background:#dbeafe">
+          <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" width="24">
+        </div>
+        <div class="asset-name">XLM</div>
+      </div>
+      <div class="asset-right">
+        <div class="asset-balance" id="xlmBal">2.72</div>
+        <div class="asset-price">$<span id="xlmUsd">511.45</span> ($<span id="xlmPrice">0.409</span>/XLM)</div>
+      </div>
+    </div>
+
+    <div class="asset-item">
+      <div class="asset-left">
+        <div class="asset-icon" style="background:#e9d5ff">
+          <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" width="24">
+        </div>
+        <div class="asset-name">Laam</div>
+      </div>
+      <div class="asset-right">
+        <div class="asset-balance" id="laamBal">8400</div>
+        <div class="asset-price">$<span id="laamUsd">471.56</span> ($<span id="laamPrice">0.056</span>/Laam)</div>
+      </div>
+    </div>
+
+    <div class="asset-item">
+      <div class="asset-left">
+        <div class="asset-icon" style="background:#d1fae5">
+          <img src="https://i.ibb.co/r2qNFs22/images-2.png" width="24">
+        </div>
+        <div class="asset-name">USDC</div>
+      </div>
+      <div class="asset-right">
+        <div class="asset-balance" id="usdcBal">265.74</div>
+        <div class="asset-price">$<span id="usdcUsd">265.74</span> ($<span id="usdcPrice">1.00</span>/USDC)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Send Wizard Modal -->
+  <div id="sendWizard" class="send-wrap" style="display:none;">
+    <!-- Step 1: Choose Asset -->
+    <div id="step1">
+      <h3>Step 1: Choose Asset</h3>
+      <label>Select Token</label>
+      <select id="sendAsset" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;">
+        <option value="XLM">XLM</option>
+        <option value="LAAM">LAAM</option>
+        <option value="USDC">USDC</option>
+      </select>
+      <button onclick="nextStep(2)" 
+        style="margin-top:12px;background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+        Next
+      </button>
+    </div>
+
+    <!-- Step 2: Enter Amount -->
+    <div id="step2" style="display:none;">
+      <h3>Step 2: Enter Amount</h3>
+      <label>Amount</label>
+      <input id="sendAmount" type="number" placeholder="0.00"
+        style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;">
+      <div style="margin-top:12px;display:flex;gap:10px;">
+        <button onclick="backStep(1)" 
+          style="flex:1;background:#6c757d;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+          Back
+        </button>
+        <button onclick="nextStep(3)" 
+          style="flex:1;background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+          Next
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 3: Enter Destination -->
+    <div id="step3" style="display:none;">
+      <h3>Step 3: Destination</h3>
+      <label>Destination Address</label>
+      <input id="sendDest" type="text" placeholder="Enter Stellar address"
+        style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;margin-bottom:10px;">
+      <label>Memo (optional)</label>
+      <input id="sendMemo" type="text" placeholder="Memo"
+        style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;">
+      <div style="margin-top:12px;display:flex;gap:10px;">
+        <button onclick="backStep(2)" 
+          style="flex:1;background:#6c757d;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+          Back
+        </button>
+        <button onclick="nextStep(4)" 
+          style="flex:1;background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+          Next
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 4: Confirm -->
+    <div id="step4" style="display:none;">
+      <h3>Step 4: Confirm Transaction</h3>
+      <p><strong>Asset:</strong> <span id="confirmAsset"></span></p>
+      <p><strong>Amount:</strong> <span id="confirmAmount"></span></p>
+      <p><strong>Destination:</strong> <span id="confirmDest"></span></p>
+      <p><strong>Memo:</strong> <span id="confirmMemo"></span></p>
+      <div style="margin-top:12px;display:flex;gap:10px;">
+        <button onclick="backStep(3)" 
+          style="flex:1;background:#6c757d;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+          Back
+        </button>
+        <button id="confirmSendBtn" onclick="sendTransaction()" 
+          style="flex:1;background:#28a745;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+          Send Now
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
-          
-        <!-- Button to open wizard -->
-<button onclick="openSendWizard()" 
-  style="background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-  Send
-</button>  
-
-<div id="sendWizard" class="send-wrap" style="display:none;">
-  <!-- Step 1: Choose Asset -->
-  <div id="step1">
-    <h3>Step 1: Choose Asset</h3>
-    <label>Select Token</label>
-    <select id="sendAsset" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;">
-      <option value="XLM">XLM</option>
-      <option value="LAAM">LAAM</option>
-      <option value="USDC">USDC</option>
-    </select>
-    <button onclick="nextStep(2)" 
-      style="margin-top:12px;background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-      Next
-    </button>
-  </div>
-
-  <!-- Step 2: Enter Amount -->
-  <div id="step2" style="display:none;">
-    <h3>Step 2: Enter Amount</h3>
-    <label>Amount</label>
-    <input id="sendAmount" type="number" placeholder="0.00"
-      style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;">
-    <div style="margin-top:12px;display:flex;gap:10px;">
-      <button onclick="backStep(1)" 
-        style="flex:1;background:#6c757d;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-        Back
-      </button>
-      <button onclick="nextStep(3)" 
-        style="flex:1;background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-        Next
-      </button>
-    </div>
-  </div>
-
-  <!-- Step 3: Enter Destination -->
-  <div id="step3" style="display:none;">
-    <h3>Step 3: Destination</h3>
-    <label>Destination Address</label>
-    <input id="sendDest" type="text" placeholder="Enter Stellar address"
-      style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;margin-bottom:10px;">
-    <label>Memo (optional)</label>
-    <input id="sendMemo" type="text" placeholder="Memo"
-      style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;">
-    <div style="margin-top:12px;display:flex;gap:10px;">
-      <button onclick="backStep(2)" 
-        style="flex:1;background:#6c757d;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-        Back
-      </button>
-      <button onclick="nextStep(4)" 
-        style="flex:1;background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-        Next
-      </button>
-    </div>
-  </div>
-
-  <!-- Step 4: Confirm -->
-  <div id="step4" style="display:none;">
-    <h3>Step 4: Confirm Transaction</h3>
-    <p><strong>Asset:</strong> <span id="confirmAsset"></span></p>
-    <p><strong>Amount:</strong> <span id="confirmAmount"></span></p>
-    <p><strong>Destination:</strong> <span id="confirmDest"></span></p>
-    <p><strong>Memo:</strong> <span id="confirmMemo"></span></p>
-    <div style="margin-top:12px;display:flex;gap:10px;">
-      <button onclick="backStep(3)" 
-        style="flex:1;background:#6c757d;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-        Back
-      </button>
-      <button id="confirmSendBtn" onclick="sendTransaction()" 
-        style="flex:1;background:#28a745;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-        Send Now
-      </button>
-    </div>
-  </div>
-  </div> 
-          <div class="action-button receive" id="btnReceive">
-            <div class="action-icon">←</div>
-            <div class="action-text">Receive</div>
-          </div>
-        </div>
-        
-        <div class="action-buttons">
-          <div class="action-button swap" id="btnSwap">
-            <div class="action-icon">⇄</div>
-            <div class="action-text">Swap</div>
-          </div>
-          <div class="action-button trustline" id="addTrustlineBtn">
-            <div class="action-icon">+</div>
-            <div class="action-text">Add Trustline</div>
-          </div>
-          <div class="action-button lock" id="logoutBtn">
-            <div class="action-icon">🔒</div>
-            <div class="action-text">Lock</div>
-          </div>
-        </div>  
-
-        <div class="assets-grid">
-            <!-- XLM Token -->
-            <div class="asset-item">
-                <div class="asset-icon xlm">
-                    <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="XLM">
-                </div>
-                <div class="asset-details">
-                    <div class="asset-name">XLM</div>
-                    <div class="asset-balance"><span id="xlmBal">1,250.50</span></div>
-                    <div class="asset-price">$<span id="xlmUsd">511.45</span> ($<span id="xlmPrice">0.409</span>/XLM)</div>
-                </div>
-            </div>
-            
-            <!-- LAAM Token -->
-            <div class="asset-item">
-                <div class="asset-icon laam">
-                    <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="LAAM">
-                </div>
-                <div class="asset-details">
-                    <div class="asset-name">Laam</div>
-                    <div class="asset-balance"><span id="laamBal">8,420.75</span></div>
-                    <div class="asset-price">$<span id="laamUsd">471.56</span> ($<span id="laamPrice">0.056</span>/Laam)</div>
-                </div>
-            </div>
-            
-            <!-- USDC Token -->
-            <div class="asset-item">
-                <div class="asset-icon usdc">
-                    <img src="https://i.ibb.co/r2qNFs22/images-2.png" alt="USDC">
-                </div>
-                <div class="asset-details">
-                    <div class="asset-name">USDC</div>
-                    <div class="asset-balance"><span id="usdcBal">265.74</span></div>
-                    <div class="asset-price">$<span id="usdcUsd">265.74</span> ($<span id="usdcPrice">1.00</span>/USDC)</div>
-                </div>
-            </div>
-        </div>
+<!-- END: REPLACE WITH THIS WALLET CONTAINER -->
             
                         
       <!-- Enhanced Trade Section -->
