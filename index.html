@@ -1110,103 +1110,82 @@
   <div class="total-label">Total assets</div>
   <div class="total-value">$<span id="totalAssets">0</span></div>
 </div>
-          
-        <!-- Button to open wizard -->
-<button onclick="openSendWizard()" 
-  style="background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-  Send
-</button>  
+          !-- Overlay -->
+<div id="wizardOverlay"></div>
 
-<div id="sendWizard" class="send-wrap" style="display:none;">
-  <!-- Step 1: Choose Asset -->
+<!-- Wizard Modal -->
+<div id="sendWizard" class="send-wrap">
+  <button id="wizardClose">×</button>
+
+  <!-- Step 1 -->
   <div id="step1">
     <h3>Step 1: Choose Asset</h3>
     <label>Select Token</label>
-    <select id="sendAsset" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;">
+    <select id="sendAsset">
       <option value="XLM">XLM</option>
       <option value="LAAM">LAAM</option>
       <option value="USDC">USDC</option>
     </select>
-    <button onclick="nextStep(2)" 
-      style="margin-top:12px;background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-      Next
-    </button>
+    <div class="btn-group">
+      <button class="wizard-btn secondary" onclick="backStep(0)">Back</button>
+      <button class="wizard-btn primary" onclick="nextStep(2)">Next</button>
+    </div>
   </div>
 
-  <!-- Step 2: Enter Amount -->
+  <!-- Step 2 -->
   <div id="step2" style="display:none;">
     <h3>Step 2: Enter Amount</h3>
-    <label>Amount</label>
-    <input id="sendAmount" type="number" placeholder="0.00"
-      style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;">
-    <div style="margin-top:12px;display:flex;gap:10px;">
-      <button onclick="backStep(1)" 
-        style="flex:1;background:#6c757d;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-        Back
-      </button>
-      <button onclick="nextStep(3)" 
-        style="flex:1;background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-        Next
-      </button>
+    <input type="number" id="sendAmount" placeholder="0.00">
+    <div class="btn-group">
+      <button class="wizard-btn secondary" onclick="backStep(1)">Back</button>
+      <button class="wizard-btn primary" onclick="nextStep(3)">Next</button>
     </div>
   </div>
 
-  <!-- Step 3: Enter Destination -->
+  <!-- Step 3 -->
   <div id="step3" style="display:none;">
     <h3>Step 3: Destination</h3>
-    <label>Destination Address</label>
-    <input id="sendDest" type="text" placeholder="Enter Stellar address"
-      style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;margin-bottom:10px;">
-    <label>Memo (optional)</label>
-    <input id="sendMemo" type="text" placeholder="Memo"
-      style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;">
-    <div style="margin-top:12px;display:flex;gap:10px;">
-      <button onclick="backStep(2)" 
-        style="flex:1;background:#6c757d;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-        Back
-      </button>
-      <button onclick="nextStep(4)" 
-        style="flex:1;background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-        Next
-      </button>
+    <input type="text" id="sendDest" placeholder="Enter Stellar address">
+    <input type="text" id="sendMemo" placeholder="Memo (optional)">
+    <div class="btn-group">
+      <button class="wizard-btn secondary" onclick="backStep(2)">Back</button>
+      <button class="wizard-btn primary" onclick="nextStep(4)">Next</button>
     </div>
   </div>
 
-  <!-- Step 4: Confirm -->
+  <!-- Step 4 -->
   <div id="step4" style="display:none;">
     <h3>Step 4: Confirm Transaction</h3>
     <p><strong>Asset:</strong> <span id="confirmAsset"></span></p>
     <p><strong>Amount:</strong> <span id="confirmAmount"></span></p>
     <p><strong>Destination:</strong> <span id="confirmDest"></span></p>
     <p><strong>Memo:</strong> <span id="confirmMemo"></span></p>
-    <div style="margin-top:12px;display:flex;gap:10px;">
-      <button onclick="backStep(3)" 
-        style="flex:1;background:#6c757d;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-        Back
-      </button>
-      <button id="confirmSendBtn" onclick="sendTransaction()" 
-        style="flex:1;background:#28a745;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-        Send Now
-      </button>
+    <div class="btn-group">
+      <button class="wizard-btn secondary" onclick="backStep(3)">Back</button>
+      <button id="confirmSendBtn" class="wizard-btn confirm" onclick="sendTransaction()">Send Now</button>
     </div>
   </div>
-  </div> 
-          <div class="action-button receive" id="btnReceive">
-            <div class="action-icon">←</div>
-            <div class="action-text">Receive</div>
-          </div>
-        </div>
-           
-        <div class="action-buttons">
-          <div class="action-button trustline" id="addTrustlineBtn">
-            <div class="action-icon">+</div>
-            <div class="action-text">Add Trustline</div>
-          </div>
-          <div class="action-button lock" id="logoutBtn">
-            <div class="action-icon">🔒</div>
-            <div class="action-text">Lock</div>
-          </div>
-        </div>  
+</div>
+
+<!-- Main Action Buttons -->
+<div class="action-buttons">
+  <div class="action-button send" id="btnSend">
+    <div class="action-icon">→</div>
+    <div class="action-text">Send</div>
+  </div>
+  <div class="action-button receive" id="btnReceive">
+    <div class="action-icon">←</div>
+    <div class="action-text">Receive</div>
+  </div>
+  <div class="action-button trustline" id="addTrustlineBtn">
+    <div class="action-icon">+</div>
+    <div class="action-text">Add Trustline</div>
+  </div>
+  <div class="action-button lock" id="logoutBtn">
+    <div class="action-icon">🔒</div>
+    <div class="action-text">Lock</div>
+  </div>
+</div>
 
         <div class="assets-grid">
             <!-- XLM Token -->
