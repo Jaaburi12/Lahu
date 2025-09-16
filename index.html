@@ -1117,47 +1117,50 @@
   <div class="total-label">Total assets</div>
   <div class="total-value">$<span id="totalAssets">0</span></div>
 </div>
-<!-- Wizard modal (overlay) -->
+  <div id="wizardOverlay"></div>
+
+<!-- Wizard Modal -->
 <div id="sendWizard" class="send-wrap">
-  <!-- Step 1: Choose Asset -->
+  <button id="wizardClose">×</button>
+
+  <!-- Step 1 -->
   <div id="step1">
-    <h3>Step 1: Choose Asset</h3>
-    <label>Select Token</label>
+    <h3>Select Token</h3>
     <select id="sendAsset">
       <option value="XLM">XLM</option>
       <option value="LAAM">LAAM</option>
       <option value="USDC">USDC</option>
     </select>
-    <button class="wizard-btn primary" onclick="nextStep(2)">Next</button>
+    <div class="btn-group">
+      <button class="wizard-btn secondary" onclick="closeWizard()">Cancel</button>
+      <button class="wizard-btn primary" onclick="nextStep(2)">Next</button>
+    </div>
   </div>
 
-  <!-- Step 2: Enter Amount -->
+  <!-- Step 2 -->
   <div id="step2" style="display:none;">
-    <h3>Step 2: Enter Amount</h3>
-    <label>Amount</label>
-    <input type="number" id="sendAmount" placeholder="0.00">
+    <h3>Enter Amount</h3>
+    <input type="number" id="sendAmount" placeholder="0.00" />
     <div class="btn-group">
       <button class="wizard-btn secondary" onclick="backStep(1)">Back</button>
       <button class="wizard-btn primary" onclick="nextStep(3)">Next</button>
     </div>
   </div>
 
-  <!-- Step 3: Enter Destination -->
+  <!-- Step 3 -->
   <div id="step3" style="display:none;">
-    <h3>Step 3: Destination</h3>
-    <label>Destination Address</label>
-    <input type="text" id="sendDest" placeholder="Enter Stellar address">
-    <label>Memo (optional)</label>
-    <input type="text" id="sendMemo" placeholder="Memo">
+    <h3>Destination</h3>
+    <input type="text" id="sendDest" placeholder="Enter Stellar address" />
+    <input type="text" id="sendMemo" placeholder="Memo (optional)" />
     <div class="btn-group">
       <button class="wizard-btn secondary" onclick="backStep(2)">Back</button>
       <button class="wizard-btn primary" onclick="nextStep(4)">Next</button>
     </div>
   </div>
 
-  <!-- Step 4: Confirm -->
+  <!-- Step 4 -->
   <div id="step4" style="display:none;">
-    <h3>Step 4: Confirm Transaction</h3>
+    <h3>Confirm Transaction</h3>
     <p><strong>Asset:</strong> <span id="confirmAsset"></span></p>
     <p><strong>Amount:</strong> <span id="confirmAmount"></span></p>
     <p><strong>Destination:</strong> <span id="confirmDest"></span></p>
@@ -1165,15 +1168,17 @@
     <div class="btn-group">
       <button class="wizard-btn secondary" onclick="backStep(3)">Back</button>
       <button id="confirmSendBtn" class="wizard-btn confirm" onclick="sendTransaction()">Send Now</button>
+    </div>
+  </div>
 </div>
-</div>
-<!-- Main action buttons, ka baxsan wizard-ka -->
+
+<!-- Main Action Buttons -->
 <div class="action-buttons">
   <div class="action-button send" id="btnSend">
-    <div class="action-icon">←</div>
+    <div class="action-icon">→</div>
     <div class="action-text">Send</div>
   </div>
-    <div class="action-button receive" id="btnReceive">
+  <div class="action-button receive" id="btnReceive">
     <div class="action-icon">←</div>
     <div class="action-text">Receive</div>
   </div>
@@ -3093,10 +3098,27 @@
         createPriceChart(); // Fallback to sample chart
       }
     }
+      // Stellar setup
+  const server = new StellarSdk.Server("https://horizon.stellar.org");
+  let currentKeypair; // waxaa lagu set gareeyaa marka user import wallet sameeyo
 
-      function openSendWizard() {
+  // Assets
+  const LAAM_ASSET = new StellarSdk.Asset("Laam", "GAL4ECDAXNBMJYFCWIJ32HKVIRLCNEXY664CAZYI3EINQWPLXTMEPR64");
+  const USDC_ASSET = new StellarSdk.Asset("USDC", "GA5ZSEZ3LOORQ3HNTYXYITJVYZLBZK7NRR3MQHDCKJUMG6KGWLC5XIDV");
+
+  // Open wizard
+  document.getElementById("btnSend").onclick = openSendWizard;
+  document.getElementById("wizardClose").onclick = closeWizard;
+  document.getElementById("wizardOverlay").onclick = closeWizard;
+
+  function openSendWizard() {
     document.getElementById("sendWizard").style.display = "block";
+    document.getElementById("wizardOverlay").style.display = "block";
     showStep(1);
+  }
+  function closeWizard() {
+    document.getElementById("sendWizard").style.display = "none";
+    document.getElementById("wizardOverlay").style.display = "none";
   }
 
   function showStep(step) {
@@ -3112,16 +3134,10 @@
       document.getElementById("confirmMemo").textContent = document.getElementById("sendMemo").value || "—";
     }
   }
+  function nextStep(step) { showStep(step); }
+  function backStep(step) { showStep(step); }
 
-  function nextStep(step) {
-    showStep(step);
-  }
-
-  function backStep(step) {
-    showStep(step);
-  }
-
-  // Send transaction (same code as hore)
+  // Send transaction
   async function sendTransaction() {
     const asset = document.getElementById("sendAsset").value;
     const amount = document.getElementById("sendAmount").value;
@@ -3161,9 +3177,7 @@
         networkPassphrase: StellarSdk.Networks.PUBLIC
       });
 
-      if (memo) {
-        txBuilder.addMemo(StellarSdk.Memo.text(memo));
-      }
+      if (memo) txBuilder.addMemo(StellarSdk.Memo.text(memo));
 
       const transaction = txBuilder
         .addOperation(operation)
@@ -3174,7 +3188,7 @@
       const result = await server.submitTransaction(transaction);
 
       alert("✅ Success! Hash: " + result.hash);
-      document.getElementById("sendWizard").style.display = "none";
+      closeWizard();
       await updateBalanceDisplay();
 
     } catch (err) {
@@ -3186,10 +3200,11 @@
     }
   }
 
-document.getElementById('btnSend').onclick = function() {
-  document.getElementById('sendWizard').style.display = 'block';
-  document.getElementById('wizardOverlay').style.display = 'block';
-};
+  // Placeholder (waxaad ku buuxisaa function update balance)
+  async function updateBalanceDisplay() {
+    console.log("Balances updated...");
+  }
+      
 function swapTradeAssets() {
   // Hel labada asset box
   const assetBoxes = document.querySelectorAll(".trade-asset-selector .asset-box");
