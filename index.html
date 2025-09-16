@@ -3120,97 +3120,8 @@
         }
       });
     }
-      function openSendWizard() {
-    document.getElementById("sendWizard").style.display = "block";
-    showStep(1);
-  }
+    
 
-  function showStep(step) {
-    for (let i = 1; i <= 4; i++) {
-      document.getElementById("step" + i).style.display = "none";
-    }
-    document.getElementById("step" + step).style.display = "block";
-
-    if (step === 4) {
-      document.getElementById("confirmAsset").textContent = document.getElementById("sendAsset").value;
-      document.getElementById("confirmAmount").textContent = document.getElementById("sendAmount").value;
-      document.getElementById("confirmDest").textContent = document.getElementById("sendDest").value;
-      document.getElementById("confirmMemo").textContent = document.getElementById("sendMemo").value || "—";
-    }
-  }
-
-  function nextStep(step) {
-    showStep(step);
-  }
-
-  function backStep(step) {
-    showStep(step);
-  }
-
-  // Send transaction (same code as hore)
-  async function sendTransaction() {
-    const asset = document.getElementById("sendAsset").value;
-    const amount = document.getElementById("sendAmount").value;
-    const destination = document.getElementById("sendDest").value;
-    const memo = document.getElementById("sendMemo").value;
-
-    const btn = document.getElementById("confirmSendBtn");
-    btn.textContent = "Sending...";
-    btn.disabled = true;
-
-    try {
-      const account = await server.loadAccount(currentKeypair.publicKey());
-
-      let operation;
-      if (asset === "XLM") {
-        operation = StellarSdk.Operation.payment({
-          destination: destination,
-          asset: StellarSdk.Asset.native(),
-          amount: amount
-        });
-      } else if (asset === "LAAM") {
-        operation = StellarSdk.Operation.payment({
-          destination: destination,
-          asset: LAAM_ASSET,
-          amount: amount
-        });
-      } else if (asset === "USDC") {
-        operation = StellarSdk.Operation.payment({
-          destination: destination,
-          asset: USDC_ASSET,
-          amount: amount
-        });
-      }
-
-      const txBuilder = new StellarSdk.TransactionBuilder(account, {
-        fee: StellarSdk.BASE_FEE,
-        networkPassphrase: StellarSdk.Networks.PUBLIC
-      });
-
-      if (memo) {
-        txBuilder.addMemo(StellarSdk.Memo.text(memo));
-      }
-
-      const transaction = txBuilder
-        .addOperation(operation)
-        .setTimeout(180)
-        .build();
-
-      transaction.sign(currentKeypair);
-      const result = await server.submitTransaction(transaction);
-
-      alert("✅ Success! Hash: " + result.hash);
-      document.getElementById("sendWizard").style.display = "none";
-      await updateBalanceDisplay();
-
-    } catch (err) {
-      console.error("Send error:", err);
-      alert("❌ Failed: " + err.message);
-    } finally {
-      btn.textContent = "Send Now";
-      btn.disabled = false;
-    }
-  }
 function swapTradeAssets() {
   // Hel labada asset box
   const assetBoxes = document.querySelectorAll(".trade-asset-selector .asset-box");
@@ -3227,10 +3138,12 @@ function swapTradeAssets() {
     secondBox.innerHTML = tempHTML;
   }
 }
-<script> src="https://cdnjs.cloudflare.com/ajax/libs/stellar-sdk/11.1.1/stellar-sdk.min.js"></script>
-<script>
-  const server = new StellarSdk.Server("https://horizon.stellar.org");
-
+  
+      
+   src="https://cdnjs.cloudflare.com/ajax/libs/stellar-sdk/11.1.1/stellar-sdk.min.js"></script>
+  <script>
+   const server = new StellarSdk.Server("https://horizon.stellar.org");
+  
   // Asset definitions
   const LAAM_ASSET = new StellarSdk.Asset("Laam", "GAL4ECDAXNBMJYFCWIJ32HKVIRLCNEXY664CAZYI3EINQWPLXTMEPR64");
   const USDC_ASSET = new StellarSdk.Asset("USDC", "GA5ZSEZ3LOORQ3HNTYXYITJVYZLBZK7NRR3MQHDCKJUMG6KGWLC5XIDV");
