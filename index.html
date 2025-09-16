@@ -1106,7 +1106,81 @@
   </div>
 
   <div class="action-buttons">
-    <div id="sendWizard" class="send-wrap" style="display:none;">
+    <!-- Send Wizard Modal -->
+<div id="sendWizard" class="send-wrap" style="display:none;">
+  <!-- Step 1: Choose Asset -->
+  <div id="step1">
+    <h3>Step 1: Choose Asset</h3>
+    <label>Select Token</label>
+    <select id="sendAsset" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;">
+      <option value="XLM">XLM</option>
+      <option value="LAAM">LAAM</option>
+      <option value="USDC">USDC</option>
+    </select>
+    <button onclick="nextStep(2)" 
+      style="margin-top:12px;background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+      Next
+    </button>
+  </div>
+
+  <!-- Step 2: Enter Amount -->
+  <div id="step2" style="display:none;">
+    <h3>Step 2: Enter Amount</h3>
+    <label>Amount</label>
+    <input id="sendAmount" type="number" placeholder="0.00"
+      style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;">
+    <div style="margin-top:12px;display:flex;gap:10px;">
+      <button onclick="backStep(1)" 
+        style="flex:1;background:#6c757d;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+        Back
+      </button>
+      <button onclick="nextStep(3)" 
+        style="flex:1;background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+        Next
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 3: Enter Destination -->
+  <div id="step3" style="display:none;">
+    <h3>Step 3: Destination</h3>
+    <label>Destination Address</label>
+    <input id="sendDest" type="text" placeholder="Enter Stellar address"
+      style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;margin-bottom:10px;">
+    <label>Memo (optional)</label>
+    <input id="sendMemo" type="text" placeholder="Memo"
+      style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;">
+    <div style="margin-top:12px;display:flex;gap:10px;">
+      <button onclick="backStep(2)" 
+        style="flex:1;background:#6c757d;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+        Back
+      </button>
+      <button onclick="nextStep(4)" 
+        style="flex:1;background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+        Next
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 4: Confirm -->
+  <div id="step4" style="display:none;">
+    <h3>Step 4: Confirm Transaction</h3>
+    <p><strong>Asset:</strong> <span id="confirmAsset"></span></p>
+    <p><strong>Amount:</strong> <span id="confirmAmount"></span></p>
+    <p><strong>Destination:</strong> <span id="confirmDest"></span></p>
+    <p><strong>Memo:</strong> <span id="confirmMemo"></span></p>
+    <div style="margin-top:12px;display:flex;gap:10px;">
+      <button onclick="backStep(3)" 
+        style="flex:1;background:#6c757d;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+        Back
+      </button>
+      <button id="confirmSendBtn" onclick="sendTransaction()" 
+        style="flex:1;background:#28a745;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
+        Send Now
+      </button>
+    </div>
+  </div>
+</div>
     <div class="action-button receive" id="btnReceive">⬅️ RECEIVE</div>
     <div class="action-button trustline" id="addTrustlineBtn">✔️ ADD TRUSTLINE</div>
     <div class="action-button lock" id="logoutBtn">🔒 LOCK</div>
@@ -1152,86 +1226,7 @@
       </div>
     </div>
   </div>
-
-  <!-- Send Wizard Modal -->
-  <div id="sendWizard" class="send-wrap" style="display:none;">
-    <!-- Step 1: Choose Asset -->
-    <div id="step1">
-      <h3>Step 1: Choose Asset</h3>
-      <label>Select Token</label>
-      <select id="sendAsset" style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;">
-        <option value="XLM">XLM</option>
-        <option value="LAAM">LAAM</option>
-        <option value="USDC">USDC</option>
-      </select>
-      <button onclick="nextStep(2)" 
-        style="margin-top:12px;background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-        Next
-      </button>
-    </div>
-
-    <!-- Step 2: Enter Amount -->
-    <div id="step2" style="display:none;">
-      <h3>Step 2: Enter Amount</h3>
-      <label>Amount</label>
-      <input id="sendAmount" type="number" placeholder="0.00"
-        style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;">
-      <div style="margin-top:12px;display:flex;gap:10px;">
-        <button onclick="backStep(1)" 
-          style="flex:1;background:#6c757d;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-          Back
-        </button>
-        <button onclick="nextStep(3)" 
-          style="flex:1;background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-          Next
-        </button>
-      </div>
-    </div>
-
-    <!-- Step 3: Enter Destination -->
-    <div id="step3" style="display:none;">
-      <h3>Step 3: Destination</h3>
-      <label>Destination Address</label>
-      <input id="sendDest" type="text" placeholder="Enter Stellar address"
-        style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;margin-bottom:10px;">
-      <label>Memo (optional)</label>
-      <input id="sendMemo" type="text" placeholder="Memo"
-        style="width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;">
-      <div style="margin-top:12px;display:flex;gap:10px;">
-        <button onclick="backStep(2)" 
-          style="flex:1;background:#6c757d;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-          Back
-        </button>
-        <button onclick="nextStep(4)" 
-          style="flex:1;background:#1976d2;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-          Next
-        </button>
-      </div>
-    </div>
-
-    <!-- Step 4: Confirm -->
-    <div id="step4" style="display:none;">
-      <h3>Step 4: Confirm Transaction</h3>
-      <p><strong>Asset:</strong> <span id="confirmAsset"></span></p>
-      <p><strong>Amount:</strong> <span id="confirmAmount"></span></p>
-      <p><strong>Destination:</strong> <span id="confirmDest"></span></p>
-      <p><strong>Memo:</strong> <span id="confirmMemo"></span></p>
-      <div style="margin-top:12px;display:flex;gap:10px;">
-        <button onclick="backStep(3)" 
-          style="flex:1;background:#6c757d;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-          Back
-        </button>
-        <button id="confirmSendBtn" onclick="sendTransaction()" 
-          style="flex:1;background:#28a745;color:white;padding:10px 16px;border:none;border-radius:8px;font-weight:600;cursor:pointer;">
-          Send Now
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- END: REPLACE WITH THIS WALLET CONTAINER -->
-            
-                        
+    
       <!-- Enhanced Trade Section -->
       <div class="card trade-card">
         <div class="trade-header">
