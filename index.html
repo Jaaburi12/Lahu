@@ -3098,17 +3098,7 @@
         
         createPriceChart(); // Fallback to sample chart
       }
-    }
-      // Horizon Mainnet
-  const server = new StellarSdk.Server("https://horizon.stellar.org");
-
-  // Replace with your real keypair (demo only)
-  const currentKeypair = StellarSdk.Keypair.fromSecret("YOUR_SECRET_KEY_HERE");
-
-  // Assets
-  const LAAM_ASSET = new StellarSdk.Asset("Laam", "GAL4ECDAXNBMJYFCWIJ32HKVIRLCNEXY664CAZYI3EINQWPLXTMEPR64");
-  const USDC_ASSET = new StellarSdk.Asset("USDC", "GA5ZSEJYB37JRC5AVNFVYYXAY7CSWGPBY2QFITX6QJVRKD7VJBU2SOUG");
-
+      }
   // Wizard steps
   function showStep(step){
     for(let i=1;i<=4;i++) document.getElementById("step"+i).style.display="none";
