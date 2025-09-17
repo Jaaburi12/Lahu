@@ -2036,7 +2036,7 @@
       const totalAssets = (xlmUsd + laamUsd + usdcUsd).toFixed(2);
       document.getElementById('totalAssets').textContent = totalAssets;
     }
-/ Helper: get best sell offer price (Laam/XLM)
+
         async function getBestSellOfferPrice() {
             try {
                 const orderbookUrl = `https://horizon.stellar.org/order_book?selling_asset_type=credit_alphanum4&selling_asset_code=${LAAM_TOKEN.code}&selling_asset_issuer=${LAAM_TOKEN.issuer}&buying_asset_type=native&limit=1`;
@@ -2123,8 +2123,8 @@
                 usdcChangeEl.textContent = "0.00%";
                 usdcChangeEl.className = 'price-change';
 
-                 updateTotalAssets();
-
+                updateTotalAssets();
+                
                 console.log('Balance display updated successfully');
 
             } catch (error) {
