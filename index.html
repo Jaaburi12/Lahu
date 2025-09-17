@@ -2092,7 +2092,7 @@ async function updateBalanceDisplay() {
 
     // ✅ XLM price + balance
     document.getElementById('xlmBal').textContent = xlmBalance.toFixed(2);
-    document.getElementById('xlmUsd').textContent = (xlmBalance * xlmPriceUSD).toFixed(2);
+    document.getElementById('xlmBalUsd').textContent = (xlmBalance * xlmPriceUSD).toFixed(2);
     document.getElementById('xlmPrice').textContent = xlmPriceUSD.toFixed(3);
 
     // Sample % change (XLM), waa in laga soo qaataa API kale
