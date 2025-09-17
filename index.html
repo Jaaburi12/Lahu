@@ -2044,85 +2044,100 @@
       const totalAssets = (xlmUsd + laamUsd + usdcUsd).toFixed(2);
       document.getElementById('totalAssets').textContent = totalAssets;
     }
+// Helper: get best sell offer price (Laam/XLM)
+async function getBestSellOfferPrice() {
+  try {
+    const orderbookUrl = `https://horizon.stellar.org/order_book?selling_asset_type=credit_alphanum4&selling_asset_code=${LAAM_TOKEN.code}&selling_asset_issuer=${LAAM_TOKEN.issuer}&buying_asset_type=native&limit=1`;
+    const response = await fetch(orderbookUrl);
+    const data = await response.json();
 
-    // Helper: get best sell offer price
-    async function getBestSellOfferPrice() {
-      try {
-        const orderbookUrl = `https://horizon.stellar.org/order_book?selling_asset_type=credit_alphanum4&selling_asset_code=${LAAM_TOKEN.code}&selling_asset_issuer=${LAAM_TOKEN.issuer}&buying_asset_type=native&limit=1`;
-        const response = await fetch(orderbookUrl);
-        const data = await response.json();
-        
-        // Check 'asks' (sell offers)
-        if (data.asks && data.asks.length > 0) {
-          return parseFloat(data.asks[0].price); // best sell offer
-        }
-      } catch (e) {
-        console.error("Failed to fetch best sell offer:", e);
-      }
-      return LAAM_TOKEN.currentPrice; // fallback if error occurs
+    if (data.asks && data.asks.length > 0) {
+      return parseFloat(data.asks[0].price); // best sell offer
     }
+  } catch (e) {
+    console.error("Failed to fetch best sell offer:", e);
+  }
+  return LAAM_TOKEN.currentPrice; // fallback
+}
 
-    // Update balance display function
-    async function updateBalanceDisplay() {
-      if (!currentKeypair || !server) {
-        console.log('No keypair or server available');
-        return;
+// Update balance display function
+async function updateBalanceDisplay() {
+  if (!currentKeypair || !server) {
+    console.log('No keypair or server available');
+    return;
+  }
+
+  try {
+    console.log('Loading account data...');
+    const account = await server.loadAccount(currentKeypair.publicKey());
+
+    let xlmBalance = 0;
+    let laamBalance = 0;
+    let usdcBalance = 0;
+
+    account.balances.forEach(balance => {
+      if (balance.asset_type === 'native') {
+        xlmBalance = parseFloat(balance.balance);
+      } else if (
+        balance.asset_code === LAAM_TOKEN.code &&
+        balance.asset_issuer === LAAM_TOKEN.issuer
+      ) {
+        laamBalance = parseFloat(balance.balance);
+      } else if (
+        balance.asset_code === USDC_TOKEN.code &&
+        balance.asset_issuer === USDC_TOKEN.issuer
+      ) {
+        usdcBalance = parseFloat(balance.balance);
       }
+    });
 
-      try {
-        console.log('Loading account data...');
-        const account = await server.loadAccount(currentKeypair.publicKey());
-        
-        let xlmBalance = 0;
-        let laamBalance = 0;
-        let usdcBalance = 0;
+    // ✅ XLM price + balance
+    document.getElementById('xlmBal').textContent = xlmBalance.toFixed(2);
+    document.getElementById('xlmBalUsd').textContent = (xlmBalance * xlmPriceUSD).toFixed(2);
+    document.getElementById('xlmUsd').textContent = (xlmBalance * xlmPriceUSD).toFixed(2);
+    document.getElementById('xlmPrice').textContent = xlmPriceUSD.toFixed(3);
 
-        account.balances.forEach(balance => {
-          if (balance.asset_type === 'native') {
-            xlmBalance = parseFloat(balance.balance);
-          } else if (
-            balance.asset_code === LAAM_TOKEN.code &&
-            balance.asset_issuer === LAAM_TOKEN.issuer
-          ) {
-            laamBalance = parseFloat(balance.balance);
-          } else if (
-            balance.asset_code === USDC_TOKEN.code &&
-            balance.asset_issuer === USDC_TOKEN.issuer
-          ) {
-            usdcBalance = parseFloat(balance.balance);
-          }
-        });
+    // Sample % change (XLM), waa in laga soo qaataa API kale
+    let xlmChange = 2.06; // tusaale
+    const xlmChangeEl = document.getElementById('xlmChange');
+    xlmChangeEl.textContent = (xlmChange >= 0 ? '+' : '') + xlmChange.toFixed(2) + '%';
+    xlmChangeEl.className = 'price-change ' + (xlmChange >= 0 ? 'positive' : 'negative');
 
-        // XLM part
-        document.getElementById('xlmBal').textContent = xlmBalance.toFixed(2);
-        document.getElementById('xlmUsd').textContent = (xlmBalance * xlmPriceUSD).toFixed(2);
-        document.getElementById('xlmPrice').textContent = xlmPriceUSD.toFixed(3);
+    // ✅ Laam part
+    const bestSellOfferXLM = await getBestSellOfferPrice();
+    const laamPriceUSD = bestSellOfferXLM * xlmPriceUSD;
 
-        // Laam part - USD value of Laam token
-        const bestSellOfferXLM = await getBestSellOfferPrice();
-        const laamPriceUSD = bestSellOfferXLM * xlmPriceUSD;
-        
-        LAAM_TOKEN.currentPrice = laamPriceUSD;
+    LAAM_TOKEN.currentPrice = laamPriceUSD;
 
-        document.getElementById('laamBal').textContent = laamBalance.toFixed(2);
-        document.getElementById('laamUsd').textContent = (laamBalance * laamPriceUSD).toFixed(2);
-        document.getElementById('laamPrice').textContent = laamPriceUSD.toFixed(6);
+    document.getElementById('laamBal').textContent = laamBalance.toFixed(2);
+    document.getElementById('laamBalUsd').textContent = (laamBalance * laamPriceUSD).toFixed(2);
+    document.getElementById('laamUsd').textContent = (laamBalance * laamPriceUSD).toFixed(2);
+    document.getElementById('laamPrice').textContent = laamPriceUSD.toFixed(6);
 
-        // USDC part
-        document.getElementById('usdcBal').textContent = usdcBalance.toFixed(2);
-        document.getElementById('usdcUsd').textContent = usdcBalance.toFixed(2); // USDC is 1:1 with USD
-        document.getElementById('usdcPrice').textContent = "1.00";
-        
-        updateTotalAssets();
-        
-        console.log('Balance display updated successfully');
-        
-      } catch (error) {
-        console.error('Error updating balance display:', error);
-        showError('Failed to load account balance: ' + error.message);
-      }
-    }
+    // Sample % change (Laam), adiga ayaad ka keenaysaa market data
+    let laamChange = -12.67; // tusaale
+    const laamChangeEl = document.getElementById('laamChange');
+    laamChangeEl.textContent = (laamChange >= 0 ? '+' : '') + laamChange.toFixed(2) + '%';
+    laamChangeEl.className = 'price-change ' + (laamChange >= 0 ? 'positive' : 'negative');
 
+    // ✅ USDC part
+    document.getElementById('usdcBal').textContent = usdcBalance.toFixed(2);
+    document.getElementById('usdcBalUsd').textContent = usdcBalance.toFixed(2);
+    document.getElementById('usdcUsd').textContent = usdcBalance.toFixed(2);
+    document.getElementById('usdcPrice').textContent = "1.00";
+
+    const usdcChangeEl = document.getElementById('usdcChange');
+    usdcChangeEl.textContent = "0.00%";
+    usdcChangeEl.className = 'price-change';
+
+    updateTotalAssets();
+
+    console.log('Balance display updated successfully');
+
+  } catch (error) {
+    console.error('Error updating balance display:', error);
+    showError('Failed to load account balance: ' + error.message);
+  }
     // Load wallet function
     async function loadWallet() {
       if (!currentKeypair) {
