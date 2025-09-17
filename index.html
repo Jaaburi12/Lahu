@@ -2044,23 +2044,21 @@
       const totalAssets = (xlmUsd + laamUsd + usdcUsd).toFixed(2);
       document.getElementById('totalAssets').textContent = totalAssets;
     }
+// Helper: get best sell offer price (Laam/XLM)
+async function getBestSellOfferPrice() {
+  try {
+    const orderbookUrl = `https://horizon.stellar.org/order_book?selling_asset_type=credit_alphanum4&selling_asset_code=${LAAM_TOKEN.code}&selling_asset_issuer=${LAAM_TOKEN.issuer}&buying_asset_type=native&limit=1`;
+    const response = await fetch(orderbookUrl);
+    const data = await response.json();
 
-    // Helper: get best sell offer price
-    async function getBestSellOfferPrice() {
-      try {
-        const orderbookUrl = `https://horizon.stellar.org/order_book?selling_asset_type=credit_alphanum4&selling_asset_code=${LAAM_TOKEN.code}&selling_asset_issuer=${LAAM_TOKEN.issuer}&buying_asset_type=native&limit=1`;
-        const response = await fetch(orderbookUrl);
-        const data = await response.json();
-        
-        // Check 'asks' (sell offers)
-        if (data.asks && data.asks.length > 0) {
-          return parseFloat(data.asks[0].price); // best sell offer
-        }
-      } catch (e) {
-        console.error("Failed to fetch best sell offer:", e);
-      }
-      return LAAM_TOKEN.currentPrice; // fallback if error occurs
+    if (data.asks && data.asks.length > 0) {
+      return parseFloat(data.asks[0].price); // best sell offer
     }
+  } catch (e) {
+    console.error("Failed to fetch best sell offer:", e);
+  }
+  return LAAM_TOKEN.currentPrice; // fallback
+}
 
 // Update balance display function
 async function updateBalanceDisplay() {
@@ -2093,11 +2091,13 @@ async function updateBalanceDisplay() {
       }
     });
 
-    // ✅ XLM part
+    // ✅ XLM price + balance
     document.getElementById('xlmBal').textContent = xlmBalance.toFixed(2);
-    document.getElementById('xlmUsd').textContent = '$' + (xlmBalance * xlmPriceUSD).toFixed(2);
+    document.getElementById('xlmBalUsd').textContent = (xlmBalance * xlmPriceUSD).toFixed(2);
+    document.getElementById('xlmUsd').textContent = (xlmBalance * xlmPriceUSD).toFixed(2);
     document.getElementById('xlmPrice').textContent = xlmPriceUSD.toFixed(3);
 
+    // Sample % change (XLM), waa in laga soo qaataa API kale
     let xlmChange = 2.06; // tusaale
     const xlmChangeEl = document.getElementById('xlmChange');
     xlmChangeEl.textContent = (xlmChange >= 0 ? '+' : '') + xlmChange.toFixed(2) + '%';
@@ -2106,12 +2106,15 @@ async function updateBalanceDisplay() {
     // ✅ Laam part
     const bestSellOfferXLM = await getBestSellOfferPrice();
     const laamPriceUSD = bestSellOfferXLM * xlmPriceUSD;
+
     LAAM_TOKEN.currentPrice = laamPriceUSD;
 
     document.getElementById('laamBal').textContent = laamBalance.toFixed(2);
-    document.getElementById('laamUsd').textContent = '$' + (laamBalance * laamPriceUSD).toFixed(2);
+    document.getElementById('laamBalUsd').textContent = (laamBalance * laamPriceUSD).toFixed(2);
+    document.getElementById('laamUsd').textContent = (laamBalance * laamPriceUSD).toFixed(2);
     document.getElementById('laamPrice').textContent = laamPriceUSD.toFixed(6);
 
+    // Sample % change (Laam), adiga ayaad ka keenaysaa market data
     let laamChange = -12.67; // tusaale
     const laamChangeEl = document.getElementById('laamChange');
     laamChangeEl.textContent = (laamChange >= 0 ? '+' : '') + laamChange.toFixed(2) + '%';
@@ -2119,7 +2122,8 @@ async function updateBalanceDisplay() {
 
     // ✅ USDC part
     document.getElementById('usdcBal').textContent = usdcBalance.toFixed(2);
-    document.getElementById('usdcUsd').textContent = '$' + usdcBalance.toFixed(2);
+    document.getElementById('usdcBalUsd').textContent = usdcBalance.toFixed(2);
+    document.getElementById('usdcUsd').textContent = usdcBalance.toFixed(2);
     document.getElementById('usdcPrice').textContent = "1.00";
 
     const usdcChangeEl = document.getElementById('usdcChange');
@@ -2135,7 +2139,6 @@ async function updateBalanceDisplay() {
     showError('Failed to load account balance: ' + error.message);
   }
 }
-
     // Load wallet function
     async function loadWallet() {
       if (!currentKeypair) {
