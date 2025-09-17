@@ -686,23 +686,36 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     margin-bottom: 20px;
   }
-  
-  .total-assets {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .total-label {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 5px;
-  }
-  
-  .total-value {
-    font-size: 28px;
-    font-weight: bold;
-    color: #1976d2;
-  }
+
+    .total-assets {
+  background: linear-gradient(135deg, #2196f3, #21cbf3);
+  color: white;
+  border-radius: 20px;
+  padding: 20px 30px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 250px;
+  margin: 20px auto;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.total-assets:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.total-label {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.total-value {
+  font-size: 36px;
+  font-weight: bold;
+  margin-top: 8px;
+  letter-spacing: 1px;
+}
 
 .action-buttons {
             padding: 20px;
