@@ -1245,6 +1245,7 @@
         </div>
         <div class="asset-right">
           <div class="asset-balance"><span id="xlmBal">0</span></div>
+            <div class="asset-balance-sub">$<span id="xlmBalUsd">0.00%</span></div>
         </div>
       </div>
 
@@ -2094,6 +2095,7 @@ async function updateBalanceDisplay() {
     document.getElementById('xlmBal').textContent = xlmBalance.toFixed(2);
     document.getElementById('xlmBalUsd').textContent = (xlmBalance * xlmPriceUSD).toFixed(2);
     document.getElementById('xlmUsd').textContent = (xlmBalance * xlmPriceUSD).toFixed(2);
+    document.getElementById('xlmPrice').textContent = xlmPriceUSD.toFixed(3);
     
 
     // Sample % change (XLM), waa in laga soo qaataa API kale
