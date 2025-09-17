@@ -1215,70 +1215,62 @@
   </div>
 </div>
       <div class="assets-grid">
-      <!-- XLM -->
-      <div class="asset-item">
-        <div class="asset-left">
-          <div class="asset-icon">
-            <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="XLM">
-          </div>
-          <div class="asset-details">
-            <div class="asset-name">XLM</div>
-            <div class="asset-price">
-              <span id="xlmUsd"></span>
-              <small class="per">$<span id="xlmPrice">0.409</span>
-              <span id="xlmChange" class="price-change">0.00%</span>
+            <!-- XLM -->
+            <div class="asset-item">
+                <div class="asset-left">
+                    <div class="asset-icon">
+                        <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="XLM">
+                    </div>
+                    <div class="asset-details">
+                        <div class="asset-name">XLM</div>
+                        <div class="asset-price">
+                            <small class="per">$<span id="xlmPrice">0.384</span></small>
+                            <span id="xlmChange" class="price-change positive">+2.06%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="asset-right">
+                    <div class="asset-balance"><span id="xlmBal">2.30</span></div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="asset-right">
-          <div class="asset-balance"><span id="xlmBal">0</span></div>
-          <div class="asset-balance <span></div>
-        </div>
-      </div>
 
-      <!-- LAAM -->
-      <div class="asset-item">
-        <div class="asset-left">
-          <div class="asset-icon">
-            <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="LAAM">
-          </div>
-          <div class="asset-details">
-            <div class="asset-name">Laam</div>
-            <div class="asset-price">
-              <span id="laamUsd"></span>
-              <small class="per">$<span id="laamPrice">0.056</span>
-              <span id="laamChange" class="price-change">0.00%</span>
+            <!-- LAAM -->
+            <div class="asset-item">
+                <div class="asset-left">
+                    <div class="asset-icon">
+                        <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="LAAM">
+                    </div>
+                    <div class="asset-details">
+                        <div class="asset-name">Laam</div>
+                        <div class="asset-price">
+                            <small class="per">$<span id="laamPrice">0.0522</span></small>
+                            <span id="laamChange" class="price-change negative">-12.67%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="asset-right">
+                    <div class="asset-balance"><span id="laamBal">0.00</span></div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="asset-right">
-          <div class="asset-balance"><span id="laamBal">0</span></div>
-          <div class="asset-balance-sub">$<span id="laamBalUsd">0.00%</span></div>
-        </div>
-      </div>
 
-      <!-- USDC -->
-      <div class="asset-item">
-        <div class="asset-left">
-          <div class="asset-icon">
-            <img src="https://i.ibb.co/r2qNFs22/images-2.png" alt="USDC">
-          </div>
-          <div class="asset-details">
-            <div class="asset-name">USDC</div>
-            <div class="asset-price">
-              <span id="usdcUsd"></span>
-              <small class="per"><span id="usdcPrice">1.00</span>
-              <span id="usdcChange" class="price-change">0.00</span>
+            <!-- USDC -->
+            <div class="asset-item">
+                <div class="asset-left">
+                    <div class="asset-icon">
+                        <img src="https://i.ibb.co/r2qNFs22/images-2.png" alt="USDC">
+                    </div>
+                    <div class="asset-details">
+                        <div class="asset-name">USDC</div>
+                        <div class="asset-price">
+                            <small class="per"><span id="usdcPrice">1.00</span></small>
+                            <span id="usdcChange" class="price-change">0.00%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="asset-right">
+                    <div class="asset-balance"><span id="usdcBal">0.00</span></div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="asset-right">
-          <div class="asset-balance"><span id="usdcBal">0</span></div>
-          <div class="asset-balance-sub">$<span id="usdcBalUsd">0.00</span></div>
-        </div>
-      </div>
-
-    </div>
       </div>
                         
       <!-- Enhanced Trade Section -->
@@ -3269,6 +3261,44 @@ function swapTradeAssets() {
     secondBox.innerHTML = tempHTML;
   }
   }
+        // Example data - in a real app this would come from an API
+        const assets = [
+            { name: 'XLM', balance: 2.30, price: 0.384, change: 2.06 },
+            { name: 'Laam', balance: 0.00, price: 0.0522, change: -12.67 },
+            { name: 'USDC', balance: 0.00, price: 1.00, change: 0.00 }
+        ];
+        
+        // Calculate total assets
+        let totalAssets = assets.reduce((total, asset) => total + (asset.balance * asset.price), 0);
+        document.querySelector('.total-amount').textContent = `$${totalAssets.toFixed(2)}`;
+        
+        // Update asset values periodically (simulated)
+        setInterval(() => {
+            // Simulate small price changes
+            assets.forEach(asset => {
+                if (asset.name !== 'USDC') {
+                    const change = (Math.random() - 0.5) * 0.02;
+                    asset.price = Math.max(0.0001, asset.price * (1 + change));
+                    asset.change = (change * 100).toFixed(2);
+                    
+                    const element = document.querySelector(`.asset-item:nth-child(${assets.indexOf(asset) + 1})`);
+                    if (element) {
+                        const priceElement = element.querySelector(`#${asset.name.toLowerCase()}Price`);
+                        const changeElement = element.querySelector(`#${asset.name.toLowerCase()}Change`);
+                        
+                        if (priceElement) priceElement.textContent = asset.price.toFixed(4);
+                        if (changeElement) {
+                            changeElement.textContent = `${asset.change >= 0 ? '+' : ''}${asset.change}%`;
+                            changeElement.className = `price-change ${asset.change >= 0 ? 'positive' : 'negative'}`;
+                        }
+                    }
+                }
+            });
+            
+            // Update total
+            totalAssets = assets.reduce((total, asset) => total + (asset.balance * asset.price), 0);
+            document.querySelector('.total-amount').textContent = `$${totalAssets.toFixed(2)}`;
+        }, 5000);
 </script>
 </script>
 </body>
