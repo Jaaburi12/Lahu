@@ -2062,7 +2062,7 @@
       return LAAM_TOKEN.currentPrice; // fallback if error occurs
     }
 
-    // Update balance display function
+// Update balance display function
 async function updateBalanceDisplay() {
   if (!currentKeypair || !server) {
     console.log('No keypair or server available');
@@ -2135,7 +2135,6 @@ async function updateBalanceDisplay() {
     showError('Failed to load account balance: ' + error.message);
   }
 }
-    
 
     // Load wallet function
     async function loadWallet() {
