@@ -3524,20 +3524,6 @@ function swapTradeAssets() {
             closeModal();
         }
         
-        // Initialize with some random changes for demo
-        document.addEventListener('DOMContentLoaded', function() {
-            // Simulate live price changes for demo
-            setInterval(() => {
-                const changeElements = document.querySelectorAll('.price-change');
-                changeElements.forEach(el => {
-                    if (el.classList.contains('positive')) {
-                        el.textContent = '+' + (Math.random() * 3).toFixed(2) + '%';
-                    } else if (el.classList.contains('negative')) {
-                        el.textContent = '-' + (Math.random() * 2).toFixed(2) + '%';
-                    }
-                });
-            }, 3000);
-        });
 </script>
 </script>
 </body>
