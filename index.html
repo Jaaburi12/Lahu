@@ -3500,6 +3500,60 @@ function swapTradeAssets() {
                 modal.style.display = 'flex';
             }
       }
+      let selectedToken = '';
+
+// Function to open token action modal
+function openTokenActionModal(token) {
+  selectedToken = token;
+  const modal = document.getElementById('tokenActionModal');
+  document.getElementById('modalTokenName').textContent = token;
+  modal.style.display = 'flex';
+}
+
+// Function to close token action modal
+function closeTokenModal() {
+  const modal = document.getElementById('tokenActionModal');
+  modal.style.display = 'none';
+}
+
+// Function to trigger send for selected token
+function triggerSend() {
+  closeTokenModal();
+  openSendWizard(selectedToken);
+}
+
+// Function to trigger receive for selected token
+function triggerReceive() {
+  closeTokenModal();
+  openReceiveModal(selectedToken);
+}
+
+// Close modal when clicking outside
+document.getElementById('tokenActionModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeTokenModal();
+  }
+});
+
+// Modify your existing asset items to be clickable
+document.addEventListener('DOMContentLoaded', function() {
+  // Make asset items clickable
+  const assetItems = document.querySelectorAll('.asset-item');
+  assetItems.forEach(item => {
+    // Remove the existing action buttons
+    const actionsDiv = item.querySelector('.asset-actions');
+    if (actionsDiv) {
+      actionsDiv.remove();
+    }
+    
+    // Make the whole item clickable
+    item.style.cursor = 'pointer';
+    item.addEventListener('click', function() {
+      const tokenName = this.querySelector('.asset-name').textContent;
+      openTokenActionModal(tokenName);
+    });
+  });
+});
 </script>
 </script>
 </body>
