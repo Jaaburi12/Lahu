@@ -3520,29 +3520,7 @@ function closeTokenModal() {
         function triggerSend() {
             closeTokenModal();
             // In a real implementation, this would open the send wizard for the selected token
-            alert('Send ' + selectedToken + ' wizard would open here');
-            // You would call: openSendWizard(selectedToken);
-            function openSendWizard(asset) {
-  console.log("Open send wizard for:", asset);
-  // halkan waxaad ku xiri kartaa wizard-kii send
-      }
-  function showStep(step){
-    for(let i=1;i<=4;i++) document.getElementById("step"+i).style.display="none";
-    if(step>=1) document.getElementById("step"+step).style.display="block";
-    if(step===4){
-      document.getElementById("confirmAsset").textContent = document.getElementById("sendAsset").value;
-      document.getElementById("confirmAmount").textContent = document.getElementById("sendAmount").value;
-      document.getElementById("confirmDest").textContent = document.getElementById("sendDest").value;
-      document.getElementById("confirmMemo").textContent = document.getElementById("sendMemo").value || "—";
-    }
-  }
-  function nextStep(step){ showStep(step); }
-  function backStep(step){
-    if(step<1){
-      document.getElementById("sendWizard").style.display="none";
-      document.getElementById("wizardOverlay").style.display="none";
-    } else showStep(step);
-  }
+        alert('Send ' + selectedToken + ' wizard would open here');
 
   // Open wizard
   document.getElementById("btnSend").onclick = function(){
