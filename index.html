@@ -1358,103 +1358,152 @@
   </div>
 </div>
       
-      <div class="assets-grid">
-            <!-- XLM -->
-            <div class="asset-item" data-token="XLM">
-                <div class="asset-left">
-                    <div class="asset-icon">
-                        <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="XLM">
-                    </div>
-                    <div class="asset-details">
-                        <div class="asset-name">XLM</div>
-                        <div class="asset-price">
-                            <span id="xlmUsd"></span>
-                            <small class="per">$<span id="xlmPrice">0.409</span>
-                            <span id="xlmChange" class="price-change positive">+2.5%</span>
-                        </div>
-                    </div>
+      <div class="asset-item" data-token="LAAM">
+                <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="LAAM" class="asset-icon">
+                <div class="asset-details">
+                    <div class="asset-name">LAAM</div>
+                    <div class="asset-balance">850 LAAM</div>
                 </div>
-                <div class="asset-right">
-                    <div class="asset-balance"><span id="xlmBal">125.50</span></div>
-                    <div class="asset-balance-sub">$<span id="xlmBalUsd">51.32</span></div>
-                </div>
+                <div class="asset-value">$47.60</div>
             </div>
-
-            <!-- LAAM -->
-            <div class="asset-item" data-token="LAAM">
-                <div class="asset-left">
-                    <div class="asset-icon">
-                        <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="LAAM">
-                    </div>
-                    <div class="asset-details">
-                        <div class="asset-name">Laam</div>
-                        <div class="asset-price">
-                            <span id="laamUsd"></span>
-                            <small class="per">$<span id="laamPrice">0.056</span>
-                            <span id="laamChange" class="price-change negative">-1.2%</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="asset-right">
-                    <div class="asset-balance"><span id="laamBal">850</span></div>
-                    <div class="asset-balance-sub">$<span id="laamBalUsd">47.60</span></div>
-                </div>
-            </div>
-
-            <!-- USDC -->
+            
             <div class="asset-item" data-token="USDC">
-                <div class="asset-left">
-                    <div class="asset-icon">
-                        <img src="https://i.ibb.co/r2qNFs22/images-2.png" alt="USDC">
+                <img src="https://i.ibb.co/r2qNFs22/images-2.png" alt="USDC" class="asset-icon">
+                <div class="asset-details">
+                    <div class="asset-name">USDC</div>
+                    <div class="asset-balance">1144.64 USDC</div>
+                </div>
+                <div class="asset-value">$1,144.64</div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="btn btn-send" id="btnSend">Send</button>
+            <button class="btn btn-receive" id="btnReceive">Receive</button>
+        </div>
+    </div>
+    
+    <!-- Token Modal -->
+    <div class="modal" id="tokenModal">
+        <div class="modal-content">
+            <span class="modal-close" id="closeTokenModal">&times;</span>
+            <div class="modal-header">
+                <img id="modalTokenIcon" src="" alt="Token" class="modal-token-icon">
+                <div class="modal-token-name" id="modalTokenName"></div>
+            </div>
+            <div class="modal-token-balance" id="modalTokenBalance"></div>
+            <div class="modal-token-value" id="modalTokenValue"></div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-send" id="modalBtnSend">Send</button>
+                <button class="btn btn-receive" id="modalBtnReceive">Receive</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Send Wizard -->
+    <div class="wizard" id="sendWizard">
+        <div class="wizard-content">
+            <span class="wizard-close" id="wizardClose">&times;</span>
+            <div class="wizard-header">
+                <h2>Send Token</h2>
+            </div>
+            
+            <!-- Step 1: Select Asset -->
+            <div class="step" id="step1">
+                <h3 class="step-title">Select Asset</h3>
+                <div class="form-group">
+                    <label for="sendAsset">Token</label>
+                    <select id="sendAsset">
+                        <option value="XLM">XLM</option>
+                        <option value="LAAM">LAAM</option>
+                        <option value="USDC">USDC</option>
+                    </select>
+                </div>
+                <div class="wizard-nav">
+                    <button class="btn-back" onclick="backStep(0)">Cancel</button>
+                    <button class="btn-next" onclick="nextStep(2)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Step 2: Amount and Destination -->
+            <div class="step" id="step2">
+                <h3 class="step-title">Amount & Destination</h3>
+                <div class="form-group">
+                    <label for="sendAmount">Amount</label>
+                    <input type="number" id="sendAmount" placeholder="0.0">
+                </div>
+                <div class="form-group">
+                    <label for="sendDest">Destination Address</label>
+                    <input type="text" id="sendDest" placeholder="Enter destination address">
+                </div>
+                <div class="wizard-nav">
+                    <button class="btn-back" onclick="backStep(1)">Back</button>
+                    <button class="btn-next" onclick="nextStep(3)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Step 3: Memo -->
+            <div class="step" id="step3">
+                <h3 class="step-title">Memo (Optional)</h3>
+                <div class="form-group">
+                    <label for="sendMemo">Memo</label>
+                    <input type="text" id="sendMemo" placeholder="Enter memo (optional)">
+                </div>
+                <div class="wizard-nav">
+                    <button class="btn-back" onclick="backStep(2)">Back</button>
+                    <button class="btn-next" onclick="nextStep(4)">Next</button>
+                </div>
+            </div>
+            
+            <!-- Step 4: Confirmation -->
+            <div class="step" id="step4">
+                <h3 class="step-title">Confirm Transaction</h3>
+                <div class="confirmation-details">
+                    <div class="confirmation-item">
+                        <span class="confirmation-label">Asset:</span>
+                        <span id="confirmAsset"></span>
                     </div>
-                    <div class="asset-details">
-                        <div class="asset-name">USDC</div>
-                        <div class="asset-price">
-                            <span id="usdcUsd"></span>
-                            <small class="per"><span id="usdcPrice">1.00</span>
-                            <span id="usdcChange" class="price-change">0.00%</span>
-                        </div>
+                    <div class="confirmation-item">
+                        <span class="confirmation-label">Amount:</span>
+                        <span id="confirmAmount"></span>
+                    </div>
+                    <div class="confirmation-item">
+                        <span class="confirmation-label">Destination:</span>
+                        <span id="confirmDest"></span>
+                    </div>
+                    <div class="confirmation-item">
+                        <span class="confirmation-label">Memo:</span>
+                        <span id="confirmMemo">—</span>
                     </div>
                 </div>
-                <div class="asset-right">
-                    <div class="asset-balance"><span id="usdcBal">1144.64</span></div>
-                    <div class="asset-balance-sub">$<span id="usdcBalUsd">1144.64</span></div>
+                <div class="wizard-nav">
+                    <button class="btn-back" onclick="backStep(3)">Back</button>
+                    <button class="btn-confirm" onclick="sendTransaction()">Confirm & Send</button>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Token Action Modal -->
-    <div class="modal" id="tokenModal">
+    <!-- Receive Modal -->
+    <div class="modal" id="receiveModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modalTokenName">XLM</h2>
-                <p>Select an action</p>
-            </div>
-            <div class="modal-body">
-                <div class="token-info">
-                    <div class="token-icon">
-                        <img id="modalTokenIcon" src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="Token">
-                    </div>
-                    <div class="token-details">
-                        <h3 id="modalTokenBalance">0</h3>
-                        <p id="modalTokenValue">$0.00</p>
-                    </div>
+            <span class="modal-close" id="closeReceiveModal">&times;</span>
+            <div class="receive-content">
+                <h2>Receive Funds</h2>
+                <p>Scan the QR code or share your address</p>
+                
+                <div class="qrcode">
+                    <!-- QR Code would be generated here in a real app -->
+                    QR Code
                 </div>
-                <div class="modal-actions">
-                    <button class="modal-btn send" onclick="openSendWizard()">
-                        <i class="fas fa-paper-plane"></i>
-                        <span>Send</span>
-                    </button>
-                    <button class="modal-btn receive" onclick="openReceiveModal()">
-                        <i class="fas fa-qrcode"></i>
-                        <span>Receive</span>
-                    </button>
+                
+                <div class="public-key" id="receivePublicKey">
+                    GABCD1234EFGH5678IJKL90MNOPQRSTUVWXYZABCDEF
                 </div>
+                
+                <button class="btn-copy" id="btnCopyAddress">Copy Address</button>
             </div>
-        </div>
-        <div class="close-modal" onclick="closeModal()">
-            <i class="fas fa-times"></i>
         </div>
     </div>
                         
