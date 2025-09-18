@@ -1239,7 +1239,7 @@
             <div class="asset-price">
               <span id="xlmUsd"></span>
               <small class="per">$<span id="xlmPrice">0.409</span>
-              
+              <span id="xlmChange" class="price-change">0.00%</span>
             </div>
           </div>
         </div>
@@ -1561,9 +1561,8 @@
   alertBox.style.display = "block";
   setTimeout(() => {
     alertBox.style.display = "none";
-  }, 3000);
-}
-
+  }, 4000);
+      }
 function showSuccess(message) {
   const alertBox = document.getElementById("successAlert");
   alertBox.textContent = "✅ " + message;
