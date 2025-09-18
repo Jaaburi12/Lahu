@@ -3453,6 +3453,53 @@ function swapTradeAssets() {
     secondBox.innerHTML = tempHTML;
   }
   }
+      // Token data
+        const tokens = {
+            XLM: {
+                name: "XLM",
+                icon: "https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png",
+                balance: "125.50",
+                value: "$51.32",
+                price: "$0.409"
+            },
+            LAAM: {
+                name: "LAAM",
+                icon: "https://i.ibb.co/r28SP1bN/20250802-225108.png",
+                balance: "850",
+                value: "$47.60",
+                price: "$0.056"
+            },
+            USDC: {
+                name: "USDC",
+                icon: "https://i.ibb.co/r2qNFs22/images-2.png",
+                balance: "1144.64",
+                value: "$1144.64",
+                price: "$1.00"
+            }
+        };
+        
+        // Get modal element
+        const modal = document.getElementById('tokenModal');
+        
+        // Add click event to all asset items
+        document.querySelectorAll('.asset-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const tokenName = this.getAttribute('data-token');
+                openTokenModal(tokenName);
+            });
+        });
+        
+        // Function to open token modal
+        function openTokenModal(tokenName) {
+            const token = tokens[tokenName];
+            if (token) {
+                document.getElementById('modalTokenName').textContent = token.name;
+                document.getElementById('modalTokenIcon').src = token.icon;
+                document.getElementById('modalTokenBalance').textContent = token.balance + " " + token.name;
+                document.getElementById('modalTokenValue').textContent = token.value + " • " + token.price;
+                modal.style.display = 'flex';
+            }
+      }
 </script>
 </script>
 </body>
