@@ -1490,7 +1490,7 @@
         </div>
       </div>
     </div>
-    
+    <div id="errorAlert" class="custom-alert" style="background:#dc3545;">Error here</div>
     <div id="successAlert" class="custom-alert">Transaction sent successfully</div>
   </div>
 
@@ -1556,17 +1556,22 @@
     
     // Utility functions
     function showError(message) {
-      alert('Error: ' + message);
-    }
-    
-    function showSuccess(message) {
-      const alertBox = document.getElementById("successAlert");
-      alertBox.textContent = message;
-      alertBox.style.display = "block";
-      setTimeout(() => {
-        alertBox.style.display = "none";
-      }, 3000);
-    }
+  const alertBox = document.getElementById("errorAlert");
+  alertBox.textContent = "❌ " + message;
+  alertBox.style.display = "block";
+  setTimeout(() => {
+    alertBox.style.display = "none";
+  }, 3000);
+}
+
+function showSuccess(message) {
+  const alertBox = document.getElementById("successAlert");
+  alertBox.textContent = "✅ " + message;
+  alertBox.style.display = "block";
+  setTimeout(() => {
+    alertBox.style.display = "none";
+  }, 3000);
+      }
     
     function formatAmount(amount) {
       return parseFloat(amount).toFixed(7);
