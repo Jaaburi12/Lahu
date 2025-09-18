@@ -1228,71 +1228,88 @@
   </div>
 </div>
       <div class="assets-grid">
-      <!-- XLM -->
-      <div class="asset-item">
-        <div class="asset-left">
-          <div class="asset-icon">
-            <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="XLM">
-          </div>
-          <div class="asset-details">
-            <div class="asset-name">XLM</div>
-            <div class="asset-price">
-              <span id="xlmUsd"></span>
-              <small class="per">$<span id="xlmPrice">0.409</span>
-              <span id="xlmChange" class="price-change">0.00%</span>
-            </div>
-          </div>
-        </div>
-        <div class="asset-right">
-          <div class="asset-balance"><span id="xlmBal">0</span></div>
-          <div class="asset-balance-sub">$<span id="xlmBalUsd">0.00</span></div>
+  <!-- XLM -->
+  <div class="asset-item">
+    <div class="asset-left">
+      <div class="asset-icon">
+        <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="XLM">
+      </div>
+      <div class="asset-details">
+        <div class="asset-name">XLM</div>
+        <div class="asset-price">
+          <span id="xlmUsd"></span>
+          <small class="per">$<span id="xlmPrice">0.409</span>
+          <span id="xlmChange" class="price-change">0.00%</span>
         </div>
       </div>
-
-      <!-- LAAM -->
-      <div class="asset-item">
-        <div class="asset-left">
-          <div class="asset-icon">
-            <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="LAAM">
-          </div>
-          <div class="asset-details">
-            <div class="asset-name">Laam</div>
-            <div class="asset-price">
-              <span id="laamUsd"></span>
-              <small class="per">$<span id="laamPrice">0.056</span>
-              <span id="laamChange" class="price-change">0.00%</span>
-            </div>
-          </div>
-        </div>
-        <div class="asset-right">
-          <div class="asset-balance"><span id="laamBal">0</span></div>
-          <div class="asset-balance-sub">$<span id="laamBalUsd">0.00%</span></div>
-        </div>
-      </div>
-
-      <!-- USDC -->
-      <div class="asset-item">
-        <div class="asset-left">
-          <div class="asset-icon">
-            <img src="https://i.ibb.co/r2qNFs22/images-2.png" alt="USDC">
-          </div>
-          <div class="asset-details">
-            <div class="asset-name">USDC</div>
-            <div class="asset-price">
-              <span id="usdcUsd"></span>
-              <small class="per"><span id="usdcPrice">1.00</span>
-              <span id="usdcChange" class="price-change">0.00</span>
-            </div>
-          </div>
-        </div>
-        <div class="asset-right">
-          <div class="asset-balance"><span id="usdcBal">0</span></div>
-          <div class="asset-balance-sub">$<span id="usdcBalUsd">0.00</span></div>
-        </div>
-      </div>
-
     </div>
+    <div class="asset-right">
+      <div class="asset-balance"><span id="xlmBal">0</span></div>
+      <div class="asset-balance-sub">$<span id="xlmBalUsd">0.00</span></div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="asset-actions">
+      <button class="asset-btn send" onclick="openSendWizard('XLM')">Send</button>
+      <button class="asset-btn receive" onclick="openReceiveModal('XLM')">Receive</button>
+    </div>
+  </div>
+
+  <!-- LAAM -->
+  <div class="asset-item">
+    <div class="asset-left">
+      <div class="asset-icon">
+        <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="LAAM">
       </div>
+      <div class="asset-details">
+        <div class="asset-name">Laam</div>
+        <div class="asset-price">
+          <span id="laamUsd"></span>
+          <small class="per">$<span id="laamPrice">0.056</span>
+          <span id="laamChange" class="price-change">0.00%</span>
+        </div>
+      </div>
+    </div>
+    <div class="asset-right">
+      <div class="asset-balance"><span id="laamBal">0</span></div>
+      <div class="asset-balance-sub">$<span id="laamBalUsd">0.00%</span></div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="asset-actions">
+      <button class="asset-btn send" onclick="openSendWizard('LAAM')">Send</button>
+      <button class="asset-btn receive" onclick="openReceiveModal('LAAM')">Receive</button>
+    </div>
+  </div>
+
+  <!-- USDC -->
+  <div class="asset-item">
+    <div class="asset-left">
+      <div class="asset-icon">
+        <img src="https://i.ibb.co/r2qNFs22/images-2.png" alt="USDC">
+      </div>
+      <div class="asset-details">
+        <div class="asset-name">USDC</div>
+        <div class="asset-price">
+          <span id="usdcUsd"></span>
+          <small class="per"><span id="usdcPrice">1.00</span>
+          <span id="usdcChange" class="price-change">0.00</span>
+        </div>
+      </div>
+    </div>
+    <div class="asset-right">
+      <div class="asset-balance"><span id="usdcBal">0</span></div>
+      <div class="asset-balance-sub">$<span id="usdcBalUsd">0.00</span></div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="asset-actions">
+      <button class="asset-btn send" onclick="openSendWizard('USDC')">Send</button>
+      <button class="asset-btn receive" onclick="openReceiveModal('USDC')">Receive</button>
+    </div>
+  </div>
+    </div>
+      
                         
       <!-- Enhanced Trade Section -->
       <div class="card trade-card">
@@ -3183,7 +3200,10 @@ async function updateBalanceDisplay() {
         createPriceChart(); // Fallback to sample chart
       }
       }
-  // Wizard steps
+      function openSendWizard(asset) {
+  console.log("Open send wizard for:", asset);
+  // halkan waxaad ku xiri kartaa wizard-kii send
+      }
   function showStep(step){
     for(let i=1;i<=4;i++) document.getElementById("step"+i).style.display="none";
     if(step>=1) document.getElementById("step"+step).style.display="block";
