@@ -885,30 +885,7 @@
             .header {
                 padding: 20px;
             }    
-
-  .wallet-address {
-            font-size: 14px;
-            color: #ccc;
-            word-break: break-all;
-            margin-bottom: 20px;
-        }
-        
-        .balance-section {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .total-balance {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .balance-label {
-            font-size: 14px;
-            opacity: 0.8;
-        }
-        
+  
         .assets-section {
             margin-bottom: 30px;
         }
@@ -1432,6 +1409,19 @@
   </div>
 </div>
       
+          <div class="balance-section">
+            <div class="total-balance" id="totalBalance">$1,243.46</div>
+            <div class="balance-label">Total Balance</div>
+        </div>
+        
+        <div class="actions">
+            <button class="action-btn send-btn" id="btnSend">
+                <span>Send</span>
+            </button>
+            <button class="action-btn receive-btn" id="btnReceive">
+                <span>Receive</span>
+            </button>
+        </div>
 <div class="assets-section">
             <h2 class="section-title">Your Assets</h2>
             <div class="asset-list">
