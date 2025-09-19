@@ -1450,7 +1450,7 @@
     </div>
   </div>
   <div class="close-modal" ="closeModal()">
-    <i class="fas fa-times">click</i>
+    <i class="fas fa-times">onclick</i>
   </div>
 </div>
                  
@@ -3450,11 +3450,7 @@ function swapTradeAssets() {
     firstBox.innerHTML = secondBox.innerHTML;
     secondBox.innerHTML = tempHTML;
   }
-  }
-function toggleSidebar() {
-       document.getElementById('sidebar').classList.toggle('collapsed');
-     }
-
+      }
 // --- START: Token → Send/Receive automatic linking patch ---
 
 function setTokenModalButtons(tokenName){
