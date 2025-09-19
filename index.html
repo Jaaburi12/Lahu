@@ -1438,11 +1438,11 @@
       </div>
 
       <div class="modal-actions">
-        <button class="modal-btn send" id="modalSendBtn">
+    <button class="modal-btn send" id="tokenModalSendBtn">
           <i class="fas fa-paper-plane"></i>
           <span>Send</span>
         </button>
-        <button class="modal-btn receive" id="modalReceiveBtn">
+        <button class="modal-btn receive" id="tokenModalReceiveBtn">
           <i class="fas fa-qrcode"></i>
           <span>Receive</span>
         </button>
@@ -2787,8 +2787,10 @@ async function updateBalanceDisplay() {
           document.getElementById('initialView').classList.remove('hidden');
         }
       });
-      
-      document.getElementById('addTrustlineBtn').addEventListener('click', async function() {
+      document.getElementById('tokenModalSendBtn').addEventListener('click', openSendWizard);
+document.getElementById('tokenModalReceiveBtn').addEventListener('click', openReceiveModal);
+     
+        document.getElementById('addTrustlineBtn').addEventListener('click', async function() {
         if (!currentKeypair || !LAAM_ASSET) {
           showError('Wallet not loaded or asset not initialized.');
           return;
@@ -3451,25 +3453,83 @@ function swapTradeAssets() {
     secondBox.innerHTML = tempHTML;
   }
   }
-      // Add click event to all asset items
-document.querySelectorAll('.asset-item').forEach(item => {
-  item.addEventListener('click', function() {
-    const tokenName = this.getAttribute('data-token');
-    openTokenModal(tokenName);
-  });
+      
+// Add these new functions to handle token modal actions
+function openSendWizard(token) {
+    closeModal();
+    document.getElementById("sendWizard").style.display = "block";
+    document.getElementById("wizardOverlay").style.display = "block";
+    
+    // Pre-select the token in the send wizard
+    if (token) {
+        document.getElementById("sendAsset").value = token;
+    }
+    
+    showStep(1);
+}
+
+function openReceiveModal() {
+    closeModal();
+    
+    // Use the existing receive functionality
+    const publicKey = currentKeypair ? currentKeypair.publicKey() : "GB7WZHXV4FCATLV2LZFLYU7A74BD5WALPUMOU4CY4DRJGJIL3EW3DGXA";
+    
+    const receiveModal = document.createElement('div');
+    receiveModal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+    `;
+    
+    receiveModal.innerHTML = `
+        <div style="background: white; padding: 25px; border-radius: 20px; text-align: center; max-width: 320px; width: 90%; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+            <h3 style="color: #1976d2; margin-top: 0; margin-bottom: 20px;">Your Receive Address</h3>
+            <div style="background: white; padding: 15px; margin: 15px 0; border-radius: 12px; border: 1px solid #e0e0e0;">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${publicKey}" 
+                     alt="QR Code" style="max-width: 180px; border-radius: 8px;">
+            </div>
+            <div style="font-size: 14px; color: #666; margin-bottom: 10px;">Scan this QR code or copy the address below</div>
+            <div class="mono" style="font-size: 13px; margin: 15px 0; padding: 12px; background: #f8f9fa; border-radius: 12px; word-break: break-all; line-height: 1.5;">
+                ${publicKey}
+            </div>
+            <button onclick="this.parentElement.parentElement.remove()" 
+                    style="background: #1976d2; color: white; border: none; padding: 12px 24px; 
+                           border-radius: 12px; cursor: pointer; font-weight: 600; margin-top: 10px;">
+                Close
+            </button>
+        </div>
+    `;
+    
+    document.body.appendChild(receiveModal);
+}
+
+function closeModal() {
+    document.getElementById('tokenModal').style.display = 'none';
+}
+
+// Update the token modal buttons to use the new functions
+document.querySelectorAll('.modal-btn.send').forEach(btn => {
+    btn.onclick = function() {
+        const tokenName = document.getElementById('modalTokenName').textContent;
+        openSendWizard(tokenName);
+    };
 });
 
-// ✅ Link modal buttons to global send/receive once
-document.getElementById("modalSendBtn").addEventListener("click", function() {
-  closeModal();           // xir token modal
-  openSendWizard();       // fur wizard send-ka guud
+document.querySelectorAll('.modal-btn.receive').forEach(btn => {
+    btn.onclick = openReceiveModal;
 });
 
-document.getElementById("modalReceiveBtn").addEventListener("click", function() {
-  closeModal();
-  openReceiveModal();     // fur receive modal-ka guud
-});
-        
+// Make sure the close button in token modal works
+document.querySelector('.close-modal').onclick = closeModal;
+
+// ... rest of existing code ...
 </script>
 </script>
 </body>
