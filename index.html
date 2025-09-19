@@ -3453,7 +3453,7 @@ function swapTradeAssets() {
     secondBox.innerHTML = tempHTML;
   }
   }
-/ Token data
+
         const tokens = {
             XLM: {
                 name: "XLM",
@@ -3477,9 +3477,11 @@ function swapTradeAssets() {
                 price: "$1.00"
             }
         };
-        
-        // Get modal element
+         // Get modal element
         const modal = document.getElementById('tokenModal');
+        const sendWizard = document.getElementById('sendWizard');
+        const receiveModal = document.getElementById('receiveModal');
+        const overlay = document.getElementById('wizardOverlay');
         
         // Add click event to all asset items
         document.querySelectorAll('.asset-item').forEach(item => {
@@ -3501,29 +3503,131 @@ function swapTradeAssets() {
             }
         }
         
-        // Function to close modal
-        function closeModal() {
+        // Close modal when clicking close button
+        document.getElementById('modalClose').addEventListener('click', function() {
             modal.style.display = 'none';
-        }
-        
-        // Close modal when clicking outside the content
-        window.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                closeModal();
-            }
         });
         
-        // Placeholder functions for send/receive
+        // Open send wizard from modal
+        document.getElementById('modalBtnSend').addEventListener('click', function() {
+            modal.style.display = 'none';
+            openSendWizard();
+        });
+        
+        // Open receive modal from modal
+        document.getElementById('modalBtnReceive').addEventListener('click', function() {
+            modal.style.display = 'none';
+            openReceiveModal();
+        });
+        
+        // Open send wizard from main button
+        document.getElementById('btnSend').addEventListener('click', openSendWizard);
+        
         function openSendWizard() {
-            alert('Send functionality would open for ' + document.getElementById('modalTokenName').textContent);
-            closeModal();
+            sendWizard.style.display = 'flex';
+            overlay.style.display = 'block';
+            showStep(1);
+            
+            // Set the default asset based on which token was selected (if any)
+            const tokenName = document.getElementById('modalTokenName').textContent;
+            if (tokenName && tokens[tokenName]) {
+                document.getElementById('sendAsset').value = tokenName;
+                updateAvailableBalance();
+            }
         }
         
+        // Open receive modal from main button
+        document.getElementById('btnReceive').addEventListener('click', openReceiveModal);
+        
         function openReceiveModal() {
-            alert('Receive functionality would open for ' + document.getElementById('modalTokenName').textContent);
-            closeModal();
+            receiveModal.style.display = 'flex';
+            overlay.style.display = 'block';
         }
-      }
+        
+        // Close wizard when clicking close button
+        document.getElementById('wizardClose').addEventListener('click', closeWizard);
+        document.getElementById('receiveClose').addEventListener('click', closeReceiveModal);
+        
+        // Close wizard when clicking overlay
+        overlay.addEventListener('click', function() {
+            closeWizard();
+            closeReceiveModal();
+        });
+        
+        function closeWizard() {
+            sendWizard.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+        
+        function closeReceiveModal() {
+            receiveModal.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+        
+        // Wizard step functions
+        function showStep(step) {
+            for(let i = 1; i <= 4; i++) {
+                document.getElementById("step" + i).style.display = "none";
+            }
+            if(step >= 1) {
+                document.getElementById("step" + step).style.display = "block";
+            }
+            if(step === 4) {
+                document.getElementById("confirmAsset").textContent = document.getElementById("sendAsset").value;
+                document.getElementById("confirmAmount").textContent = document.getElementById("sendAmount").value;
+                document.getElementById("confirmDest").textContent = document.getElementById("sendDest").value;
+                document.getElementById("confirmMemo").textContent = document.getElementById("sendMemo").value || "—";
+            }
+        }
+        
+        function nextStep(step) {
+            showStep(step);
+            
+            // Update available balance when moving to step 2
+            if (step === 2) {
+                updateAvailableBalance();
+            }
+        }
+        
+        function backStep(step) {
+            if(step < 1) {
+                closeWizard();
+            } else {
+                showStep(step);
+            }
+        }
+        
+        function updateAvailableBalance() {
+            const asset = document.getElementById("sendAsset").value;
+            const balance = tokens[asset].balance;
+            document.getElementById("availableBalance").textContent = `${balance} ${asset}`;
+        }
+        
+        // Update available balance when asset changes
+        document.getElementById("sendAsset").addEventListener("change", updateAvailableBalance);
+        
+        // Send transaction function
+        async function sendTransaction() {
+            const asset = document.getElementById("sendAsset").value;
+            const amount = document.getElementById("sendAmount").value;
+            const destination = document.getElementById("sendDest").value;
+            const memo = document.getElementById("sendMemo").value;
+            
+            // Here would be the actual transaction code
+            console.log("Sending transaction:", { asset, amount, destination, memo });
+            
+            // Simulate transaction success
+            alert(`Successfully sent ${amount} ${asset} to ${destination}`);
+            closeWizard();
+        }
+        
+        // Copy address function
+        document.getElementById('copyAddress').addEventListener('click', function() {
+            const publicKey = document.getElementById('publicKey').textContent;
+            navigator.clipboard.writeText(publicKey).then(() => {
+                alert('Address copied to clipboard!');
+            });
+        });
 </script>
 </script>
 </body>
