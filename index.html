@@ -3622,27 +3622,7 @@ function showStep(step) {
     }
 }
 
-// Next step
-function nextStep(step) {
-    showStep(step);
-}
 
-// Back step
-function backStep(step) {
-    if(step < 1) {
-        closeWizard();
-    } else {
-        showStep(step);
-    }
-}
-
-// Copy address
-function copyAddress() {
-    const address = document.getElementById("receiveAddress").textContent;
-    navigator.clipboard.writeText(address).then(() => {
-        alert("Address copied to clipboard!");
-    });
-}
 
 // Send Transaction
 async function sendTransaction() {
