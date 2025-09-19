@@ -3491,18 +3491,6 @@ function swapTradeAssets() {
             });
         });
         
-        // Function to open token modal
-        function openTokenModal(tokenName) {
-            const token = tokens[tokenName];
-            if (token) {
-                document.getElementById('modalTokenName').textContent = token.name;
-                document.getElementById('modalTokenIcon').src = token.icon;
-                document.getElementById('modalTokenBalance').textContent = token.balance + " " + token.name;
-                document.getElementById('modalTokenValue').textContent = token.value + " • " + token.price;
-                modal.style.display = 'flex';
-            }
-        }
-        
 </script>
 </script>
 </body>
