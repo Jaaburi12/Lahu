@@ -3459,26 +3459,6 @@ document.querySelectorAll('.asset-item').forEach(item => {
   });
 });
 
-function openTokenModal(tokenName) {
-  // token info ka buuxi
-  document.getElementById('modalTokenName').textContent = tokenName;
-  document.getElementById('modalTokenIcon').src =
-    (tokenName === "XLM")
-      ? "https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png"
-      : (tokenName === "LAAM")
-        ? "https://i.ibb.co/r28SP1bN/20250802-225108.png"
-        : "https://i.ibb.co/r2qNFs22/images-2.png";
-
-  // balance tus
-  let balance = "0";
-  if (tokenName === "XLM") balance = document.getElementById("xlmBal").innerText + " XLM";
-  if (tokenName === "LAAM") balance = document.getElementById("laamBal").innerText + " Laam";
-  if (tokenName === "USDC") balance = document.getElementById("usdcBal").innerText + " USDC";
-  document.getElementById('modalTokenBalance').textContent = balance;
-
-  document.getElementById('tokenModal').style.display = 'flex';
-}
-
 // ✅ Link modal buttons to global send/receive once
 document.getElementById("modalSendBtn").addEventListener("click", function() {
   closeModal();           // xir token modal
