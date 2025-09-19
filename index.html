@@ -1408,140 +1408,174 @@
     <div class="action-text">Lock</div>
   </div>
     </div>
+                <div class="action-buttons">
+                <button class="btn btn-send" id="btnSend">Send</button>
+                <button class="btn btn-receive" id="btnReceive">Receive</button>
+            </div>
+            
+            <div class="assets">
+                <h3 class="assets-title">My Assets</h3>
+                
                 <div class="asset-item" data-token="XLM">
                     <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="XLM" class="asset-icon">
                     <div class="asset-details">
                         <div class="asset-name">XLM</div>
-                        <div class="asset-balance">125.50 XLM</div>
+                        <div class="asset-balance">Balance: 125.50</div>
                     </div>
-                    <div class="asset-value">$51.32</div>
+                    <div class="asset-value">
+                        <div class="asset-amount">$51.32</div>
+                        <div class="asset-price">$0.409</div>
+                    </div>
                 </div>
                 
                 <div class="asset-item" data-token="LAAM">
                     <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="LAAM" class="asset-icon">
                     <div class="asset-details">
                         <div class="asset-name">LAAM</div>
-                        <div class="asset-balance">850 LAAM</div>
+                        <div class="asset-balance">Balance: 850</div>
                     </div>
-                    <div class="asset-value">$47.60</div>
+                    <div class="asset-value">
+                        <div class="asset-amount">$47.60</div>
+                        <div class="asset-price">$0.056</div>
+                    </div>
                 </div>
                 
                 <div class="asset-item" data-token="USDC">
                     <img src="https://i.ibb.co/r2qNFs22/images-2.png" alt="USDC" class="asset-icon">
                     <div class="asset-details">
                         <div class="asset-name">USDC</div>
-                        <div class="asset-balance">1144.64 USDC</div>
+                        <div class="asset-balance">Balance: 1144.64</div>
                     </div>
-                    <div class="asset-value">$1,144.64</div>
+                    <div class="asset-value">
+                        <div class="asset-amount">$1144.64</div>
+                        <div class="asset-price">$1.00</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
+    
     <!-- Token Modal -->
     <div class="modal" id="tokenModal">
         <div class="modal-content">
+            <span class="modal-close" id="modalClose">&times;</span>
             <div class="modal-header">
-                <div class="modal-title">
-                    <img id="modalTokenIcon" src="" alt="" class="modal-token-icon">
-                    <span id="modalTokenName"></span>
-                </div>
-                <button class="close-modal">&times;</button>
+                <img id="modalTokenIcon" src="" alt="" class="modal-token-icon">
+                <h2 id="modalTokenName" class="modal-token-name"></h2>
+                <div id="modalTokenBalance" class="modal-token-balance"></div>
+                <div id="modalTokenValue" class="modal-token-value"></div>
             </div>
-            <div class="modal-body">
-                <div class="modal-token-balance" id="modalTokenBalance"></div>
-                <div class="modal-token-balance" id="modalTokenValue"></div>
-                <div class="modal-actions">
-                    <button class="modal-action-btn send-btn" id="modalSendBtn">Send</button>
-                    <button class="modal-action-btn receive-btn" id="modalReceiveBtn">Receive</button>
-                </div>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-send" id="modalTokenSend">Send</button>
+                <button class="modal-btn modal-btn-receive" id="modalTokenReceive">Receive</button>
             </div>
         </div>
     </div>
-
+    
     <!-- Send Wizard -->
     <div class="wizard" id="sendWizard">
         <div class="wizard-content">
+            <span class="wizard-close" id="wizardClose">&times;</span>
+            
             <div class="wizard-header">
-                <h2 class="wizard-title">Send Tokens</h2>
-                <button class="close-modal">&times;</button>
+                <h2>Send Tokens</h2>
             </div>
             
-            <div class="wizard-step active" id="step1">
-                <div class="form-group">
-                    <label class="form-label">Select Asset</label>
-                    <select class="form-input" id="sendAsset">
-                        <option value="XLM">XLM</option>
-                        <option value="LAAM">LAAM</option>
-                        <option value="USDC">USDC</option>
-                    </select>
-                </div>
-                <div class="wizard-nav">
-                    <button class="wizard-btn btn-back" onclick="backStep(0)">Cancel</button>
-                    <button class="wizard-btn btn-next" onclick="nextStep(2)">Next</button>
+            <!-- Step 1: Select Asset -->
+            <div class="wizard-step" id="step1">
+                <label class="wizard-label" for="sendAsset">Select Asset</label>
+                <select class="wizard-input" id="sendAsset">
+                    <option value="XLM">XLM</option>
+                    <option value="LAAM">LAAM</option>
+                    <option value="USDC">USDC</option>
+                </select>
+                
+                <div class="wizard-actions">
+                    <button class="wizard-btn wizard-btn-back" onclick="backStep(0)">Cancel</button>
+                    <button class="wizard-btn wizard-btn-next" onclick="nextStep(2)">Next</button>
                 </div>
             </div>
             
+            <!-- Step 2: Enter Amount -->
             <div class="wizard-step" id="step2">
-                <div class="form-group">
-                    <label class="form-label">Amount</label>
-                    <input type="number" class="form-input" id="sendAmount" placeholder="Enter amount">
-                </div>
-                <div class="wizard-nav">
-                    <button class="wizard-btn btn-back" onclick="backStep(1)">Back</button>
-                    <button class="wizard-btn btn-next" onclick="nextStep(3)">Next</button>
+                <label class="wizard-label" for="sendAmount">Amount</label>
+                <input type="number" class="wizard-input" id="sendAmount" placeholder="0.00">
+                
+                <div class="wizard-actions">
+                    <button class="wizard-btn wizard-btn-back" onclick="backStep(1)">Back</button>
+                    <button class="wizard-btn wizard-btn-next" onclick="nextStep(3)">Next</button>
                 </div>
             </div>
             
+            <!-- Step 3: Destination -->
             <div class="wizard-step" id="step3">
-                <div class="form-group">
-                    <label class="form-label">Destination Address</label>
-                    <input type="text" class="form-input" id="sendDest" placeholder="Enter destination address">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Memo (Optional)</label>
-                    <input type="text" class="form-input" id="sendMemo" placeholder="Enter memo">
-                </div>
-                <div class="wizard-nav">
-                    <button class="wizard-btn btn-back" onclick="backStep(2)">Back</button>
-                    <button class="wizard-btn btn-next" onclick="nextStep(4)">Next</button>
+                <label class="wizard-label" for="sendDest">Destination Address</label>
+                <input type="text" class="wizard-input" id="sendDest" placeholder="GABCD...">
+                
+                <label class="wizard-label" for="sendMemo">Memo (Optional)</label>
+                <input type="text" class="wizard-input" id="sendMemo" placeholder="Memo">
+                
+                <div class="wizard-actions">
+                    <button class="wizard-btn wizard-btn-back" onclick="backStep(2)">Back</button>
+                    <button class="wizard-btn wizard-btn-next" onclick="nextStep(4)">Next</button>
                 </div>
             </div>
             
+            <!-- Step 4: Confirmation -->
             <div class="wizard-step" id="step4">
                 <h3>Confirm Transaction</h3>
-                <div class="form-group">
-                    <p><strong>Asset:</strong> <span id="confirmAsset"></span></p>
-                    <p><strong>Amount:</strong> <span id="confirmAmount"></span></p>
-                    <p><strong>Destination:</strong> <span id="confirmDest"></span></p>
-                    <p><strong>Memo:</strong> <span id="confirmMemo">—</span></p>
+                
+                <div class="confirmation-details">
+                    <div class="confirmation-item">
+                        <span class="confirmation-label">Asset:</span>
+                        <span id="confirmAsset"></span>
+                    </div>
+                    <div class="confirmation-item">
+                        <span class="confirmation-label">Amount:</span>
+                        <span id="confirmAmount"></span>
+                    </div>
+                    <div class="confirmation-item">
+                        <span class="confirmation-label">Destination:</span>
+                        <span id="confirmDest"></span>
+                    </div>
+                    <div class="confirmation-item">
+                        <span class="confirmation-label">Memo:</span>
+                        <span id="confirmMemo">—</span>
+                    </div>
                 </div>
-                <div class="wizard-nav">
-                    <button class="wizard-btn btn-back" onclick="backStep(3)">Back</button>
-                    <button class="wizard-btn btn-confirm" onclick="sendTransaction()">Confirm & Send</button>
+                
+                <div class="wizard-actions">
+                    <button class="wizard-btn wizard-btn-back" onclick="backStep(3)">Back</button>
+                    <button class="wizard-btn wizard-btn-confirm" onclick="sendTransaction()">Confirm</button>
                 </div>
             </div>
         </div>
     </div>
-
+    
     <!-- Receive Modal -->
-    <div class="receive-modal" id="receiveModal">
-        <div class="receive-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Receive Tokens</h2>
-                <button class="close-modal">&times;</button>
+    <div class="wizard" id="receiveModal">
+        <div class="wizard-content">
+            <span class="wizard-close" id="receiveClose">&times;</span>
+            
+            <div class="wizard-header">
+                <h2>Receive Tokens</h2>
             </div>
-            <div class="modal-body">
-                <div id="receiveTokenName"></div>
-                <div class="qrcode-container">
-                    <div id="qrcode"></div>
+            
+            <div class="receive-content">
+                <p>Send assets to your Stellar address</p>
+                
+                <div class="qr-code" id="qrCode">
+                    QR Code
                 </div>
-                <div class="public-key" id="receivePublicKey"></div>
+                
+                <div class="address-display" id="receiveAddress">
+                    GABCD1234XYZ567890...
+                </div>
+                
                 <button class="copy-btn" id="copyAddress">Copy Address</button>
             </div>
         </div>
     </div>
-                        
       <!-- Enhanced Trade Section -->
       <div class="card trade-card">
         <div class="trade-header">
