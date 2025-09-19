@@ -3595,11 +3595,17 @@ function swapTradeAssets() {
                 price: "$1.00"
             }
         };
+           // Mock current keypair
+        const currentKeypair = {
+            publicKey: function() {
+                return "GABCD1234XYZ567890EFGHIJKLMNOPQRSTUVW";
+            }
+        };
         
         // Get modal elements
         const tokenModal = document.getElementById('tokenModal');
-        const receiveModal = document.getElementById('receiveModal');
         const sendWizard = document.getElementById('sendWizard');
+        const receiveModal = document.getElementById('receiveModal');
         const wizardOverlay = document.getElementById('wizardOverlay');
         
         // Add click event to all asset items
@@ -3616,88 +3622,78 @@ function swapTradeAssets() {
             if (token) {
                 document.getElementById('modalTokenName').textContent = token.name;
                 document.getElementById('modalTokenIcon').src = token.icon;
-                document.getElementById('modalTokenBalance').textContent = token.balance + " " + token.name;
-                document.getElementById('modalTokenValue').textContent = token.value + " • " + token.price;
+                document.getElementById('modalTokenBalance').textContent = `Balance: ${token.balance} ${token.name}`;
+                document.getElementById('modalTokenValue').textContent = `${token.value} • ${token.price}`;
                 tokenModal.style.display = 'flex';
             }
         }
         
         // Close modals
-        document.getElementById('closeTokenModal').addEventListener('click', function() {
+        document.getElementById('modalClose').addEventListener('click', function() {
             tokenModal.style.display = 'none';
         });
         
-        document.getElementById('closeReceiveModal').addEventListener('click', function() {
+        document.getElementById('wizardClose').addEventListener('click', closeWizard);
+        document.getElementById('receiveClose').addEventListener('click', function() {
             receiveModal.style.display = 'none';
+            wizardOverlay.style.display = 'none';
         });
         
-        document.getElementById('wizardClose').addEventListener('click', closeWizard);
         wizardOverlay.addEventListener('click', closeWizard);
         
         function closeWizard() {
             sendWizard.style.display = 'none';
+            receiveModal.style.display = 'none';
             wizardOverlay.style.display = 'none';
         }
         
-        // Modal buttons - Send and Receive
-        document.getElementById('modalBtnSend').addEventListener('click', function() {
+        // Modal send and receive buttons
+        document.getElementById('modalTokenSend').addEventListener('click', function() {
             const tokenName = document.getElementById('modalTokenName').textContent;
             tokenModal.style.display = 'none';
             openSendWizard(tokenName);
         });
         
-        document.getElementById('modalBtnReceive').addEventListener('click', function() {
+        document.getElementById('modalTokenReceive').addEventListener('click', function() {
+            const tokenName = document.getElementById('modalTokenName').textContent;
             tokenModal.style.display = 'none';
-            openReceiveModal();
+            openReceiveModal(tokenName);
         });
         
-        // Main Send and Receive buttons
+        // Main send and receive buttons
         document.getElementById('btnSend').addEventListener('click', function() {
-            openSendWizard();
+            openSendWizard('XLM'); // Default to XLM
         });
         
         document.getElementById('btnReceive').addEventListener('click', function() {
-            openReceiveModal();
+            openReceiveModal('XLM'); // Default to XLM
         });
         
-        // Open Send Wizard
-        function openSendWizard(tokenName = null) {
-            if (tokenName) {
-                document.getElementById('sendAsset').value = tokenName;
-            }
-            
+        // Open send wizard
+        function openSendWizard(tokenName) {
+            document.getElementById('sendAsset').value = tokenName;
             sendWizard.style.display = 'flex';
             wizardOverlay.style.display = 'flex';
             showStep(1);
         }
         
-        // Open Receive Modal
-        function openReceiveModal() {
-            // In a real app, this would get the actual public key
-            const publicKey = "GABCD1234EFGH5678IJKL90MNOPQRSTUVWXYZABCDEF";
-            document.getElementById('receivePublicKey').textContent = publicKey;
+        // Open receive modal
+        function openReceiveModal(tokenName) {
+            const publicKey = currentKeypair ? currentKeypair.publicKey() : "";
+            document.getElementById('receiveAddress').textContent = publicKey;
             receiveModal.style.display = 'flex';
+            wizardOverlay.style.display = 'flex';
         }
-        
-        // Copy address functionality
-        document.getElementById('btnCopyAddress').addEventListener('click', function() {
-            const publicKey = document.getElementById('receivePublicKey').textContent;
-            navigator.clipboard.writeText(publicKey).then(function() {
-                alert('Address copied to clipboard!');
-            });
-        });
         
         // Wizard step functions
         function showStep(step) {
-            for (let i = 1; i <= 4; i++) {
-                document.getElementById("step" + i).style.display = "none";
+            for(let i = 1; i <= 4; i++) {
+                document.getElementById("step"+i).style.display = "none";
             }
-            
-            if (step >= 1) {
-                document.getElementById("step" + step).style.display = "block";
+            if(step >= 1) {
+                document.getElementById("step"+step).style.display = "block";
             }
-            
-            if (step === 4) {
+            if(step === 4) {
                 document.getElementById("confirmAsset").textContent = document.getElementById("sendAsset").value;
                 document.getElementById("confirmAmount").textContent = document.getElementById("sendAmount").value;
                 document.getElementById("confirmDest").textContent = document.getElementById("sendDest").value;
@@ -3710,7 +3706,7 @@ function swapTradeAssets() {
         }
         
         function backStep(step) {
-            if (step < 1) {
+            if(step < 1) {
                 closeWizard();
             } else {
                 showStep(step);
@@ -3724,23 +3720,25 @@ function swapTradeAssets() {
             const destination = document.getElementById("sendDest").value;
             const memo = document.getElementById("sendMemo").value;
             
-            // Here would be the actual transaction sending logic
+            // Here you would implement the actual transaction sending logic
             console.log("Sending transaction:", { asset, amount, destination, memo });
             
             // Simulate transaction
-            alert(`Transaction submitted! Sending ${amount} ${asset} to ${destination}`);
+            alert(`Transaction submitted!\nSending ${amount} ${asset} to ${destination}`);
+            
             closeWizard();
         }
         
-        // Close modals when clicking outside
-        window.addEventListener('click', function(event) {
-            if (event.target == tokenModal) {
-                tokenModal.style.display = 'none';
-            }
-            if (event.target == receiveModal) {
-                receiveModal.style.display = 'none';
-            }
+        // Copy address functionality
+        document.getElementById('copyAddress').addEventListener('click', function() {
+            const address = document.getElementById('receiveAddress').textContent;
+            navigator.clipboard.writeText(address).then(() => {
+                alert('Address copied to clipboard!');
+            });
         });
+           // Initialize wallet address display
+        document.getElementById('walletAddress').textContent = currentKeypair.publicKey().substring(0, 10) + '...' + 
+                                                              currentKeypair.publicKey().substring(currentKeypair.publicKey().length - 4);
 </script>
 </script>
 </body>
