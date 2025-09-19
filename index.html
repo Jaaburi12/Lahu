@@ -3491,16 +3491,27 @@ function swapTradeAssets() {
             });
         });
         
-        // Function to open token modal
         function openTokenModal(tokenName) {
-            const token = tokens[tokenName];
-            if (token) {
-                document.getElementById('modalTokenName').textContent = token.name;
-                document.getElementById('modalTokenIcon').src = token.icon;
-                document.getElementById('modalTokenBalance').textContent = token.balance + " " + token.name;
-                document.getElementById('modalTokenValue').textContent = token.value + " • " + token.price;
-                modal.style.display = 'flex';
-            }
+    const token = tokens[tokenName];
+    if (token) {
+        document.getElementById('modalTokenName').textContent = token.name;
+        document.getElementById('modalTokenIcon').src = token.icon;
+        document.getElementById('modalTokenBalance').textContent = token.balance + " " + token.name;
+        document.getElementById('modalTokenValue').textContent = token.value + " • " + token.price;
+        
+        // Ku dar buttons
+        const actionsHtml = `
+            <div style="margin-top:15px; display:flex; gap:10px; justify-content:center;">
+                <button style="padding:8px 14px; border:none; border-radius:8px; background:#1976d2; color:#fff; cursor:pointer;"
+                    onclick="openSendWizard('${token.name}')">Send</button>
+                <button style="padding:8px 14px; border:none; border-radius:8px; background:#28a745; color:#fff; cursor:pointer;"
+                    onclick="openReceiveModal()">Receive</button>
+            </div>
+        `;
+        document.getElementById('modalTokenValue').insertAdjacentHTML("afterend", actionsHtml);
+
+        modal.style.display = 'flex';
+    }
         }
         
 </script>
