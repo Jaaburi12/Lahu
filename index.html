@@ -1016,159 +1016,299 @@
         
         /* Modal Styles */
         .modal {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            justify-content: center;
+            display: none;
             align-items: center;
+            justify-content: center;
+            z-index: 1000;
         }
         
         .modal-content {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            width: 85%;
+            background: #1e1e1e;
+            border-radius: 16px;
+            width: 90%;
             max-width: 400px;
-            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            animation: modalAppear 0.3s ease-out;
-        }
-        
-        @keyframes modalAppear {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
         
         .modal-header {
             padding: 20px;
             text-align: center;
-            background: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .modal-header h2 {
-            font-size: 22px;
+            font-size: 24px;
             margin-bottom: 5px;
         }
         
+        .modal-header p {
+            color: #ccc;
+        }
+        
         .modal-body {
-            padding: 25px;
+            padding: 20px;
         }
         
         .token-info {
             display: flex;
             align-items: center;
+            gap: 15px;
             margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 12px;
         }
         
         .token-icon {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
+            overflow: hidden;
         }
         
         .token-icon img {
-            width: 70%;
-            height: 70%;
-            object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .token-details h3 {
-            font-size: 24px;
+            font-size: 18px;
             margin-bottom: 5px;
         }
         
         .token-details p {
-            color: #a0a0a0;
+            color: #ccc;
         }
         
         .modal-actions {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 15px;
         }
         
         .modal-btn {
-            flex: 1;
-            padding: 16px 0;
-            border-radius: 12px;
-            border: none;
-            font-weight: 600;
-            font-size: 18px;
-            cursor: pointer;
-            transition: all 0.2s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            padding: 20px;
+            border-radius: 12px;
             background: rgba(255, 255, 255, 0.1);
-            color: white;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .modal-btn i {
-            font-size: 24px;
-            margin-bottom: 8px;
+            font-size: 28px;
+            margin-bottom: 10px;
         }
         
         .modal-btn.send {
-            background: #e74c3c;
+            color: #ff9500;
         }
         
         .modal-btn.receive {
-            background: #2ecc71;
-        }
-        
-        .modal-btn:active {
-            transform: scale(0.95);
+            color: #4cd964;
         }
         
         .close-modal {
             position: absolute;
             top: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.1);
             width: 40px;
             height: 40px;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Wizard Styles */
+        .wizard {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #1e1e1e;
+            border-radius: 20px 20px 0 0;
+            display: none;
+            flex-direction: column;
+            z-index: 1001;
+            max-height: 90vh;
+        }
+        
+        .wizard-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .wizard-close {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
             cursor: pointer;
         }
         
-        .close-modal i {
-            font-size: 24px;
-            color: white;
+        .wizard-steps {
+            padding: 20px;
+            overflow-y: auto;
+            flex-grow: 1;
         }
         
-        /* Responsive adjustments */
+        .step {
+            display: none;
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        .wizard-nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .wizard-btn {
+            padding: 12px 25px;
+            border-radius: 12px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .btn-back {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+        
+        .btn-next {
+            background: #007bff;
+            color: #fff;
+        }
+        
+        .btn-confirm {
+            background: #4cd964;
+            color: #fff;
+        }
+        
+        .wizard-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            z-index: 1000;
+        }
+        
+        .confirmation-details {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .confirmation-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .confirmation-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .confirmation-label {
+            color: #ccc;
+        }
+        
+        .receive-content {
+            text-align: center;
+        }
+        
+        .qrcode-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        #qrcode {
+            padding: 15px;
+            background: #fff;
+            border-radius: 12px;
+            display: inline-block;
+        }
+        
+        .public-address {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            word-break: break-all;
+            font-size: 14px;
+            margin: 20px 0;
+        }
+        
+        .copy-btn {
+            padding: 12px 25px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
         @media (max-width: 480px) {
-            .header h1 {
-                font-size: 24px;
+            .container {
+                padding: 15px;
             }
-            
-            .asset-icon {
-                width: 42px;
-                height: 42px;
-                margin-right: 12px;
-            }
-            
-            .asset-name {
-                font-size: 16px;
-            }
-            
-            .asset-balance {
-                font-size: 16px;
-            }
-            
   .custom-alert {
     position: fixed;
     bottom: 20px;
