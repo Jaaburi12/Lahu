@@ -1482,11 +1482,18 @@
 <div id="receiveWizard">
     <div class="wizard-header">
         <h3>Receive Tokens</h3>
-        <button class="wizard-close" onclick="closeReceiveWizard()">&times;</button>
+        <button class="wizard-close" click="closeReceiveWizard()">&times;</button>
     </div>
     
+    <div class="receive-token" id="receiveTokenName">XLM</div>
     
-    <button class="copy-btn" onclick="copyAddress()">
+    <div id="receiveQrcode"></div>
+    
+    <div class="receive-address" id="receiveAddress">
+        GABCD1234EFGH5678IJKL9012MNOP3456QRST7890UVWX
+    </div>
+    
+    <button class="copy-btn" click="copyAddress()">
         <i class="fas fa-copy"></i> Copy Address
     </button>
 </div>       
