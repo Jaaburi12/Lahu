@@ -1357,89 +1357,104 @@
     <div class="action-text">Lock</div>
   </div>
 </div>
-      
       <div class="assets-grid">
-            <!-- XLM -->
-            <div class="asset-item" data-token="XLM">
-                <div class="asset-left">
-                    <div class="asset-icon">
-                        <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="XLM">
-                    </div>
-                    <div class="asset-details">
-                        <div class="asset-name">XLM</div>
-                        <div class="asset-price">
-                            <span id="xlmUsd"></span>
-                            <small class="per">$<span id="xlmPrice">0.409</span>
-                            <span id="xlmChange" class="price-change positive">+2.5%</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="asset-right">
-                    <div class="asset-balance"><span id="xlmBal">125.50</span></div>
-                    <div class="asset-balance-sub">$<span id="xlmBalUsd">51.32</span></div>
-                </div>
-            </div>
+  <!-- XLM -->
+  <div class="asset-item" data-token="XLM">
+    <div class="asset-left">
+      <div class="asset-icon">
+        <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="XLM">
+      </div>
+      <div class="asset-details">
+        <div class="asset-name">XLM</div>
+        <div class="asset-price">
+          <small class="per">$<span id="xlmPrice">0.409</span>
+          <span id="xlmChange" class="price-change positive">+2.5%</span>
+        </div>
+      </div>
+    </div>
+    <div class="asset-right">
+      <div class="asset-balance"><span id="xlmBal">125.50</span></div>
+      <div class="asset-balance-sub">$<span id="xlmBalUsd">51.32</span></div>
+    </div>
+  </div>
 
-            <!-- LAAM -->
-            <div class="asset-item" data-token="LAAM">
-                <div class="asset-left">
-                    <div class="asset-icon">
-                        <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="LAAM">
-                    </div>
-                    <div class="asset-details">
-                        <div class="asset-name">Laam</div>
-                        <div class="asset-price">
-                            <span id="laamUsd"></span>
-                            <small class="per">$<span id="laamPrice">0.056</span>
-                            <span id="laamChange" class="price-change negative">-1.2%</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="asset-right">
-                    <div class="asset-balance"><span id="laamBal">850</span></div>
-                    <div class="asset-balance-sub">$<span id="laamBalUsd">47.60</span></div>
-                </div>
-            </div>
+  <!-- LAAM -->
+  <div class="asset-item" data-token="LAAM">
+    <div class="asset-left">
+      <div class="asset-icon">
+        <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="LAAM">
+      </div>
+      <div class="asset-details">
+        <div class="asset-name">Laam</div>
+        <div class="asset-price">
+          <small class="per">$<span id="laamPrice">0.056</span>
+          <span id="laamChange" class="price-change negative">-1.2%</span>
+        </div>
+      </div>
+    </div>
+    <div class="asset-right">
+      <div class="asset-balance"><span id="laamBal">850</span></div>
+      <div class="asset-balance-sub">$<span id="laamBalUsd">47.60</span></div>
+    </div>
+  </div>
 
-            <!-- USDC -->
-            <div class="asset-item" data-token="USDC">
-                <div class="asset-left">
-                    <div class="asset-icon">
-                        <img src="https://i.ibb.co/r2qNFs22/images-2.png" alt="USDC">
-                    </div>
-                    <div class="asset-details">
-                        <div class="asset-name">USDC</div>
-                        <div class="asset-price">
-                            <span id="usdcUsd"></span>
-                            <small class="per"><span id="usdcPrice">1.00</span>
-                            <span id="usdcChange" class="price-change">0.00%</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="asset-right">
-                    <div class="asset-balance"><span id="usdcBal">1144.64</span></div>
-                    <div class="asset-balance-sub">$<span id="usdcBalUsd">1144.64</span></div>
-                </div>
-            </div>
+  <!-- USDC -->
+  <div class="asset-item" data-token="USDC">
+    <div class="asset-left">
+      <div class="asset-icon">
+        <img src="https://i.ibb.co/r2qNFs22/images-2.png" alt="USDC">
+      </div>
+      <div class="asset-details">
+        <div class="asset-name">USDC</div>
+        <div class="asset-price">
+          <small class="per"><span id="usdcPrice">1.00</span>
+          <span id="usdcChange" class="price-change">0.00%</span>
         </div>
+      </div>
     </div>
+    <div class="asset-right">
+      <div class="asset-balance"><span id="usdcBal">1144.64</span></div>
+      <div class="asset-balance-sub">$<span id="usdcBalUsd">1144.64</span></div>
     </div>
-                <div class="modal-actions">
-  <button class="modal-btn send" id="modalSendBtn">
-    <i class="fas fa-paper-plane"></i>
-    <span>Send</span>
-  </button>
-  <button class="modal-btn receive" id="modalReceiveBtn">
-    <i class="fas fa-qrcode"></i>
-    <span>Receive</span>
-  </button>           
-     </div>
+  </div>
+</div>
+
+<!-- Token Action Modal -->
+<div class="modal" id="tokenModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 id="modalTokenName">XLM</h2>
+      <p>Select an action</p>
     </div>
+    <div class="modal-body">
+      <div class="token-info">
+        <div class="token-icon">
+          <img id="modalTokenIcon" src="" alt="Token">
         </div>
-        <div class="close-modal" onclick="closeModal()">
-            <i class="fas fa-times"></i>
+        <div class="token-details">
+          <h3 id="modalTokenBalance">0</h3>
+          <p id="modalTokenValue">$0.00</p>
         </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="modal-btn send" id="modalSendBtn">
+          <i class="fas fa-paper-plane"></i>
+          <span>Send</span>
+        </button>
+        <button class="modal-btn receive" id="modalReceiveBtn">
+          <i class="fas fa-qrcode"></i>
+          <span>Receive</span>
+        </button>
+      </div>
     </div>
+  </div>
+  <div class="close-modal" onclick="closeModal()">
+    <i class="fas fa-times"></i>
+  </div>
+</div>
+
+            
                         
       <!-- Enhanced Trade Section -->
       <div class="card trade-card">
@@ -3460,7 +3475,7 @@ function swapTradeAssets() {
                 price: "$1.00"
             }
         };
-         // Add click event to all asset items
+      // Add click event to all asset items
 document.querySelectorAll('.asset-item').forEach(item => {
   item.addEventListener('click', function() {
     const tokenName = this.getAttribute('data-token');
@@ -3469,17 +3484,23 @@ document.querySelectorAll('.asset-item').forEach(item => {
 });
 
 function openTokenModal(tokenName) {
-  const token = tokens[tokenName];
-  if (token) {
-    document.getElementById('modalTokenName').textContent = token.name;
-    document.getElementById('modalTokenIcon').src = token.icon;
-    document.getElementById('modalTokenBalance').textContent =
-      token.balance + " " + token.name;
-    document.getElementById('modalTokenValue').textContent =
-      token.value + " • " + token.price;
+  // token info ka buuxi
+  document.getElementById('modalTokenName').textContent = tokenName;
+  document.getElementById('modalTokenIcon').src =
+    (tokenName === "XLM")
+      ? "https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png"
+      : (tokenName === "LAAM")
+        ? "https://i.ibb.co/r28SP1bN/20250802-225108.png"
+        : "https://i.ibb.co/r2qNFs22/images-2.png";
 
-    document.getElementById('tokenModal').style.display = 'flex';
-  }
+  // balance tus
+  let balance = "0";
+  if (tokenName === "XLM") balance = document.getElementById("xlmBal").innerText + " XLM";
+  if (tokenName === "LAAM") balance = document.getElementById("laamBal").innerText + " Laam";
+  if (tokenName === "USDC") balance = document.getElementById("usdcBal").innerText + " USDC";
+  document.getElementById('modalTokenBalance').textContent = balance;
+
+  document.getElementById('tokenModal').style.display = 'flex';
 }
 
 // ✅ Link modal buttons to global send/receive once
@@ -3490,7 +3511,7 @@ document.getElementById("modalSendBtn").addEventListener("click", function() {
 
 document.getElementById("modalReceiveBtn").addEventListener("click", function() {
   closeModal();
-  openReceiveModal();     // fur modal receive-ka guud
+  openReceiveModal();     // fur receive modal-ka guud
 });
         
 </script>
