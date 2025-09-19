@@ -1440,19 +1440,16 @@
                         <h3 id="modalTokenBalance">0</h3>
                         <p id="modalTokenValue">$0.00</p>
                     </div>
-                </div><div class="modal-actions">
-    <button class="modal-btn send" id="modalSendBtn">
-        <i class="fas fa-paper-plane"></i>
-        <span>Send</span>
-    </button>
-    <button class="modal-btn receive" id="modalReceiveBtn">
-        <i class="fas fa-qrcode"></i>
-        <span>Receive</span>
-    </button>
-            </div>
-            </div>
-            </div>
-        </div>
+                <div class="modal-actions">
+  <button class="modal-btn send" id="modalSendBtn">
+    <i class="fas fa-paper-plane"></i>
+    <span>Send</span>
+  </button>
+  <button class="modal-btn receive" id="modalReceiveBtn">
+    <i class="fas fa-qrcode"></i>
+    <span>Receive</span>
+  </button>
+    </div>
         <div class="close-modal" onclick="closeModal()">
             <i class="fas fa-times"></i>
         </div>
@@ -3477,27 +3474,41 @@ function swapTradeAssets() {
                 price: "$1.00"
             }
         };
-         function openTokenModal(tokenName) {
-    const token = tokens[tokenName];
-    if (token) {
-        document.getElementById('modalTokenName').textContent = token.name;
-        document.getElementById('modalTokenIcon').src = token.icon;
-        document.getElementById('modalTokenBalance').textContent = token.balance + " " + token.name;
-        document.getElementById('modalTokenValue').textContent = token.value + " • " + token.price;
+      // Modal references
+const modal = document.getElementById('tokenModal');
 
-        modal.style.display = 'flex';
-    }
-         }
-      document.getElementById("modalSendBtn").addEventListener("click", function() {
-    closeModal();
-    openSendWizard(); // wizard-ka guud
+// Add click event to all asset items
+document.querySelectorAll('.asset-item').forEach(item => {
+  item.addEventListener('click', function() {
+    const tokenName = this.getAttribute('data-token');
+    openTokenModal(tokenName);
+  });
+});
+
+function openTokenModal(tokenName) {
+  const token = tokens[tokenName];
+  if (token) {
+    document.getElementById('modalTokenName').textContent = token.name;
+    document.getElementById('modalTokenIcon').src = token.icon;
+    document.getElementById('modalTokenBalance').textContent =
+      token.balance + " " + token.name;
+    document.getElementById('modalTokenValue').textContent =
+      token.value + " • " + token.price;
+
+    modal.style.display = 'flex';
+  }
+}
+
+// ✅ Link modal buttons to global send/receive once
+document.getElementById("modalSendBtn").addEventListener("click", function() {
+  closeModal();           // xir token modal
+  openSendWizard();       // fur wizard send-ka guud
 });
 
 document.getElementById("modalReceiveBtn").addEventListener("click", function() {
-    closeModal();
-    openReceiveModal(); // receive modal-ka guud
+  closeModal();
+  openReceiveModal();     // fur modal receive-ka guud
 });
-        
         
 </script>
 </script>
