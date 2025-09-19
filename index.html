@@ -726,7 +726,36 @@
             color: #ccc;
             font-size: 16px;
         }
+
+    .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
         
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .action-btn i {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        
+        .send-btn {
+            color: #ff9500;
+        }
+        
+        .receive-btn {
+            color: #4cd964;
+        }
+    
         .assets-section {
             margin-bottom: 25px;
         }
@@ -828,34 +857,6 @@
             margin-top: 20px;
         }
         
-        .action-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .action-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .action-btn i {
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-        
-        .send-btn {
-            color: #ff9500;
-        }
-        
-        .receive-btn {
-            color: #4cd964;
-        }
         
         /* Modal Styles */
         .modal {
