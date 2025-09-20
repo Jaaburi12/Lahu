@@ -1374,61 +1374,7 @@
       <div class="balance-amount">$<span id="totalAssets">0</span></div>
       <div class="balance-label">Total Assets</div>
     </div>
-  <!-- Wizard Overlay -->
-<div id="wizardOverlay" style="display:none;">
-  <!-- Wizard Modal -->
-  <div id="sendWizard" class="send-wrap">
-    <button id="wizardClose">×</button>
-
-    <!-- Step 1 -->
-    <div id="step1">
-      <h3>Step 1: Choose Asset</h3>
-      <label>Select Token</label>
-      <select id="sendAsset">
-        <option value="XLM">XLM</option>
-        <option value="LAAM">LAAM</option>
-        <option value="USDC">USDC</option>
-      </select>
-      <div class="btn-group">
-        <button class="wizard-btn secondary" onclick="backStep(0)">Back</button>
-        <button class="wizard-btn primary" onclick="nextStep(2)">Next</button>
-      </div>
-    </div>
-
-    <!-- Step 2 -->
-    <div id="step2" style="display:none;">
-      <h3>Step 2: Enter Amount</h3>
-      <input type="number" id="sendAmount" placeholder="0.00">
-      <div class="btn-group">
-        <button class="wizard-btn secondary" onclick="backStep(1)">Back</button>
-        <button class="wizard-btn primary" onclick="nextStep(3)">Next</button>
-      </div>
-    </div>
-
-    <!-- Step 3 -->
-    <div id="step3" style="display:none;">
-      <h3>Step 3: Destination</h3>
-      <input type="text" id="sendDest" placeholder="Enter Stellar address">
-      <input type="text" id="sendMemo" placeholder="Memo (optional)">
-      <div class="btn-group">
-        <button class="wizard-btn secondary" onclick="backStep(2)">Back</button>
-        <button class="wizard-btn primary" onclick="nextStep(4)">Next</button>
-      </div>
-    </div>
-
-    <!-- Step 4 -->
-    <div id="step4" style="display:none;">
-      <h3>Step 4: Confirm Transaction</h3>
-      <p><strong>Asset:</strong> <span id="confirmAsset"></span></p>
-      <p><strong>Amount:</strong> <span id="confirmAmount"></span></p>
-      <p><strong>Destination:</strong> <span id="confirmDest"></span></p>
-      <p><strong>Memo:</strong> <span id="confirmMemo"></span></p>
-      <div class="btn-group">
-        <button class="wizard-btn secondary" onclick="backStep(3)">Back</button>
-        <button id="confirmSendBtn" class="wizard-btn confirm" onclick="sendTransaction()">Send Now</button>
-      </div>
-    </div>
-  </div>
+  <!-- 
     <!-- Action Buttons (2x2 grid) -->
     <div class="actions">
       <div class="action-btn send-btn" id="btnSend">
