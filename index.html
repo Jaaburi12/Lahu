@@ -729,13 +729,33 @@
 .price-change.positive{ background: rgba(76,217,100,0.12); color:#4cd964; }
 .price-change.negative{ background: rgba(255,59,48,0.12); color:#ff3b30; }
 
-.actions{ display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:20px; }
-.action-btn{ display:flex; flex-direction:column; align-items:center; padding:12px; border-radius:12px; background: rgba(255,255,255,0.06); cursor:pointer; }
-.action-btn i{ font-size:20px; margin-bottom:8px; }
-.send-btn{ color:#ff9500; }
-.receive-btn{ color:#4cd964; }
+    .actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 tiir */
+  gap: 15px;
+  margin: 20px 0; /* bannaan sare & hoose */
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  cursor: pointer;
+}
+
+.action-btn i {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.send-btn { color: #ff9500; }    /* oranji */
+.receive-btn { color: #4cd964; } /* cagaar */
 .trust-btn { color: #007aff; }   /* buluug */
 .lock-btn  { color: #ff3b30; }   /* casaan */
+
 /* responsive tweaks */
 @media (max-width:480px){
   .container{ padding:16px; }
@@ -1098,129 +1118,110 @@
         }
         
         /* Wizard Styles */
-        .wizard {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: #1e1e1e;
-            border-radius: 20px 20px 0 0;
-            display: none;
-            flex-direction: column;
-            z-index: 1001;
-            max-height: 90vh;
-        }
-        
-        .wizard-header {
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-        }
-        
-        .wizard-close {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-        }
-        
-        .wizard-steps {
-            padding: 20px;
-            overflow-y: auto;
-            flex-grow: 1;
-        }
-        
-        .step {
-            display: none;
-        }
-        
-        .step.active {
-            display: block;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #ccc;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 15px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            font-size: 16px;
-        }
-        
-        .wizard-nav {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .wizard-btn {
-            padding: 12px 25px;
-            border-radius: 12px;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        .btn-back {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-        }
-        
-        .btn-next {
-            background: #007bff;
-            color: #fff;
-        }
-        
-        .btn-confirm {
-            background: #4cd964;
-            color: #fff;
-        }
-        
-        .wizard-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            z-index: 1000;
-        }
-        
-        .confirmation-details {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-        }
-        
-        .confirmation-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        
-        .confirmation-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .confirmation-label {
-            color: #ccc;
-        }
+        /* Overlay */
+#wizardOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal wrap */
+.send-wrap {
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 20px;
+  max-width: 420px;
+  width: 90%;
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  position: relative;
+  animation: fadeIn .3s ease;
+}
+
+/* Close button */
+#sendWizard #wizardClose {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Steps */
+#sendWizard h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#sendWizard input, 
+#sendWizard select {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 10px 0;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+/* Button group */
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.wizard-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.wizard-btn.primary {
+  background: #007aff;
+  color: #fff;
+}
+.wizard-btn.primary:hover {
+  background: #005fcc;
+}
+
+.wizard-btn.secondary {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+.wizard-btn.secondary:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.wizard-btn.confirm {
+  background: #4cd964;
+  color: #fff;
+}
+.wizard-btn.confirm:hover {
+  background: #38b64c;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+            
         
         .receive-content {
             text-align: center;
@@ -1366,189 +1367,186 @@
       </div>
     </div>
 
-    <!-- LOGGED IN VIEW -->
     <div id="loggedInView" class="hidden">
-      <!-- Wallet Container with New Design -->
-      <div class="wallet-container">
-        <!-- Total Assets -->
-<div class="total-assets">
-  <div class="total-label">Total assets</div>
-  <div class="total-value">$<span id="totalAssets">0</span></div>
-</div>
-    
-<div id="wizardOverlay"></div>
+  <div class="container">
+    <!-- Total Assets -->
+    <div class="wallet-balance">
+      <div class="balance-amount">$<span id="totalAssets">0</span></div>
+      <div class="balance-label">Total Assets</div>
+    </div>
+  <!-- Wizard Overlay -->
+<div id="wizardOverlay" style="display:none;">
+  <!-- Wizard Modal -->
+  <div id="sendWizard" class="send-wrap">
+    <button id="wizardClose">×</button>
 
-<!-- Wizard Modal -->
-<div id="sendWizard" class="send-wrap">
-  <button id="wizardClose">×</button>
+    <!-- Step 1 -->
+    <div id="step1">
+      <h3>Step 1: Choose Asset</h3>
+      <label>Select Token</label>
+      <select id="sendAsset">
+        <option value="XLM">XLM</option>
+        <option value="LAAM">LAAM</option>
+        <option value="USDC">USDC</option>
+      </select>
+      <div class="btn-group">
+        <button class="wizard-btn secondary" onclick="backStep(0)">Back</button>
+        <button class="wizard-btn primary" onclick="nextStep(2)">Next</button>
+      </div>
+    </div>
 
-  <!-- Step 1 -->
-  <div id="step1">
-    <h3>Step 1: Choose Asset</h3>
-    <label>Select Token</label>
-    <select id="sendAsset">
-      <option value="XLM">XLM</option>
-      <option value="LAAM">LAAM</option>
-      <option value="USDC">USDC</option>
-    </select>
-    <div class="btn-group">
-      <button class="wizard-btn secondary" onclick="backStep(0)">Back</button>
-      <button class="wizard-btn primary" onclick="nextStep(2)">Next</button>
+    <!-- Step 2 -->
+    <div id="step2" style="display:none;">
+      <h3>Step 2: Enter Amount</h3>
+      <input type="number" id="sendAmount" placeholder="0.00">
+      <div class="btn-group">
+        <button class="wizard-btn secondary" onclick="backStep(1)">Back</button>
+        <button class="wizard-btn primary" onclick="nextStep(3)">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div id="step3" style="display:none;">
+      <h3>Step 3: Destination</h3>
+      <input type="text" id="sendDest" placeholder="Enter Stellar address">
+      <input type="text" id="sendMemo" placeholder="Memo (optional)">
+      <div class="btn-group">
+        <button class="wizard-btn secondary" onclick="backStep(2)">Back</button>
+        <button class="wizard-btn primary" onclick="nextStep(4)">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div id="step4" style="display:none;">
+      <h3>Step 4: Confirm Transaction</h3>
+      <p><strong>Asset:</strong> <span id="confirmAsset"></span></p>
+      <p><strong>Amount:</strong> <span id="confirmAmount"></span></p>
+      <p><strong>Destination:</strong> <span id="confirmDest"></span></p>
+      <p><strong>Memo:</strong> <span id="confirmMemo"></span></p>
+      <div class="btn-group">
+        <button class="wizard-btn secondary" onclick="backStep(3)">Back</button>
+        <button id="confirmSendBtn" class="wizard-btn confirm" onclick="sendTransaction()">Send Now</button>
+      </div>
     </div>
   </div>
-
-  <!-- Step 2 -->
-  <div id="step2" style="display:none;">
-    <h3>Step 2: Enter Amount</h3>
-    <input type="number" id="sendAmount" placeholder="0.00">
-    <div class="btn-group">
-      <button class="wizard-btn secondary" onclick="backStep(1)">Back</button>
-      <button class="wizard-btn primary" onclick="nextStep(3)">Next</button>
+    <!-- Action Buttons (2x2 grid) -->
+    <div class="actions">
+      <div class="action-btn send-btn" id="btnSend">
+        <i class="fas fa-paper-plane"></i><span>Send</span>
+      </div>
+      <div class="action-btn receive-btn" id="btnReceive">
+        <i class="fas fa-qrcode"></i><span>Receive</span>
+      </div>
+      <div class="action-btn trust-btn" id="addTrustlineBtn">
+        <i class="fas fa-link"></i><span>Trustline</span>
+      </div>
+      <div class="action-btn lock-btn" id="logoutBtn">
+        <i class="fas fa-lock"></i><span>Lock</span>
+      </div>
     </div>
-  </div>
 
-  <!-- Step 3 -->
-  <div id="step3" style="display:none;">
-    <h3>Step 3: Destination</h3>
-    <input type="text" id="sendDest" placeholder="Enter Stellar address">
-    <input type="text" id="sendMemo" placeholder="Memo (optional)">
-    <div class="btn-group">
-      <button class="wizard-btn secondary" onclick="backStep(2)">Back</button>
-      <button class="wizard-btn primary" onclick="nextStep(4)">Next</button>
-    </div>
-  </div>
+    <!-- My Assets -->
+    <div class="assets-section">
+      <div class="section-title">
+        <span>My Assets</span>
+        <i class="fas fa-ellipsis-h"></i>
+      </div>
 
-  <!-- Step 4 -->
-  <div id="step4" style="display:none;">
-    <h3>Step 4: Confirm Transaction</h3>
-    <p><strong>Asset:</strong> <span id="confirmAsset"></span></p>
-    <p><strong>Amount:</strong> <span id="confirmAmount"></span></p>
-    <p><strong>Destination:</strong> <span id="confirmDest"></span></p>
-    <p><strong>Memo:</strong> <span id="confirmMemo"></span></p>
-    <div class="btn-group">
-      <button class="wizard-btn secondary" onclick="backStep(3)">Back</button>
-      <button id="confirmSendBtn" class="wizard-btn confirm" onclick="sendTransaction()">Send Now</button>
-    </div>
-  </div>
-</div>
-          
-    <div class="action-buttons">
-  <div class="action-button send" id="btnSend">
-    <div class="action-icon">➤</div>
-    <div class="action-text">Send</div>
-  </div>
-    <div class="action-button receive" id="btnReceive">
-    <div class="action-icon">📥</div>
-    <div class="action-text">Receive</div>
-  </div>
-  <div class="action-button trustline" id="addTrustlineBtn">
-    <div class="action-icon">+</div>
-    <div class="action-text">Add Trustline</div>
-  </div>
-  <div class="action-button lock" id="logoutBtn">
-    <div class="action-icon">🔒</div>
-    <div class="action-text">Lock</div>
-  </div>
-</div>
-      
-      <div class="assets-grid">
-            <!-- XLM -->
-            <div class="asset-item" data-token="XLM">
-                <div class="asset-left">
-                    <div class="asset-icon">
-                        <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="XLM">
-                    </div>
-                    <div class="asset-details">
-                        <div class="asset-name">XLM</div>
-                        <div class="asset-price">
-                            <span id="xlmUsd"></span>
-                            <small class="per">$<span id="xlmPrice">0.409</span>
-                            <span id="xlmChange" class="price-change positive">+2.5%</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="asset-right">
-                    <div class="asset-balance"><span id="xlmBal">125.50</span></div>
-                    <div class="asset-balance-sub">$<span id="xlmBalUsd">51.32</span></div>
-                </div>
+      <!-- XLM -->
+      <div class="asset-item" data-token="XLM">
+        <div class="asset-left">
+          <div class="asset-icon">
+            <img src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="XLM">
+          </div>
+          <div class="asset-details">
+            <div class="asset-name">XLM</div>
+            <div class="asset-price">
+              $<span id="xlmPrice">0.409</span>
+              <span id="xlmChange" class="price-change positive">+2.5%</span>
             </div>
-
-            <!-- LAAM -->
-            <div class="asset-item" data-token="LAAM">
-                <div class="asset-left">
-                    <div class="asset-icon">
-                        <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="LAAM">
-                    </div>
-                    <div class="asset-details">
-                        <div class="asset-name">Laam</div>
-                        <div class="asset-price">
-                            <span id="laamUsd"></span>
-                            <small class="per">$<span id="laamPrice">0.056</span>
-                            <span id="laamChange" class="price-change negative">-1.2%</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="asset-right">
-                    <div class="asset-balance"><span id="laamBal">850</span></div>
-                    <div class="asset-balance-sub">$<span id="laamBalUsd">47.60</span></div>
-                </div>
-            </div>
-
-            <!-- USDC -->
-            <div class="asset-item" data-token="USDC">
-                <div class="asset-left">
-                    <div class="asset-icon">
-                        <img src="https://i.ibb.co/r2qNFs22/images-2.png" alt="USDC">
-                    </div>
-                    <div class="asset-details">
-                        <div class="asset-name">USDC</div>
-                        <div class="asset-price">
-                            <span id="usdcUsd"></span>
-                            <small class="per"><span id="usdcPrice">1.00</span>
-                            <span id="usdcChange" class="price-change">0.00%</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="asset-right">
-                    <div class="asset-balance"><span id="usdcBal">1144.64</span></div>
-                    <div class="asset-balance-sub">$<span id="usdcBalUsd">1144.64</span></div>
-                </div>
-            </div>
+          </div>
         </div>
+        <div class="asset-right">
+          <div class="asset-balance"><span id="xlmBal">125.50</span></div>
+          <div class="asset-balance-sub">$<span id="xlmBalUsd">51.32</span></div>
+        </div>
+      </div>
+
+      <!-- LAAM -->
+      <div class="asset-item" data-token="LAAM">
+        <div class="asset-left">
+          <div class="asset-icon">
+            <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="LAAM">
+          </div>
+          <div class="asset-details">
+            <div class="asset-name">Laam</div>
+            <div class="asset-price">
+              $<span id="laamPrice">0.056</span>
+              <span id="laamChange" class="price-change negative">-1.2%</span>
+            </div>
+          </div>
+        </div>
+        <div class="asset-right">
+          <div class="asset-balance"><span id="laamBal">850</span></div>
+          <div class="asset-balance-sub">$<span id="laamBalUsd">47.60</span></div>
+        </div>
+      </div>
+
+      <!-- USDC -->
+      <div class="asset-item" data-token="USDC">
+        <div class="asset-left">
+          <div class="asset-icon">
+            <img src="https://i.ibb.co/r2qNFs22/images-2.png" alt="USDC">
+          </div>
+          <div class="asset-details">
+            <div class="asset-name">USDC</div>
+            <div class="asset-price">
+              $<span id="usdcPrice">1.00</span>
+              <span id="usdcChange" class="price-change">0.00%</span>
+            </div>
+          </div>
+        </div>
+        <div class="asset-right">
+          <div class="asset-balance"><span id="usdcBal">1144.64</span></div>
+          <div class="asset-balance-sub">$<span id="usdcBalUsd">1144.64</span></div>
+        </div>
+      </div>
     </div>
-    
-    <!-- Token Action Modal -->
-    <div class="modal" id="tokenModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modalTokenName">XLM</h2>
-                <p>Select an action</p>
-            </div>
-            <div class="modal-body">
-                <div class="token-info">
-                    <div class="token-icon">
-                        <img id="modalTokenIcon" src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="Token">
-                    </div>
-                    <div class="token-details">
-                        <h3 id="modalTokenBalance">0</h3>
-                        <p id="modalTokenValue">$0.00</p>
-                    </div>
-                </div>
-                <div class="modal-actions">
-                    <button class="modal-btn send" onclick="openSendWizard()">
-                        <i class="fas fa-paper-plane"></i>
-                        <span>Send</span>
-                    </button>
-                    <button class="modal-btn receive" onclick="openReceiveModal()">
-                        <i class="fas fa-qrcode"></i>
-                        <span>Receive</span>
-                    </button>
-                </div>
-            </div>
+  </div>
+
+  <!-- Token Action Modal -->
+  <div class="modal" id="tokenModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTokenName">XLM</h2>
+        <p>Select an action</p>
+      </div>
+      <div class="modal-body">
+        <div class="token-info">
+          <div class="token-icon">
+            <img id="modalTokenIcon" src="https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png" alt="Token">
+          </div>
+          <div class="token-details">
+            <h3 id="modalTokenBalance">0</h3>
+            <p id="modalTokenValue">$0.00</p>
+          </div>
         </div>
-        <div class="close-modal" onclick="closeModal()">
-            <i class="fas fa-times"></i>
+        <div class="modal-actions">
+          <button class="modal-btn send" onclick="openSendWizard()">
+            <i class="fas fa-paper-plane"></i>
+            <span>Send</span>
+          </button>
+          <button class="modal-btn receive" onclick="openReceiveModal()">
+            <i class="fas fa-qrcode"></i>
+            <span>Receive</span>
+          </button>
         </div>
+      </div>
+    </div>
+    <div class="close-modal" onclick="closeModal()">
+      <i class="fas fa-times"></i>
+    </div>
+  </div>
     </div>
                         
       <!-- Enhanced Trade Section -->
