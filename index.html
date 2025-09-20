@@ -678,117 +678,70 @@
     }
   }
 
-  /* New UI Elements for the Wallet */
-.wallet-container {
-    background: white;
-    border-radius: 20px;
+/* Wallet & Assets styles copied from index ok.html (keep alongside your existing styles) */
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 16px;
     padding: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
-  }
-  
-.total-assets {
-  background: linear-gradient(135deg, #2196f3, #21cbf3);
-  color: white;
-  border-radius: 20px;
-  padding: 20px 30px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  text-align: center;
-  max-width: 250px;
-  margin: 20px auto;
-  transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    color: #fff;
 }
 
-.total-assets:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+.header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
 }
+.header h1{ font-size:28px; display:flex; align-items:center; justify-content:center; gap:10px; }
+.header p{ color:#ccc; font-size:16px; }
 
-.total-label {
-  font-size: 14px;
-  font-weight: 500;
-  opacity: 0.9;
+.wallet-balance{ text-align:center; margin-bottom:25px; }
+.balance-amount{ font-size:36px; font-weight:bold; margin-bottom:5px; }
+.balance-label{ color:#ccc; font-size:16px; }
+
+.assets-section{ margin-bottom:25px; }
+.section-title{ font-size:18px; margin-bottom:15px; display:flex; justify-content:space-between; align-items:center; }
+
+.asset-item{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:15px; background: rgba(255,255,255,0.08); border-radius:12px;
+    margin-bottom:12px; cursor:pointer; transition:all .25s ease;
 }
+.asset-item:hover{ transform:translateY(-4px); background: rgba(255,255,255,0.12); }
 
-.total-value {
-  font-size: 36px;
-  font-weight: bold;
-  margin-top: 8px;
-  letter-spacing: 1px;
+.asset-left{ display:flex; align-items:center; gap:12px; }
+.asset-icon{ width:44px; height:44px; border-radius:50%; overflow:hidden; background:#fff; display:flex; align-items:center; justify-content:center; }
+.asset-icon img{ width:100%; height:100%; object-fit:cover; }
+
+.asset-details{ display:flex; flex-direction:column; }
+.asset-name{ font-weight:700; font-size:16px; color:#fff; }
+.asset-price{ font-size:14px; color:#ddd; }
+
+.asset-right{ text-align:right; }
+.asset-balance{ font-weight:700; font-size:16px; color:#fff; }
+.asset-balance-sub{ font-size:14px; color:#d6d6d6; }
+
+.price-change{ font-size:12px; margin-left:6px; padding:2px 6px; border-radius:8px; }
+.price-change.positive{ background: rgba(76,217,100,0.12); color:#4cd964; }
+.price-change.negative{ background: rgba(255,59,48,0.12); color:#ff3b30; }
+
+.actions{ display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:20px; }
+.action-btn{ display:flex; flex-direction:column; align-items:center; padding:12px; border-radius:12px; background: rgba(255,255,255,0.06); cursor:pointer; }
+.action-btn i{ font-size:20px; margin-bottom:8px; }
+.send-btn{ color:#ff9500; }
+.receive-btn{ color:#4cd964; }
+.trust-btn { color: #007aff; }   /* buluug */
+.lock-btn  { color: #ff3b30; }   /* casaan */
+/* responsive tweaks */
+@media (max-width:480px){
+  .container{ padding:16px; }
+  .asset-icon{ width:40px; height:40px; }
 }
-
-.action-buttons {
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-        
-        .action-button {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            julstify-content: center;
-            padding: 15px;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s;
-            cursor: pointer;
-            border: 1px solid #eee;
-        }
-        
-        .action-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-        }
-        
-        .action-button.send {
-            background: linear-gradient(135deg, #1976d2, #2196f3);
-            color: white;
-        }
-        
-        .action-button.receive {
-            background: linear-gradient(135deg, #28a745, #20c997);
-            color: white;
-        }
-        
-        
-        .action-button.trustline {
-            background: linear-gradient(135deg, #fd7e14, #ffc107);
-            color: white;
-        }
-        
-        .action-button.lock {
-            background: linear-gradient(135deg, #dc3545, #fd7e14);
-            color: white;
-            
-        }
-        
-        .action-icon {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-        }
-        
-        .action-text {
-            font-weight: 600;
-            font-size: 1rem;
-        }
-        
-        .footer {
-            padding: 20px;
-            text-align: center;
-            color: #777;
-            font-size: 0.9rem;
-            border-top: 1px solid #eee;
-        }
-        
-        .highlight {
-            color: #2196f3;
-            font-weight: 600;
-        }
-        
-
+ 
   /* Send Button */
   .send-btn {
     background: #1976d2;
