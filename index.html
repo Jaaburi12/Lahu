@@ -3364,188 +3364,150 @@ function swapTradeAssets() {
     secondBox.innerHTML = tempHTML;
   }
   }
-       // Token data
-        const tokens = {
-            XLM: {
-                name: "XLM",
-                icon: "https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png",
-                balance: "125.50",
-                value: "$51.32",
-                price: "$0.409"
-            },
-            LAAM: {
-                name: "LAAM",
-                icon: "https://i.ibb.co/r28SP1bN/20250802-225108.png",
-                balance: "850",
-                value: "$47.60",
-                price: "$0.056"
-            },
-            USDC: {
-                name: "USDC",
-                icon: "https://i.ibb.co/r2qNFs22/images-2.png",
-                balance: "1144.64",
-                value: "$1144.64",
-                price: "$1.00"
+       const server = new StellarSdk.Server('https://horizon.stellar.org'); // Mainnet
+// const server = new StellarSdk.Server('https://horizon-testnet.stellar.org'); // Testnet
+
+let currentKeypair = null; // User keypair
+let selectedToken = '';
+let currentStep = 1;
+
+// Token data template (prices can be updated from an API like Coinpaprika, CoinGecko)
+let tokens = {
+    XLM: {
+        name: "XLM",
+        icon: "https://res.coinpaper.com/coinpaper/stellar_xlm_logo_07021d63c0.png",
+        balance: "0",
+        value: "0",
+        price: "0.409" // static example, you can fetch real price
+    }
+};
+
+// Function to load Stellar account balances
+async function loadAccountData(publicKey) {
+    try {
+        currentKeypair = StellarSdk.Keypair.fromPublicKey(publicKey);
+        const account = await server.loadAccount(publicKey);
+        
+        tokens = { XLM: { ...tokens.XLM, balance: '0', value: '0' } }; // Reset XLM
+        account.balances.forEach(bal => {
+            if (bal.asset_type === 'native') {
+                tokens.XLM.balance = parseFloat(bal.balance).toFixed(6);
+                tokens.XLM.value = (tokens.XLM.balance * parseFloat(tokens.XLM.price)).toFixed(2);
+            } else {
+                const code = bal.asset_code;
+                tokens[code] = {
+                    name: code,
+                    icon: "https://i.ibb.co/r28SP1bN/20250802-225108.png", // default LAAM icon
+                    balance: parseFloat(bal.balance).toFixed(6),
+                    value: (parseFloat(bal.balance) * parseFloat(tokens[code]?.price || 0)).toFixed(2),
+                    price: tokens[code]?.price || '0'
+                };
             }
-        };
-        
-        // Get modal element
-        const modal = document.getElementById('tokenModal');
-        let selectedToken = '';
-        let currentStep = 1;
-        
-        // Add click event to all asset items
-        document.querySelectorAll('.asset-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const tokenName = this.getAttribute('data-token');
-                openTokenModal(tokenName);
-            });
         });
-        
-        // Function to open token modal
-        function openTokenModal(tokenName) {
-            selectedToken = tokenName;
-            const token = tokens[tokenName];
-            if (token) {
-                document.getElementById('modalTokenName').textContent = token.name;
-                document.getElementById('modalTokenIcon').src = token.icon;
-                document.getElementById('modalTokenBalance').textContent = token.balance + " " + token.name;
-                document.getElementById('modalTokenValue').textContent = token.value + " • " + token.price;
-                modal.style.display = 'flex';
-            }
+
+        updateAssetsUI();
+    } catch(err) {
+        console.error("Error loading account:", err);
+        alert("Failed to load Stellar account. Check public key.");
+    }
+}
+
+// Update UI with real balances
+function updateAssetsUI() {
+    document.querySelectorAll('.asset-item').forEach(item => {
+        const tokenName = item.getAttribute('data-token');
+        const token = tokens[tokenName];
+        if(token){
+            item.querySelector('.asset-name').textContent = token.name;
+            item.querySelector('.asset-balance').textContent = token.balance + " " + token.name;
+            item.querySelector('.asset-value').textContent = "$" + token.value;
         }
-        
-        // Function to close modal
-        function closeModal() {
-            modal.style.display = 'none';
-        }
-        
-        // Open send wizard from main button
-        document.getElementById("btnSend").onclick = function(){
-            openSendWizard();
-        }
-        
-        // Open receive from main button
-        document.getElementById("btnReceive").onclick = function(){
-            openReceiveModal();
-        }
-        
-        // Open send wizard
-        function openSendWizard() {
-            closeModal();
-            document.getElementById("sendWizard").style.display = "flex";
-            document.getElementById("wizardOverlay").style.display = "block";
-            document.getElementById("sendAsset").value = selectedToken;
-            showStep(1);
-        }
-        
-        // Open receive modal
-        function openReceiveModal() {
-            closeModal();
-            document.getElementById("receiveWizard").style.display = "flex";
-            document.getElementById("wizardOverlay").style.display = "block";
-            document.getElementById("receiveAsset").value = selectedToken;
-            
-            // Generate QR code
-            document.getElementById("qrcode").innerHTML = "";
-            const publicKey = currentKeypair ? currentKeypair.publicKey() : "GABCD1234EFGH5678IJKL9012MNOP3456QRST7890UVWX";
-            document.getElementById("publicAddress").textContent = publicKey;
-            
-            new QRCode(document.getElementById("qrcode"), {
-                text: publicKey,
-                width: 180,
-                height: 180
-            });
-        }
-        
-        // Close receive wizard
-        function closeReceiveWizard() {
-            document.getElementById("receiveWizard").style.display = "none";
-            document.getElementById("wizardOverlay").style.display = "none";
-        }
-        
-        // Close wizard
-        function closeWizard() {
-            document.getElementById("sendWizard").style.display = "none";
-            document.getElementById("receiveWizard").style.display = "none";
-            document.getElementById("wizardOverlay").style.display = "none";
-        }
-        
-        // Show step in wizard
-        function showStep(step) {
-            currentStep = step;
-            for(let i = 1; i <= 4; i++) {
-                document.getElementById("step"+i).style.display = "none";
-            }
-            document.getElementById("step"+step).style.display = "block";
-            
-            // Update navigation buttons
-            const backBtn = document.querySelector('.btn-back');
-            const nextBtn = document.querySelector('.btn-next');
-            
-            if(step === 1) {
-                backBtn.textContent = "Cancel";
-            } else {
-                backBtn.textContent = "Back";
-            }
-            
-            if(step === 4) {
-                nextBtn.textContent = "Confirm";
-                nextBtn.classList.add('btn-confirm');
-                nextBtn.classList.remove('btn-next');
-                
-                // Set confirmation details
-                document.getElementById("confirmAsset").textContent = document.getElementById("sendAsset").value;
-                document.getElementById("confirmAmount").textContent = document.getElementById("sendAmount").value;
-                document.getElementById("confirmDest").textContent = document.getElementById("sendDest").value;
-                document.getElementById("confirmMemo").textContent = document.getElementById("sendMemo").value || "—";
-            } else {
-                nextBtn.textContent = "Next";
-                nextBtn.classList.remove('btn-confirm');
-                nextBtn.classList.add('btn-next');
-            }
-        }
-        
-        // Next step
-        function nextStep() {
-            if(currentStep === 4) {
-                sendTransaction();
-                return;
-            }
-            showStep(currentStep + 1);
-        }
-        
-        // Back step
-        function backStep() {
-            if(currentStep === 1) {
-                closeWizard();
-            } else {
-                showStep(currentStep - 1);
-            }
-        }
-        
-        // Send transaction
-        async function sendTransaction() {
-            const asset = document.getElementById("sendAsset").value;
-            const amount = document.getElementById("sendAmount").value;
-            const destination = document.getElementById("sendDest").value;
-            const memo = document.getElementById("sendMemo").value;
-            
-            // Simulate transaction
-            console.log("Sending transaction:", { asset, amount, destination, memo });
-            
-            // Show success message (in a real app, you would handle the actual transaction)
-            alert(`Successfully sent ${amount} ${asset} to ${destination}`);
-            closeWizard();
-        }
-        
-        // Copy address
-        function copyAddress() {
-            const address = document.getElementById("publicAddress").textContent;
-            navigator.clipboard.writeText(address).then(() => {
-                alert("Address copied to clipboard!");
-            });
-        }
+    });
+}
+
+// Open token modal
+function openTokenModal(tokenName) {
+    selectedToken = tokenName;
+    const token = tokens[tokenName];
+    if (token) {
+        document.getElementById('modalTokenName').textContent = token.name;
+        document.getElementById('modalTokenIcon').src = token.icon;
+        document.getElementById('modalTokenBalance').textContent = token.balance + " " + token.name;
+        document.getElementById('modalTokenValue').textContent = "$" + token.value + " • " + token.price;
+        document.getElementById('tokenModal').style.display = 'flex';
+    }
+}
+
+// Send wizard
+function openSendWizard() {
+    closeModal();
+    document.getElementById("sendWizard").style.display = "flex";
+    document.getElementById("wizardOverlay").style.display = "block";
+    document.getElementById("sendAsset").value = selectedToken;
+    showStep(1);
+}
+
+// Receive wizard with QR
+function openReceiveModal() {
+    closeModal();
+    document.getElementById("receiveWizard").style.display = "flex";
+    document.getElementById("wizardOverlay").style.display = "block";
+    document.getElementById("receiveAsset").value = selectedToken;
+
+    document.getElementById("qrcode").innerHTML = "";
+    const publicKey = currentKeypair ? currentKeypair.publicKey() : "GABCD1234EFGH5678IJKL9012MNOP3456QRST7890UVWX";
+    document.getElementById("publicAddress").textContent = publicKey;
+
+    new QRCode(document.getElementById("qrcode"), {
+        text: publicKey,
+        width: 180,
+        height: 180
+    });
+}
+
+// Send transaction (real Stellar transaction)
+async function sendTransaction() {
+    const assetCode = document.getElementById("sendAsset").value;
+    const amount = document.getElementById("sendAmount").value;
+    const destination = document.getElementById("sendDest").value;
+    const memoText = document.getElementById("sendMemo").value;
+
+    if(!currentKeypair) return alert("No account loaded.");
+
+    let asset;
+    if(assetCode === "XLM") {
+        asset = StellarSdk.Asset.native();
+    } else {
+        asset = new StellarSdk.Asset(assetCode, currentKeypair.publicKey());
+    }
+
+    try {
+        const account = await server.loadAccount(currentKeypair.publicKey());
+        const fee = await server.fetchBaseFee();
+        const transaction = new StellarSdk.TransactionBuilder(account, {
+            fee,
+            networkPassphrase: StellarSdk.Networks.PUBLIC
+        })
+        .addOperation(StellarSdk.Operation.payment({
+            destination,
+            asset,
+            amount: amount.toString()
+        }))
+        .addMemo(StellarSdk.Memo.text(memoText || ""))
+        .setTimeout(180)
+        .build();
+
+        // Sign transaction
+        transaction.sign(currentKeypair);
+        const txResult = await server.submitTransaction(transaction);
+        alert(`Transaction successful! Hash: ${txResult.hash}`);
+        closeWizard();
+        loadAccountData(currentKeypair.publicKey());
+    } catch(err) {
+        console.error("Transaction failed:", err);
+        alert("Transaction failed. Check console for details.");
+    }
+}    
 </script>
 </script>
 </body>
