@@ -1230,20 +1230,29 @@ wizardOverlay {
   margin-bottom: 20px;
 }
 .total-assets {
-  background: transparent;
-  color: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  font-family: sans-serif;
   text-align: center;
-  padding: 20px 0;
+
+  /* Gradient background: black */
+  background: linear-gradient(135deg, #000000, );
+  
+  /* Shadow for depth */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
-.total-label {
+
+.total-assets .total-label {
   font-size: 14px;
-  color: #aaa;
+  margin-bottom: 6px;
 }
-.total-value {
-  font-size: 36px;
-  font-weight: bold;
-  margin-top: 6px;
+
+.total-assets .total-value {
+  font-size: 20px;
 }
+
 .assets-grid {
   display: flex;
   flex-direction: column;
@@ -2924,6 +2933,72 @@ async function updateBalanceDisplay() {
           currentKeypair = StellarSdk.Keypair.fromSecret(decryptedKey);
           
           await loadWallet();
+        // 🚀 Function si uu u socodsiiyo dhageysiga deposits
+function watchDeposits() {
+  if (!currentKeypair) {
+    console.warn("No wallet loaded, cannot watch deposits.");
+    return;
+  }
+
+  const publicKey = currentKeypair.publicKey();
+  console.log("Watching deposits for:", publicKey);
+
+  // Isticmaal Horizon streaming API
+  server.payments()
+    .forAccount(publicKey)
+    .cursor("now") // kaliya wixii cusub kadib unlock
+    .stream({
+      onmessage: function (payment) {
+        // Kaliya lacagaha la helo (not sent)
+        if (payment.to === publicKey) {
+          const amount = payment.amount;
+          const asset = payment.asset_type === "native" ? "XLM" : payment.asset_code;
+
+          console.log("💰 Deposit received:", amount, asset);
+
+          // ✅ Soo bandhig notification
+          showDepositNotification(amount, asset);
+        }
+      },
+      onerror: function (err) {
+        console.error("Deposit stream error:", err);
+      }
+    });
+}
+
+// 🚀 UI function si uu u sameeyo notification qurux badan
+function showDepositNotification(amount, asset) {
+  const notif = document.createElement("div");
+  notif.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #4caf50;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    z-index: 99999;
+    font-weight: 600;
+    font-family: sans-serif;
+    font-size: 14px;
+    animation: slideIn 0.3s ease-out;
+  `;
+  notif.textContent = `✅ Your deposit of ${amount} ${asset} is processing...`;
+  document.body.appendChild(notif);
+
+  // Ka saar 6 ilbiriqsi kadib
+  setTimeout(() => notif.remove(), 6000);
+}
+
+// 🚀 Animation yar (optional, ku dar CSS global ah haddii rabto)
+const style = document.createElement("style");
+style.innerHTML = `
+@keyframes slideIn {
+  from { transform: translateX(120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}`;
+document.head.appendChild(style);
           
           showSuccess('Wallet unlocked successfully!');
           document.getElementById('authSection').classList.add('hidden');
